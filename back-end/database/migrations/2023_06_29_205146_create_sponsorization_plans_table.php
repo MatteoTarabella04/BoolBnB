@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('sponsorization_plans', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->unsignedSmallInteger('duration');
+            $table->decimal('price', 4, 2);
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

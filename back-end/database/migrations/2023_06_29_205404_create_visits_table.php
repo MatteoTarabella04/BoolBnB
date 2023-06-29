@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('apartment_id');
+            $table->foreign('apartment_id')->references('id')->on('apartments');
+            $table->dateTime('visit_date');
+            $table->string('ip_address', 15);
             $table->timestamps();
         });
     }
