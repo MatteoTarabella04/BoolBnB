@@ -39,12 +39,15 @@ export default {
 </script>
 
 <template>
-    <div>
-        <h2>{{ apartment.name }}</h2>
-        <div class="image">
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ apartment.name }}</h2>
+        </div>
+
+        <div class="card-image">
             <img :src="apartment.image" alt="Immagine appartamento">
         </div>
-        <div>
+        <div class="card-body">
             <p><strong>Descrizione:</strong> {{ apartment.description }}</p>
             <p><strong>Prezzo per notte:</strong> {{ apartment.price_per_night }}</p>
             <p>Numero di stanze: {{ apartment.rooms }}</p>
@@ -55,7 +58,7 @@ export default {
             <p>Quest' appartamento è disponibile?{{ apartment.visible }}</p>
             <p>Quest'appartamento è ancora disponibile?: {{ apartment.visible }}</p>
         </div>
-        <div>
+        <div class="card-footer">
             <router-link to="/apartments">Torna all'elenco degli appartamenti</router-link>
             <router-link :to="`/apartments/${apartment.id}/edit`">Modifica</router-link>
             <button @click="deleteApartment(apartment.id)">Elimina</button>
