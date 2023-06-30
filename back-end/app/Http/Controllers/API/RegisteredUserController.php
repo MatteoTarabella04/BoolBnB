@@ -27,9 +27,9 @@ class RegisteredUserController extends Controller
         $validator = Validator::make($request->all(),[
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'first_name' => ['string', 'max:50'],
-            'last_name' => ['string', 'max:50'],
-            'date_of_birth' => ['date', 'before:today']
+            'first_name' => ['nullable', 'string', 'max:50'],
+            'last_name' => ['nullable', 'string', 'max:50'],
+            'date_of_birth' => ['nullable', 'date', 'before:today']
         ], [
             'email.required' => 'Inserire obbligatoriamente l\'e-mail',
             'email.string' => 'L\'e-mail dev\'essere una stringa di testo',
