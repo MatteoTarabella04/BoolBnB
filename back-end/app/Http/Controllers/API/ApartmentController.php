@@ -6,6 +6,7 @@ use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -16,7 +17,9 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Auth::user()->apartments()->orderByDesc('id')->paginate(6);
+
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
@@ -27,7 +30,7 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        //
+
     }
 
     /**
