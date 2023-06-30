@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Service;
-use App\Http\Requests\StoreServiceRequest;
-use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Visit;
+use App\Http\Requests\StoreVisitRequest;
+use App\Http\Requests\UpdateVisitRequest;
+use App\Http\Controllers\Controller;
 
-class ServiceController extends Controller
+class VisitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,10 +22,10 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreServiceRequest  $request
+     * @param  \App\Http\Requests\StoreVisitRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreServiceRequest $request)
+    public function store(StoreVisitRequest $request)
     {
         //
     }
@@ -32,10 +33,10 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Visit $visit)
     {
         //
     }
@@ -43,11 +44,11 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateServiceRequest  $request
-     * @param  \App\Models\Service  $service
+     * @param  \App\Http\Requests\UpdateVisitRequest  $request
+     * @param  \App\Models\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(UpdateVisitRequest $request, Visit $visit)
     {
         //
     }
@@ -55,10 +56,10 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Visit $visit)
     {
         //
     }
