@@ -28,14 +28,14 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)//: RedirectResponse
     {
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'first_name' => ['string', 'max:50'],
-            'last_name' => ['string', 'max:50'],
-            'date_of_birth' => ['date', 'before:today']
+            'first_name' => ['nullable', 'string', 'max:50'],
+            'last_name' => ['nullable', 'string', 'max:50'],
+            'date_of_birth' => ['nullable', 'date', 'before:today']
         ]);
 
         $data = [
@@ -64,6 +64,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        //TODO complete redirect return redirect(RouteServiceProvider::HOME);
     }
 }
