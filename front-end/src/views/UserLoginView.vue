@@ -63,7 +63,7 @@ export default {
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" id="password"
                                 aria-describedby="passwordhelpId" placeholder="Inserisci la password" required
-                                v-model.trim="email">
+                                v-model.trim="password">
                         </div>
 
 
