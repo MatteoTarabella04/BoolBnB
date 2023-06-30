@@ -22,7 +22,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)//: JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(),[
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
