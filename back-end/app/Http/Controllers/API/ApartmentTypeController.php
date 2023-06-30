@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\ApartmentType;
 use App\Http\Requests\StoreApartmentTypeRequest;
 use App\Http\Requests\UpdateApartmentTypeRequest;
+use App\Http\Controllers\Controller;
 
 class ApartmentTypeController extends Controller
 {
