@@ -1,10 +1,10 @@
 <script>
-
 export default {
-    components: {}
+    components: {},
 }
 </script>
 
-<template></template>
+<template>
+</template>
 
 <style lang="scss"></style>
