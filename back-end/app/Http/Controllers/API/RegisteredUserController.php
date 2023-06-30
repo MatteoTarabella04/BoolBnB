@@ -82,9 +82,8 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return response()->json([
-            "session" => Auth::getSession()
-        ]);  
-
-        //TODO complete redirect return redirect(RouteServiceProvider::HOME);
+            "success" => true,
+            "user_id" => Auth::id(),
+        ]);
     }
 }
