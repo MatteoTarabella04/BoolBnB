@@ -1,2 +1,4 @@
 // Import all of Bootstrap's CSS
+@use './partials/colors.scss' as *;
 @import "/node_modules/bootstrap/scss/bootstrap";
+

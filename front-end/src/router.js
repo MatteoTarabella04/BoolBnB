@@ -15,7 +15,7 @@ const router = createRouter({
     routes: [
         {/* ---------------------------la view home non è stata creata al momento  */
             'path': '/',
-            'name': 'home',
+            'name': 'Home',
             'component': HomeView
         },
         {
