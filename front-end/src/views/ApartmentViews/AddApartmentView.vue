@@ -15,7 +15,7 @@ export default {
                 bathrooms: 0,
                 square_meters: 0,
                 address: "",
-                image: ""
+                image: null
 
             }
         }
@@ -36,8 +36,13 @@ export default {
 
                     console.error('Errore durante l\'aggiunta dell\'appartamento:', error);
                 });
+        },
+        handleImageChange(event) {
+            const file = event.target.files[0];
+            this.apartment.image = file;
         }
     }
+
 }
 </script>
 
@@ -47,7 +52,11 @@ export default {
         <h4>Inserisci un annuncio!</h4>
         <form @submit.prevent="addApartment()">
             <div>
-                <label for="title">Nome:</label>
+                <label for="image">Aggiungi un immagine:</label>
+                <input type="file" id="image" accept="image/*" @change="handleImageChange" required>
+            </div>
+            <div>
+                <label for="name">Nome:</label>
                 <input type="text" id="title" v-model="apartment.title" required>
             </div>
             <div>
@@ -55,32 +64,33 @@ export default {
                 <textarea id="description" v-model="apartment.description" required></textarea>
             </div>
             <div>
-                <label for="price">Prezzo a notte:</label>
-                <input type="number" id="price" v-model="apartment.price_per_night" required>
+                <label for="price_per_night">Prezzo a notte:</label>
+                <input type="number" id="price_per_night" v-model="apartment.price_per_night" required>
             </div>
             <div>
-                <label for="price">Stanze:</label>
-                <input type="number" id="price" v-model="apartment.rooms" required>
+                <label for="rooms">Numero di Stanze:</label>
+                <input type="number" id="rooms" v-model="apartment.rooms" required>
             </div>
             <div>
-                <label for="price">Numero di letti:</label>
-                <input type="number" id="price" v-model="apartment.beds" required>
+                <label for="beds">Numero di letti:</label>
+                <input type="number" id="beds" v-model="apartment.beds" required>
             </div>
             <div>
-                <label for="price">Bagni:</label>
-                <input type="number" id="price" v-model="apartment.bathrooms" required>
+                <label for="bathrooms">Bagni:</label>
+                <input type="number" id="bathrooms" v-model="apartment.bathrooms" required>
             </div>
             <div>
-                <label for="price">Dimensione:</label>
-                <input type="number" id="price" v-model="apartment.square_meters" required>
+                <label for="square_meters">Dimensione:</label>
+                <input type="number" id="square_meters" v-model="apartment.square_meters" required>
             </div>
             <div>
-                <label for="price">Indirizzo:</label>
-                <input type="number" id="price" v-model="apartment.address" required>
+                <label for="address">Indirizzo:</label>
+                <input type="text" id="address" v-model="apartment.address" required>
             </div>
+
             <div>
-                <label for="price">Immagine:</label>
-                <input type="number" id="price" v-model="apartment.image" required>
+                <label for="visible">Quest'appartamento è disponibile al pernottamento?:</label>
+                <input type="number" id="visible" v-model="apartment.visible" required>
             </div>
             <button type="submit">Aggiungi appartamento</button>
         </form>
