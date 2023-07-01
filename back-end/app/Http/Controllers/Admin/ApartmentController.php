@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
@@ -41,7 +42,12 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         $val_data = $request->validated();
-        $val_data["slug"] = Apartment::generateSlug($val_data["name"]);
+        
+        // USED TO RETRIEVE NEXT ID THAT WILL BE USED
+        $statement = DB::select("SHOW TABLE STATUS LIKE 'apartments'");
+        $nextId = $statement[0]->Auto_increment;
+
+        $val_data["slug"] = Apartment::generateSlug($val_data["name"]) . "-" . $nextId;
         if(count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 0) {
             return to_route("admin.apartments.create")->with("message", "Per favore usa un nome univoco, senza considerare la punteggiatura");
         }
@@ -88,7 +94,7 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         $val_data = $request->validated();
-        $val_data["slug"] = Apartment::generateSlug($val_data["name"]);
+        $val_data["slug"] = Apartment::generateSlug($val_data["name"]) . "-" . $apartment->id;
         if(count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 1) {
             return to_route("admin.apartments.edit", $apartment)->with("message", "Per favore usa un nome univoco, senza considerare la punteggiatura");
         }
