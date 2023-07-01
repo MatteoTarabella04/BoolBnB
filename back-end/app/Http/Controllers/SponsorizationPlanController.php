@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Models\SponsorizationPlan;
 use App\Http\Requests\StoreSponsorizationPlanRequest;
 use App\Http\Requests\UpdateSponsorizationPlanRequest;
-use App\Http\Controllers\Controller;
 
 class SponsorizationPlanController extends Controller
 {
@@ -15,6 +14,16 @@ class SponsorizationPlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
@@ -37,6 +46,17 @@ class SponsorizationPlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(SponsorizationPlan $sponsorizationPlan)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\SponsorizationPlan  $sponsorizationPlan
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(SponsorizationPlan $sponsorizationPlan)
     {
         //
     }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('apartment_type_id')->references('id')->on('apartment_types');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price_per_night', 6, 2)->index();
+            $table->decimal('price_per_night', 8, 2)->index();
             $table->unsignedTinyInteger('rooms')->index();
             $table->unsignedTinyInteger('beds')->index();
             $table->unsignedTinyInteger('bathrooms');

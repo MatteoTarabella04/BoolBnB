@@ -41,9 +41,6 @@ class RegisteredUserController extends Controller
         $data = [
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'first_name' => null,
-            'last_name' => null,
-            'date_of_birth' => null,
         ];
 
         if($request->first_name) {
