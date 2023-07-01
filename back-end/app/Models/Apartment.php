@@ -15,11 +15,16 @@ class Apartment extends Model
 
     public static function generateSlug($name)
     {
-        return Str::slug($name, '-');
+        return Str::slug($name);
     }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function apartment_type(): BelongsTo
+    {
+        return $this->belongsTo(ApartmentType::class);
     }
 }

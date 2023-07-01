@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\RegisteredUserController;
-use App\Http\Controllers\API\AuthenticatedSessionController;
+use App\Http\Controllers\API\ApartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', [RegisteredUserController::class, 'store']);
-Route::post('login', [AuthenticatedSessionController::class, 'store']);
-Route::post('logout', [AuthenticatedSessionController::class, 'destroy']);
-
+Route::get('/apartments', [ApartmentController::class, 'index']);
