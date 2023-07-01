@@ -24,7 +24,6 @@ class StoreApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'apartment_type_id' => 'required|exists:apartment_types,id',
             'name' => 'nullable|string',
             'description' => 'nullable|string',
@@ -36,9 +35,8 @@ class StoreApartmentRequest extends FormRequest
             'address' => 'required|string',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image',
             'visible' => 'nullable|boolean',
-            'slug' => 'required|string|unique:apartments,slug',
         ];
     }
 }
