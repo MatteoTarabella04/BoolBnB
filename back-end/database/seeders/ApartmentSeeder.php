@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Apartment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentSeeder extends Seeder
 {
@@ -17,6 +18,10 @@ class ApartmentSeeder extends Seeder
     {
         $apartments = config("db.apartments");
         foreach ($apartments as $key => $apartment) {
+            // USED TO RETRIEVE NEXT ID THAT WILL BE USED
+            $statement = DB::select("SHOW TABLE STATUS LIKE 'apartments'");
+            $nextId = $statement[0]->Auto_increment;
+            
             $newApartment = new Apartment();
             $newApartment->user_id = 1;
             $newApartment->apartment_type_id = 1;
@@ -31,7 +36,7 @@ class ApartmentSeeder extends Seeder
             $newApartment->latitude = $apartment["latitude"];
             $newApartment->longitude = $apartment["longitude"];
             $newApartment->image = $apartment["image"];
-            $newApartment->slug = Apartment::generateSlug($apartment["name"]) . "-" . $key;
+            $newApartment->slug = Apartment::generateSlug($apartment["name"]) . "-" . $nextId;
             $newApartment->save();
         }
     }
