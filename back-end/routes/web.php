@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\API\ApartmentController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ApartmentController;
+// REMOVED BECAUSE OF BRIEF INDICATIONS
+// use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     // responds to url /admin
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); // admin.dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); // admin.dashboard
     Route::resource('apartments', ApartmentController::class)->parameters([
         'apartments' => 'apartment:slug'
     ]);
@@ -36,11 +37,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     ])->only(['index', 'store', 'update', 'destroy']); */
 });
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// REMOVED BECAUSE OF BRIEF INDICATIONS
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__ . '/auth.php';

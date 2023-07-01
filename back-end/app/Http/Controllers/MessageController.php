@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
-use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
@@ -15,6 +14,16 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
@@ -37,6 +46,17 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Message $message)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Message  $message
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Message $message)
     {
         //
     }
