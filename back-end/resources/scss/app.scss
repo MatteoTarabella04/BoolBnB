@@ -1,1 +1,11 @@
-@import '~bootstrap/scss/bootstrap'
+@use './partials/colors.scss' as *;
+@use "./partials/AppHeader.scss";
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: $bg-secondary !important;
+
+  & .card {
+      background-color: $bg-special-light !important;
+  }
+}
