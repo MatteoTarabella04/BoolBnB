@@ -15,7 +15,7 @@ const latEl = document.getElementById("latitude");
 const lonEl = document.getElementById("longitude");
 
 // KEEP LATITUDE AND LONGITUDE VALUES IN CASE OF VALIDATION FAIL
-if(latEl.value != "" && lonEl.value != "" && addressEl != "") {
+if (latEl.value != "" && lonEl.value != "" && addressEl != "") {
   showMap(latEl.value, lonEl.value);
 }
 
@@ -26,12 +26,13 @@ document.body.addEventListener("click", () => {
 
 // LISTENS TO INPUT ON ADDRESS FIELD
 addressEl.addEventListener("input", () => {
+  selectedIndex = -1;
   inputAddress = addressEl.value;
   latEl.value = "";
   lonEl.value = "";
 
   // IF ADDRESS IS MORE THAN 5 CHARSACTERS LONG, STARTS SHOWING THE SUGGESTIONS
-  if(inputAddress.length >= 5) {
+  if (inputAddress.length >= 5) {
     getRealtimeResults();
   } else {
     suggestedAddressesContainer.innerHTML = "";
@@ -43,22 +44,22 @@ addressEl.addEventListener("input", () => {
  */
 function getRealtimeResults() {
   axios
-  .get(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
-  .then(response => {
-    suggestedAddressesContainer.innerHTML = "";
-    results = response.data.results;
-    suggestedAddressesContainer.classList.remove("d-none");
-    results.forEach(result => {
-      const newResult = document.createElement("li");
-      newResult.classList.add("list-group-item", "list-group-item-action");
-      newResult.innerText = result.address.freeformAddress;
-      suggestedAddressesContainer.appendChild(newResult);
-    });
-    listenForSelection();
-  })
-  .catch(error => {
-    console.error(error.message);
-  })
+    .get(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+    .then(response => {
+      suggestedAddressesContainer.innerHTML = "";
+      results = response.data.results;
+      suggestedAddressesContainer.classList.remove("d-none");
+      results.forEach(result => {
+        const newResult = document.createElement("li");
+        newResult.classList.add("list-group-item", "list-group-item-action");
+        newResult.innerText = result.address.freeformAddress;
+        suggestedAddressesContainer.appendChild(newResult);
+      });
+      listenForSelection();
+    })
+    .catch(error => {
+      console.error(error.message);
+    })
 }
 
 /**
@@ -92,15 +93,59 @@ function showMap(lat, lon) {
   mapWrapper.classList.remove("d-none");
   const mapChilds = document.querySelectorAll("#map *");
   mapChilds.forEach(child => {
-      child.remove();
+    child.remove();
   });
   let map = tt.map({
-      key: apiKey,
-      container: "map",
-      center: [lon, lat],
-      zoom: 14,
+    key: apiKey,
+    container: "map",
+    center: [lon, lat],
+    zoom: 14,
   })
   let marker = new tt.Marker()
-  .setLngLat([lon, lat])
-  .addTo(map)
+    .setLngLat([lon, lat])
+    .addTo(map)
+}
+
+
+// ENABLE SCROLLING IN THE ADDRESSES WITH THE ARROW KEYS
+
+let selectedIndex = -1;
+
+addressEl.addEventListener('keydown', (event) => {
+  const key = event.key;
+
+  if (key === 'ArrowDown') {
+    selectedIndex = Math.min(selectedIndex + 1, suggestedAddressesContainer.children.length - 1);
+    updateSelection();
+
+  } else if (key === 'ArrowUp') {
+    selectedIndex = Math.max(selectedIndex - 1, 0);
+    updateSelection();
+
+  } else if (key === 'Enter') {
+
+    const selectedResult = results[selectedIndex];
+    addressEl.value = selectedResult.address.freeformAddress;
+    latEl.value = selectedResult.position.lat;
+    lonEl.value = selectedResult.position.lon;
+    suggestedAddressesContainer.innerHTML = "";
+    showMap(selectedResult.position.lat, selectedResult.position.lon);
+
+  }
+}
+);
+
+
+/**
+ * Remove the selected class to the old element and add to the new one
+ */
+function updateSelection() {
+  const selected = suggestedAddressesContainer.querySelector('.selected');
+
+  if (selected) {
+    selected.classList.remove('selected');
+  }
+
+  const newSelected = suggestedAddressesContainer.children[selectedIndex];
+  newSelected.classList.add('selected');
 }
