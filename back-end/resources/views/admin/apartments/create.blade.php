@@ -27,7 +27,7 @@
                 <div class="mb-3">
                   <label for="image" class="form-label">Aggiungi un'immagine</label>
                   <input type="file"
-                    class="form-control" name="image" id="image" aria-describedby="helpId">
+                    class="form-control" name="image" id="image" aria-describedby="helpId" accept="image/*">
                     @error('image')
                         <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
                     @enderror
