@@ -6,6 +6,7 @@ let inputAddress = "";
 let selectedAddress = null;
 let selectedLat = null;
 let selectedLon = null;
+const apiKey = import.meta.env.VITE_TOM_TOM_KEY;
 
 // GET DOM ELEMENTS
 const suggestedAddressesContainer = document.getElementById("addressSuggestions");
@@ -42,7 +43,7 @@ addressEl.addEventListener("input", () => {
  */
 function getRealtimeResults() {
   axios
-  .get(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+  .get(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
   .then(response => {
     suggestedAddressesContainer.innerHTML = "";
     results = response.data.results;
@@ -94,7 +95,7 @@ function showMap(lat, lon) {
       child.remove();
   });
   let map = tt.map({
-      key: "1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm",
+      key: apiKey,
       container: "map",
       center: [lon, lat],
       zoom: 14,
