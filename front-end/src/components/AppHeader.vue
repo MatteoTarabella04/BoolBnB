@@ -30,11 +30,11 @@ export default {
                                 <span>Registrati</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <router-link class="nav-link" class-active="" :to="{ 'name': 'Home' }">
                                 <span>Esci</span>
                             </router-link>
-                        </li>
+                        </li> -->
 
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
