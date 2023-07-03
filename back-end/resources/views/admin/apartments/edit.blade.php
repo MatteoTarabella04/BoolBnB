@@ -21,7 +21,7 @@
       
         <div>
             <h4>Modifica l'annuncio!</h4>
-            <form action="{{ route('admin.apartments.update') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.apartments.update', $apartment) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -119,7 +119,7 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary w-100 text-uppercase">Aggiungi appartamento</button>
+                <button type="submit" class="btn btn-primary w-100 text-uppercase">salva le modifiche</button>
             </form>
         </div>
 
