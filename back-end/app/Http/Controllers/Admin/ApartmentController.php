@@ -81,6 +81,8 @@ class ApartmentController extends Controller
     {
         if (Auth::id() === $apartment->user_id) {
             return view("admin.apartments.edit", compact("apartment"));
+        } else {
+            return to_route("admin.apartments.index")->with("message", "Stai cercando di modificare un appartamento non tuo");
         }
     }
 
