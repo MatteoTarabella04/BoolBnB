@@ -115,11 +115,12 @@ addressEl.addEventListener('keydown', (event) => {
   const key = event.key;
 
   if (key === 'ArrowDown') {
+    event.preventDefault();
     selectedIndex = Math.min(selectedIndex + 1, suggestedAddressesContainer.children.length - 1);
     updateSelection();
 
   } else if (key === 'ArrowUp') {
-
+    event.preventDefault();
     selectedIndex = Math.max(selectedIndex - 1, -1);
     if (selectedIndex == -1) {
       const selected = suggestedAddressesContainer.querySelector('.selected');
