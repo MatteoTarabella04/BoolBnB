@@ -68,7 +68,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view("admin.apartments.show", compact("apartment"));
+        if (Auth::id() === $apartment->user_id) {
+            return view("admin.apartments.show", compact("apartment"));
+        } else {
+            return to_route("admin.apartments.index")->with("message", "Stai cercando di visualizzare un appartamento non tuo");
+        }
     }
 
     /**
