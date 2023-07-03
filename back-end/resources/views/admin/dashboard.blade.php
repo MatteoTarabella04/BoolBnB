@@ -4,13 +4,13 @@
 <div class="container">
 
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
 
         <h2 class="fs-4 text-secondary my-4">
             {{ __('Dashboard') }}
         </h2>
         
-        <a class="btn btn-primary my-3" href="{{ route('admin.apartments.index') }}" role="button">Vedi appartamenti</a>
+        <a class="btn btn-primary" href="{{ route('admin.apartments.index') }}" role="button">Vedi appartamenti</a>
 
         
     </div>
