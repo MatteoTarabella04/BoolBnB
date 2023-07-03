@@ -2,14 +2,25 @@
 
 @section('content')
 <div class="container">
-    <h2 class="fs-4 text-secondary my-4">
-        {{ __('Dashboard') }}
-    </h2>
+
+
+    <div class="d-flex justify-content-between">
+
+        <h2 class="fs-4 text-secondary my-4">
+            {{ __('Dashboard') }}
+        </h2>
+        
+        <a class="btn btn-primary my-3" href="{{ route('admin.apartments.index') }}" role="button">Vedi appartamenti</a>
+
+        
+    </div>
+
+
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
+                
                 <div class="card-header">{{ __('User Dashboard') }}</div>
-
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
