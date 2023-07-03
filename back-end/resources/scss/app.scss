@@ -1,11 +1,26 @@
 @use './partials/colors.scss' as *;
 @use "./partials/AppHeader.scss";
 @import '~bootstrap/scss/bootstrap';
+@import "/node_modules/@tomtom-international/web-sdk-maps/dist/maps.css";
 
 body {
   background-color: $bg-secondary !important;
 
   & .card {
       background-color: $bg-special-light !important;
+  }
+}
+
+#addressSuggestionsWrapper ul {
+  position: absolute;
+  left: 0;
+  top: 38px;
+  border-radius: 6px;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+
+  li {
+    cursor: pointer;
   }
 }
