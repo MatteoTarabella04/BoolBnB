@@ -1,5 +1,5 @@
 <?php
-
+//TODO passare autorizzazione al front per pulsanti header 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
