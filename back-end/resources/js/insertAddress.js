@@ -119,8 +119,17 @@ addressEl.addEventListener('keydown', (event) => {
     updateSelection();
 
   } else if (key === 'ArrowUp') {
-    selectedIndex = Math.max(selectedIndex - 1, 0);
-    updateSelection();
+
+    selectedIndex = Math.max(selectedIndex - 1, -1);
+    if (selectedIndex == -1) {
+      const selected = suggestedAddressesContainer.querySelector('.selected');
+
+      if (selected) {
+        selected.classList.remove('selected');
+      }
+    } else {
+      updateSelection();
+    }
 
   } else if (key === 'Enter') {
     event.preventDefault();
