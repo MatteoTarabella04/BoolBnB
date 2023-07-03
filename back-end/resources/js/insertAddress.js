@@ -123,7 +123,7 @@ addressEl.addEventListener('keydown', (event) => {
     updateSelection();
 
   } else if (key === 'Enter') {
-
+    event.preventDefault();
     const selectedResult = results[selectedIndex];
     addressEl.value = selectedResult.address.freeformAddress;
     latEl.value = selectedResult.position.lat;
