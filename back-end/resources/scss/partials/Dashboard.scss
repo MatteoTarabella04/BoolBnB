@@ -1,0 +1,16 @@
+@use "./colors.scss" as *;
+
+.dashboard {
+
+    & .card_bg_special{
+        background-color: $bg-card-special!important;
+    }
+
+    & .badge_special{
+        text-align: center;
+        padding: 1.5rem;
+        background-color: $bg-card-special!important;
+        display: block;
+        border-radius: 1rem;
+    }
+}

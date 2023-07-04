@@ -1,5 +1,7 @@
 @use './partials/colors.scss' as *;
 @use "./partials/AppHeader.scss";
+@use "./partials/Dashboard.scss";
+
 @import '~bootstrap/scss/bootstrap';
 
 body {
