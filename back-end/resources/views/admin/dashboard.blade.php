@@ -19,7 +19,7 @@
 
         <div class=" justify-content-center">
             <div class="row">
-                <div class="col-6 d-flex flex-wrap">
+                <div class="col-sm-12 col-lg-6 d-flex flex-wrap">
                     <div id="card_off_interval" class="card card_bg_special w-100 mb-4">{{-- dashboard card --}}
 
                         <div class="card-header text-center text-uppercase p-2">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-sm-12 col-lg-6">
                     <div class="card card_bg_special">{{-- statistics card --}}
                         <div class="card-header text-center">
                             <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{__('le tue statistiche')}}</h2>
