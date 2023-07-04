@@ -2,6 +2,7 @@
 
 @section('javascript')
     @vite(['resources/js/insertAddress.js'])
+    @vite(['resources/js/create-apartment-validation.js'])
 @endsection
 
 @section('content')
