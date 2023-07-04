@@ -118,7 +118,7 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         $val_data = $request->validated();
-        $val_data["slug"] = Apartment::generateSlug($val_data["name"]) . "-" . $apartment->id;
+        $val_data["slug"] = Apartment::generateSlug($val_data['name']) . "-" . $apartment->id;
         if (count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 1) {
             return to_route("admin.apartments.edit", $apartment)->with("message", "Per favore usa un nome univoco, senza considerare la punteggiatura");
         }

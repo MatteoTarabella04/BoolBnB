@@ -12,25 +12,27 @@
         <h2>Elenco degli appartamenti</h2>
         <div class="row">
             @forelse($apartments as $apartment)
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">{{ $apartment->name }}</div>
-                    <div class="card-image">
-                        <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}">
-                    </div>
-                    <div class="card-body">
+            <div class="col-12 d-flex  rounded-1 m-1">
+                <div class="col-4 p-1">
+                    <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}">
+                </div>
+                <div class="col-8 p-1">
+                    <h5><strong>Appartamento </strong></h5>
+                    <div class="">{{ $apartment->name }}</div>
+                    
+                    <div class="">
                         <h5><strong>Descrizione </strong></h5>
                         <p>{{ $apartment->description }}</p>
                         <p><strong>Prezzo per notte:</strong> {{ $apartment->price_per_night }}€</p>
-                        <p>Quest'appartamento è ancora disponibile?: {{ $apartment->visible ? "Si" : "No" }}</p>
+                        <p>Quest'appartamento è ancora disponibile?: <strong>{{ $apartment->visible ? "Si" : "No" }}</strong> </p>
                     </div>
-                    <div class="card-footer">
-                        <a class="btn btn-primary" href="{{ route('admin.apartments.show', $apartment) }}">Dettagli</a>
-                        <a class="btn btn-primary" href="{{ route('admin.apartments.edit', $apartment) }}">Modifica</a>
-                        <form class="mt-3" action="{{ route('admin.apartments.destroy', $apartment) }}" method="post">
+                    <div class="index_buttons">
+                        <a class="btn btn-primary btn-sm" href="{{ route('admin.apartments.show', $apartment) }}">Dettagli</a>
+                        <a class="btn btn-primary btn-sm" href="{{ route('admin.apartments.edit', $apartment) }}">Modifica</a>
+                        <form class="mt-3 d-inline-block" action="{{ route('admin.apartments.destroy', $apartment) }}" method="post">
                             @csrf
                             @method("delete")
-                            <button type="submit" class="btn btn-primary">Elimina</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
                         </form>
                     </div>
                 </div>

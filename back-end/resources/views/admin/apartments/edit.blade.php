@@ -3,6 +3,7 @@
 @section('javascript')
     @vite(['resources/js/insertAddress.js'])
     @vite(['resources/js/edit-apartment-validation.js'])
+    @vite(['resources/js/insertPreviewApartment.js'])
 @endsection
 
 @section('content')
@@ -15,6 +16,7 @@
                             <strong>{{ session('message') }}</strong>
                         </div>
                     @endif
+
 
                     @if ($errors->any())
                         @foreach ($errors->all() as $error)
@@ -31,13 +33,21 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Aggiungi un'immagine</label>
-                                <input type="file" class="form-control" name="image" id="image"
-                                    aria-describedby="helpId" accept="image/*">
-                                @error('image')
-                                    <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
-                                @enderror
+                            <div class="d-flex justify-content-between flex-wrap align-items-center">
+                                <div class="mb-3 col-12 col-md-8">
+                                    <label for="image" class="form-label">Aggiungi un'immagine</label>
+                                    <input type="file" class="form-control" name="image" id="image"
+                                        aria-describedby="helpId" accept="image/*"
+                                        value="{{ old('image', $apartment->image) }}">
+                                    @error('image')
+                                        <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
+                                    @enderror
+                                </div>
+                                <div id="image-preview-container"
+                                    class="mt-2 col-12 col-md-4 d-flex justify-content-center">
+                                    <img id="image-preview" src="{{ asset('storage/' . old('image', $apartment->image)) }}"
+                                        alt="Preview dell'immagine" style="max-width: 100%;" class="p-3" />
+                                </div>
                             </div>
 
 
@@ -72,7 +82,7 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            
                             <div class="mb-3">
                                 <label for="price_per_night" class="form-label">Prezzo a notte (€)</label>
                                 <input type="number" class="form-control" name="price_per_night" id="price_per_night"
@@ -136,9 +146,9 @@
                                 @enderror
                             </div>
 
-                            <input type="text" class="form-control d-none" name="latitude" id="latitude"
+                            <input type="text" class="d-none" name="latitude" id="latitude"
                                 aria-describedby="helpId" placeholder="" value="{{ old('latitude') }}" required>
-                            <input type="text" class="form-control d-none" name="longitude" id="longitude"
+                            <input type="text" class="d-none" name="longitude" id="longitude"
                                 aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}" required>
 
                             <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
@@ -170,9 +180,8 @@
                                 </div>
                             </div>
 
-
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="1" id="visible" checked>
+                                <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" checked>
                                 <label class="form-check-label" for="visible">
                                     Appartamento disponibile da subito
                                 </label>
