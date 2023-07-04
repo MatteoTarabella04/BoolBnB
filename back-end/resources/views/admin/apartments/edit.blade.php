@@ -138,9 +138,13 @@
 
                             <div class="mb-3">
                                 <label for="address" class="form-label">Indirizzo</label>
-                                <input type="text" class="form-control" name="address" id="address"
+                                <div class="position-relative" id="addressSuggestionsWrapper">
+                                    <input type="text" class="form-control" name="address" id="address"
                                     aria-describedby="helpId" placeholder=""
                                     value="{{ old('address', $apartment->address) }}" required>
+                                    <ul class="list-unstyled d-none list-group" id="addressSuggestions">
+                                    </ul>
+                                </div>
                                 @error('address')
                                     <small class="text-danger">Per favore, inserisci correttamente l'indirizzo.</small>
                                 @enderror
