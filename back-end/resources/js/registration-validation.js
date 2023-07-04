@@ -8,14 +8,12 @@ const dateEl = document.getElementById("date_of_birth");
 
 form.addEventListener("submit", (e) => {
   // SELECT SPAN WITH ERROR MESSAGE AND DELETE THEM IF ALREADY EXIST
-  const existingPasswordSpan = document.getElementById("passwordConfirmationError");
-  const existingDateSpan = document.getElementById("dateError");
-  if(existingPasswordSpan) {
-    existingPasswordSpan.remove();
-  }
-  if(existingDateSpan) {
-    existingDateSpan.remove();
-  }
+  const errorSpans = document.querySelectorAll('span[id$="Error"]');
+  errorSpans.forEach(span => {
+    if(span) {
+      span.remove();
+    }
+  });
 
   // REMOVE is-invalid CLASS FROM PREVIOUS SUBMIT
   passwordEl.classList.remove("is-invalid");
