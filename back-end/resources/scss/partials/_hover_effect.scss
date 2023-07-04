@@ -1,0 +1,13 @@
+//TO MAKE THE ICONS APPEAR
+
+.icon svg {
+    scale: 0;
+    width: 0;
+    transition-duration: 0.3s;
+}
+
+a:hover .icon svg,
+button:hover .icon svg {
+    width: 20px;
+    scale: 1,
+}

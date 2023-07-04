@@ -1,0 +1,15 @@
+@use "./colors.scss" as *;
+
+// BACKGROUND
+
+.bg_primary {
+    background-color: $bg-primary !important;
+}
+
+
+//POSITION
+
+
+.z_index_1000 {
+    z-index: 1000;
+}

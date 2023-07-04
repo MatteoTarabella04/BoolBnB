@@ -1,7 +1,8 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light position-sticky top-0 z_index_1000">
         <div class="container">
-            <a class="text-decoration-none fw-bold fs-2 text-dark" href="{{ route('admin.apartments.index') }}">BoolBnB</a>
+            <a class="text-decoration-none fw-bold fs-2 text-dark"
+                href="{{ route('admin.apartments.index') }}">BoolBnB</a>
             {{-- config('app.name', 'Laravel') --}}
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
@@ -53,4 +54,4 @@
             </div>
         </div>
     </nav>
-<header>
+    <header>
