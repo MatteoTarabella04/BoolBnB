@@ -4,6 +4,7 @@ const formEl = document.getElementById("create_apartment_form");
 const imageValidationEl = document.getElementById("image");
 const nameValidationEl = document.getElementById("name");
 const descriptionValidationEl = document.getElementById("description");
+const apartmentTypeValidationEl = document.getElementById("apartment_type_id")
 const pricePerNightValidationEl = document.getElementById("price_per_night");
 const roomsValidationEl = document.getElementById("rooms");
 const bedsValidationEl = document.getElementById("beds");
@@ -12,6 +13,8 @@ const squareMetersValidationEl = document.getElementById("square_meters");
 const addressValidationEl = document.getElementById("address");
 const latitudeValidationEl = document.getElementById("latitude");
 const longitudeValidationEl = document.getElementById("longitude");
+const apartmentServicesValidationEls = document.querySelectorAll("[name='services[]']");
+const apartmentTypesAmount = document.querySelectorAll("#apartment_type_id > option").length - 1;
 
 formEl.addEventListener("submit", (e) => {
   // SELECT SPAN WITH ERROR MESSAGE AND DELETE THEM IF ALREADY EXIST
@@ -26,6 +29,7 @@ formEl.addEventListener("submit", (e) => {
   imageValidationEl.classList.remove("is-invalid");
   nameValidationEl.classList.remove("is-invalid");
   descriptionValidationEl.classList.remove("is-invalid");
+  apartmentTypeValidationEl.classList.remove("is-invalid");
   pricePerNightValidationEl.classList.remove("is-invalid");
   roomsValidationEl.classList.remove("is-invalid");
   bedsValidationEl.classList.remove("is-invalid");
@@ -35,10 +39,15 @@ formEl.addEventListener("submit", (e) => {
   latitudeValidationEl.classList.remove("is-invalid");
   longitudeValidationEl.classList.remove("is-invalid");
 
+  apartmentServicesValidationEls.forEach(apartmentService => {
+    apartmentService.classList.remove("is-invalid");
+  });
+
   // READ DOM ELEMENTS VALUES
   let image = imageValidationEl.value;
   let name = nameValidationEl.value;
   let description = descriptionValidationEl.value;
+  let apartmentType = apartmentTypeValidationEl.value;
   let pricePerNight = pricePerNightValidationEl.value;
   let rooms = roomsValidationEl.value;
   let beds = bedsValidationEl.value;
@@ -115,6 +124,29 @@ formEl.addEventListener("submit", (e) => {
     // ADD THE ERROR MESSAGE TO THE DOM
     descriptionValidationSpan.appendChild(descriptionValidationStrong);
     descriptionValidationEl.insertAdjacentElement("afterend", descriptionValidationSpan);
+  }
+
+  if(isNaN(parseInt(apartmentType)) || apartmentType === "" || apartmentType < 1 || apartmentType > apartmentTypesAmount) {
+    e.preventDefault();
+
+    // ADD is-invalid CLASS
+    apartmentTypeValidationEl.classList.add("is-invalid");
+
+    // CREATE THE SPAN FOR THE ERROR MESSAGE
+    const apartmentTypeValidationSpan = document.createElement("span");
+    apartmentTypeValidationSpan.classList.add("mt-1");
+    apartmentTypeValidationSpan.setAttribute("id", "apartmentTypeError");
+    apartmentTypeValidationSpan.setAttribute("role", "alert");
+    
+    // CREATE THE STRONG WITH THE ERROR MESSAGE
+    const apartmentTypeValidationStrong = document.createElement("strong");
+    apartmentTypeValidationStrong.style.fontSize = "14px";
+    apartmentTypeValidationStrong.classList.add("text-danger");
+    apartmentTypeValidationStrong.innerText = "Inserire un prezzo valido";
+    
+    // ADD THE ERROR MESSAGE TO THE DOM
+    apartmentTypeValidationSpan.appendChild(apartmentTypeValidationStrong);
+    apartmentTypeValidationEl.insertAdjacentElement("afterend", apartmentTypeValidationSpan);
   }
 
   if(pricePerNight <= 0 || pricePerNight > 999999.99) {
@@ -257,4 +289,32 @@ formEl.addEventListener("submit", (e) => {
     addressValidationSpan.appendChild(addressValidationStrong);
     addressValidationEl.insertAdjacentElement("afterend", addressValidationSpan);
   }
+
+  apartmentServicesValidationEls.forEach((apartmentService, index) => {
+    if(isNaN(parseInt(apartmentService.value)) || apartmentService.value === "" || apartmentService.value < 1 || apartmentService.value > apartmentServicesValidationEls.length) {
+      e.preventDefault();
+
+      // SELECT THE LABEL OF THE CHECKBOX WITH THE ERROR
+      const targetedLabel = document.querySelectorAll(".apartment_services > label")[index];
+  
+      // ADD is-invalid CLASS
+      apartmentService.classList.add("is-invalid");
+  
+      // CREATE THE SPAN FOR THE ERROR MESSAGE
+      const apartmentServiceValidationSpan = document.createElement("span");
+      apartmentServiceValidationSpan.classList.add("d-block");
+      apartmentServiceValidationSpan.setAttribute("id", `apartmentServiceError`);
+      apartmentServiceValidationSpan.setAttribute("role", "alert");
+      
+      // CREATE THE STRONG WITH THE ERROR MESSAGE
+      const apartmentServiceValidationStrong = document.createElement("strong");
+      apartmentServiceValidationStrong.style.fontSize = "14px";
+      apartmentServiceValidationStrong.classList.add("text-danger");
+      apartmentServiceValidationStrong.innerText = "Inserire un prezzo valido";
+      
+      // ADD THE ERROR MESSAGE TO THE DOM
+      apartmentServiceValidationSpan.appendChild(apartmentServiceValidationStrong);
+      targetedLabel.insertAdjacentElement("afterend", apartmentServiceValidationSpan);
+    }
+  })
 })
