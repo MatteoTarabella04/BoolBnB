@@ -2,6 +2,7 @@
 
 @section('javascript')
 @vite(['resources/js/insertAddress.js'])
+@vite(['resources/js/insertPreviewApartment.js'])
 @vite(['resources/js/create-apartment-validation.js'])
 @endsection
 
@@ -29,13 +30,21 @@
             <form id="create_apartment_form" action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
-                <div class="mb-3">
-                  <label for="image" class="form-label">Aggiungi un'immagine</label>
-                  <input type="file" class="form-control" name="image" id="image" aria-describedby="helpId" accept="image/*">
-                    @error('image')
-                    <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
-                    @enderror
-                </div>
+                <div class="d-flex justify-content-between flex-wrap align-items-center">
+                                <div class="mb-3 col-12 col-md-8">
+                                    <label for="image" class="form-label">Aggiungi un'immagine</label>
+                                    <input type="file" class="form-control" name="image" id="image"
+                                        aria-describedby="helpId" accept="image/*">
+                                    @error('image')
+                                        <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
+                                    @enderror
+                                </div>
+                                <div id="image-preview-container"
+                                    class="mt-2 d-none col-12 col-md-4 d-flex justify-content-center">
+                                    <img id="image-preview" src="#" alt="Preview dell'immagine"
+                                        style="max-width: 100%;" class="p-3">
+                                </div>
+                            </div>
 
 
                 <div class="mb-3">
@@ -107,8 +116,8 @@
                     @enderror
                 </div>
 
-                <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId" placeholder="" value="{{ old('latitude') }}">
-                <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}">
+                <input type="text" class="d-none" name="latitude" id="latitude" aria-describedby="helpId" placeholder="" value="{{ old('latitude') }}">
+                <input type="text" class="d-none" name="longitude" id="longitude" aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}">
 
                 <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
           
@@ -121,14 +130,7 @@
                     <small class="text-danger">Per favore, indica correttamente la visibilità.</small>
                   @enderror
                 </div>
-
-
-                <button type="submit" class="btn btn-primary w-100 text-uppercase">Aggiungi appartamento</button>
-            </form>
+            </div>
         </div>
-
-      </div>
     </div>
-  </div>
-</div>
 @endsection

@@ -42,17 +42,17 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         $val_data = $request->validated();
-        
+
         // USED TO RETRIEVE NEXT ID THAT WILL BE USED
         $statement = DB::select("SHOW TABLE STATUS LIKE 'apartments'");
         $nextId = $statement[0]->Auto_increment;
 
         $val_data["slug"] = Apartment::generateSlug($val_data["name"]) . "-" . $nextId;
-        if(count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 0) {
+        if (count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 0) {
             return to_route("admin.apartments.create")->with("message", "Per favore usa un nome univoco, senza considerare la punteggiatura");
         }
         $val_data["user_id"] = Auth::id();
-        if($request->hasFile("image")) {
+        if ($request->hasFile("image")) {
             $imagePath = Storage::put("uploads", $val_data["image"]);
             $val_data["image"] = $imagePath;
         }
@@ -100,12 +100,12 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         $val_data = $request->validated();
-        $val_data["slug"] = Apartment::generateSlug($val_data["name"]) . "-" . $apartment->id;
-        if(count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 1) {
+        $val_data["slug"] = Apartment::generateSlug($val_data['name']) . "-" . $apartment->id;
+        if (count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 1) {
             return to_route("admin.apartments.edit", $apartment)->with("message", "Per favore usa un nome univoco, senza considerare la punteggiatura");
         }
-        if($request->hasFile("image")) {
-            if($apartment->image) {
+        if ($request->hasFile("image")) {
+            if ($apartment->image) {
                 Storage::delete($apartment->image);
             }
             $imagePath = Storage::put("uploads", $val_data["image"]);
@@ -123,7 +123,7 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        if($apartment->image) {
+        if ($apartment->image) {
             Storage::delete($apartment->image);
         }
         $apartment->delete();
