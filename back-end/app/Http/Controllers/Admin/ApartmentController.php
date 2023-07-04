@@ -33,7 +33,7 @@ class ApartmentController extends Controller
     public function create()
     {
         $apartment_types = ApartmentType::orderBy('name')->get();
-        $apartment_services = Service::orderBy('name')->get();
+        $apartment_services = Service::orderByDesc('id')->get();
 
         return view("admin.apartments.create", compact('apartment_types', 'apartment_services'));
     }
@@ -80,7 +80,7 @@ class ApartmentController extends Controller
     {
 
         $apartment_types = ApartmentType::orderBy('name')->get();
-        $apartment_services = Service::orderBy('name')->get();
+        $apartment_services = Service::orderByDesc('id')->get();
 
         if (Auth::id() === $apartment->user_id) {
             return view("admin.apartments.show", compact("apartment", "apartment_types", "apartment_services"));
@@ -97,8 +97,12 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+
+        $apartment_types = ApartmentType::orderBy('name')->get();
+        $apartment_services = Service::orderByDesc('id')->get();
+
         if (Auth::id() === $apartment->user_id) {
-            return view("admin.apartments.edit", compact("apartment"));
+            return view("admin.apartments.edit", compact("apartment", "apartment_types", "apartment_services"));
         } else {
             return to_route("admin.apartments.index")->with("message", "Stai cercando di modificare un appartamento non tuo");
         }
