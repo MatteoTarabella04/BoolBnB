@@ -12,11 +12,11 @@
         <h2>Elenco degli appartamenti</h2>
         <div class="row">
             @forelse($apartments as $apartment)
-            <div class="col-12 d-flex  rounded-1 m-1">
-                <div class="col-4 p-1">
+            <div class="col-12 d-lg-flex d-sm-block rounded-1 m-1">
+                <div class="col-lg-4 col-sm-12 p-1">
                     <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}">
                 </div>
-                <div class="col-8 p-1">
+                <div class="col-lg-8 col-sm-12 p-1">
                     <h5><strong>Appartamento </strong></h5>
                     <div class="">{{ $apartment->name }}</div>
                     
