@@ -67,6 +67,9 @@ class ApartmentController extends Controller
         if ($request->has('apartment_types')) {
             $newApartment->apartment_types()->attach($request->apartment_types);
         }
+        if ($request->has('services')) {
+            $newApartment->services()->attach($request->services);
+        }
         return to_route("admin.apartments.index")->with("message", "Annuncio aggiunto");
     }
 
@@ -133,6 +136,9 @@ class ApartmentController extends Controller
 
         if ($request->has('apartment_types')) {
             $apartment->apartment_types()->sync($request->apartment_types);
+        }
+        if ($request->has('services')) {
+            $apartment->services()->sync($request->services);
         }
 
         return to_route("admin.apartments.show", $apartment)->with("message", "Annuncio: " . $apartment->name . " aggiornato");
