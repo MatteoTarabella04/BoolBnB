@@ -20,6 +20,5 @@ document.addEventListener('DOMContentLoaded', function () {
     const imageInput = document.getElementById('image');
     imageInput.addEventListener('change', function () {
         showImagePreview(this);
-        console.log(this.files);
     });
 });

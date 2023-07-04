@@ -130,6 +130,8 @@
                     <small class="text-danger">Per favore, indica correttamente la visibilità.</small>
                   @enderror
                 </div>
+
+                <button type="submit" class="btn btn-primary w-100 text-uppercase">Aggiungi appartamento</button>
             </div>
         </div>
     </div>
