@@ -9,6 +9,21 @@ body {
   & .card {
     background-color: $bg-special-light !important;
   }
+
+
+  .col-12 {
+    background-color: #c0def0;
+    border: 1px solid;
+    border-color: rgb(206, 206, 206);
+
+  }
+
+  .col-8 {
+    font-size: 12px;
+    color: #333333;
+  }
+
+
 }
 
 #addressSuggestionsWrapper ul {
@@ -30,4 +45,5 @@ body {
 
 
   }
+
 }
