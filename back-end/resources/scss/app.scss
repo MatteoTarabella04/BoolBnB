@@ -7,7 +7,7 @@ body {
   background-color: $bg-secondary !important;
 
   & .card {
-      background-color: $bg-special-light !important;
+    background-color: $bg-special-light !important;
   }
 }
 
@@ -22,5 +22,12 @@ body {
 
   li {
     cursor: pointer;
+
+    &.selected {
+      background-color: $bg-selected-bootstrap;
+    }
+
+
+
   }
 }
