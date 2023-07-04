@@ -55,21 +55,22 @@
                                 @enderror
                             </div>
 
-                            <div class='form-group d-flex gap-2'>
-                                <p>Seleziona il tipo di struttura:</p>
-                                @foreach ($apartment_types as $type)
-                                    <div class="form-check @error('apartment_types') is-invalid @enderror">
-                                        <label class='form-check-label'>
-                                            <input name='types[]' type='checkbox' value='{{ $type->id }}'
-                                                class='form-check-input'
-                                                {{ in_array($type->id, old('apartment_types', [])) ? 'checked' : '' }}>
-                                            {{ $type->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                                @error('apartment_types')
-                                    <div class='invalid-feedback'>{{ $message }}</div>
-                                @enderror
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="apartment_type" class="form-label">Seleziona il tipo di struttura:</label>
+                                    <select class="form-control" name="apartment_type" id="apartment_type">
+                                        <option value="">-</option>
+                                        @forelse ($apartment_types as $type)
+                                            <option value="{{ $type->id }}">
+                                                {{ $type->name }}
+                                            </option>
+                                        @empty
+                                            <option value="">
+                                                none
+                                            </option>
+                                        @endforelse
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="mb-3">
@@ -114,7 +115,8 @@
                             <div class="mb-3">
                                 <label for="square_meters" class="form-label">Metri quadri</label>
                                 <input type="number" class="form-control" name="square_meters" id="square_meters"
-                                    aria-describedby="helpId" placeholder="" value="{{ old('square_meters') }}" required>
+                                    aria-describedby="helpId" placeholder="" value="{{ old('square_meters') }}"
+                                    required>
                                 @error('square_meters')
                                     <small class="text-danger">Per favore, inserisci correttamente il numero di mq.</small>
                                 @enderror
