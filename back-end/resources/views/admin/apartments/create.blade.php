@@ -62,6 +62,24 @@
                     <small class="text-danger">Per favore, inserisci correttamente la descrizione.</small>
                     @enderror
                 </div>
+                
+                 <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="apartment_type" class="form-label">Seleziona il tipo di struttura:</label>
+                                    <select class="form-control" name="apartment_type" id="apartment_type">
+                                        <option value="">-</option>
+                                        @forelse ($apartment_types as $type)
+                                            <option value="{{ $type->id }}">
+                                                {{ $type->name }}
+                                            </option>
+                                        @empty
+                                            <option value="">
+                                                none
+                                            </option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
 
                 <div class="mb-3">
                   <label for="price_per_night" class="form-label">Prezzo a notte (€)</label>
@@ -120,6 +138,25 @@
                 <input type="text" class="d-none" name="longitude" id="longitude" aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}">
 
                 <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
+                
+                <div class="mb-3">
+                                <div class='form-group'>
+                                    <p>Seleziona i servizi:</p>
+                                    @foreach ($apartment_services as $service)
+                                        <div class="form-check @error('apartment_services') is-invalid @enderror">
+                                            <label class='form-check-label'>
+                                                <input name='services[]' type='checkbox' value='{{ $service->id }}'
+                                                    class='form-check-input'
+                                                    {{ in_array($service->id, old('apartment_services', [])) ? 'checked' : '' }}>
+                                                {{ $service->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    @error('apartment_services')
+                                        <div class='invalid-feedback'>{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
           
                 <div class="form-check mb-3">
                   <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" checked>

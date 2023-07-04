@@ -2,6 +2,7 @@
 
 @section('javascript')
     @vite(['resources/js/insertAddress.js'])
+    @vite(['resources/js/edit-apartment-validation.js'])
     @vite(['resources/js/insertPreviewApartment.js'])
 @endsection
 
@@ -16,6 +17,7 @@
                         </div>
                     @endif
 
+
                     @if ($errors->any())
                         @foreach ($errors->all() as $error)
                             <div class="alert alert-danger" role="alert">
@@ -27,19 +29,9 @@
                     <div>
                         <h4>Modifica l'annuncio!</h4>
                         <form action="{{ route('admin.apartments.update', $apartment) }}" method="post"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" id="edit_apartment_form">
                             @csrf
                             @method('PUT')
-
-                            {{-- <div class="mb-3">
-                  <label for="image" class="form-label">Aggiungi un'immagine</label>
-                  <input type="file"
-                    class="form-control" name="image" id="image" aria-describedby="helpId" accept="image/*">
-                    @error('image')
-                        <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
-                    @enderror
-                </div>
- --}}
 
                             <div class="d-flex justify-content-between flex-wrap align-items-center">
                                 <div class="mb-3 col-12 col-md-8">
@@ -77,6 +69,20 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label for="apartment_types" class="form-label">Seleziona il tipo di struttura:</label>
+                                <select class="form-select @error('apartment_types') is-invalid @enderror"
+                                    name=" apartment_types" id="apartment_types">
+                                    <option value="">-</option>
+                                    @foreach ($apartment_types as $type)
+                                        <option value="{{ $type?->id }}"
+                                            {{ $type?->id == old('apartment_types', $apartment->apartment_type_id) ? 'selected' : '' }}>
+                                            {{ $type?->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
                             <div class="mb-3">
                                 <label for="price_per_night" class="form-label">Prezzo a notte (€)</label>
                                 <input type="number" class="form-control" name="price_per_night" id="price_per_night"
@@ -132,29 +138,50 @@
 
                             <div class="mb-3">
                                 <label for="address" class="form-label">Indirizzo</label>
-                                <div class="position-relative" id="addressSuggestionsWrapper">
-                                    <input type="text" class="form-control" name="address" id="address"
-                                        aria-describedby="helpId" placeholder=""
-                                        value="{{ old('address', $apartment->address) }}" required>
-                                    <ul class="list-unstyled d-none list-group" id="addressSuggestions">
-                                    </ul>
-                                </div>
+                                <input type="text" class="form-control" name="address" id="address"
+                                    aria-describedby="helpId" placeholder=""
+                                    value="{{ old('address', $apartment->address) }}" required>
                                 @error('address')
                                     <small class="text-danger">Per favore, inserisci correttamente l'indirizzo.</small>
                                 @enderror
                             </div>
 
-                            <input type="text" class="form-control d-none" name="latitude" id="latitude"
-                                aria-describedby="helpId" placeholder=""
-                                value="{{ old('latitude', $apartment->latitude) }}" required>
-                            <input type="text" class="form-control d-none" name="longitude" id="longitude"
-                                aria-describedby="helpId" placeholder=""
-                                value="{{ old('longitude', $apartment->longitude) }}" required>
+                            <input type="text" class="d-none" name="latitude" id="latitude"
+                                aria-describedby="helpId" placeholder="" value="{{ old('latitude') }}" required>
+                            <input type="text" class="d-none" name="longitude" id="longitude"
+                                aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}" required>
 
                             <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
 
+                            <div class="mb-3">
+                                <div class='form-group'>
+                                    <p>Seleziona i servizi:</p>
+                                    @foreach ($apartment_services as $service)
+                                        <div class="form-check @error('apartment_services') is-invalid @enderror">
+                                            <label class='form-check-label'>
+                                                @if ($errors->any())
+                                                    <!-- 1 (if) -->
+                                                    <input name="services[]" type="checkbox" value="{{ $service->id }}"
+                                                        class="form-check-input"
+                                                        {{ in_array($service->id, old('apartment_services', [])) ? 'checked' : '' }}>
+                                                @else
+                                                    <!-- 2 (else) -->
+                                                    <input name='services[]' type='checkbox' value='{{ $service->id }}'
+                                                        class='form-check-input'
+                                                        {{ $apartment->services->contains($service) ? 'checked' : '' }}>
+                                                @endif
+                                                {{ $service->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    @error('apartment_services')
+                                        <div class='invalid-feedback'>{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="1" id="visible" checked>
+                                <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" checked>
                                 <label class="form-check-label" for="visible">
                                     Appartamento disponibile da subito
                                 </label>

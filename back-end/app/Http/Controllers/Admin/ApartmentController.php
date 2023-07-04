@@ -6,6 +6,8 @@ use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Http\Controllers\Controller;
+use App\Models\ApartmentType;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +32,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view("admin.apartments.create");
+        $apartment_types = ApartmentType::orderBy('name')->get();
+        $apartment_services = Service::orderBy('name')->get();
+
+        return view("admin.apartments.create", compact('apartment_types', 'apartment_services'));
     }
 
     /**
@@ -57,6 +62,11 @@ class ApartmentController extends Controller
             $val_data["image"] = $imagePath;
         }
         $newApartment = Apartment::create($val_data);
+
+        // ATTACH TEH CHECKED TYPES
+        if ($request->has('apartment_types')) {
+            $newApartment->apartment_types()->attach($request->apartment_types);
+        }
         return to_route("admin.apartments.index")->with("message", "Annuncio aggiunto");
     }
 
@@ -68,8 +78,12 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+
+        $apartment_types = ApartmentType::orderBy('name')->get();
+        $apartment_services = Service::orderBy('name')->get();
+
         if (Auth::id() === $apartment->user_id) {
-            return view("admin.apartments.show", compact("apartment"));
+            return view("admin.apartments.show", compact("apartment", "apartment_types", "apartment_services"));
         } else {
             return to_route("admin.apartments.index")->with("message", "Stai cercando di visualizzare un appartamento non tuo");
         }
@@ -83,8 +97,12 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+
+        $apartment_types = ApartmentType::orderBy('name')->get();
+        $apartment_services = Service::orderBy('name')->get();
+
         if (Auth::id() === $apartment->user_id) {
-            return view("admin.apartments.edit", compact("apartment"));
+            return view("admin.apartments.edit", compact("apartment", "apartment_types", "apartment_services"));
         } else {
             return to_route("admin.apartments.index")->with("message", "Stai cercando di modificare un appartamento non tuo");
         }
@@ -112,6 +130,11 @@ class ApartmentController extends Controller
             $val_data["image"] = $imagePath;
         }
         $apartment->update($val_data);
+
+        if ($request->has('apartment_types')) {
+            $apartment->apartment_types()->sync($request->apartment_types);
+        }
+
         return to_route("admin.apartments.show", $apartment)->with("message", "Annuncio: " . $apartment->name . " aggiornato");
     }
 
