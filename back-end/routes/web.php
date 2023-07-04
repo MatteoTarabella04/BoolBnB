@@ -17,9 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// REDIRECT TO LOGIN PAGE WHEN A GUEST LANDS ON THE HOMEPAGE
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+// REDIRECT TO DASHBOARD WHEN A REGISTERED USER LANDS ON THE HOMEPAGE
+Route::get('/', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified']);
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     // responds to url /admin
