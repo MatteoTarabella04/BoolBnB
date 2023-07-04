@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('javascript')
+    @vite(['resources/js/insertAddress.js'])
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -130,6 +134,13 @@
                                     <small class="text-danger">Per favore, inserisci correttamente l'indirizzo.</small>
                                 @enderror
                             </div>
+
+                            <input type="text" class="form-control d-none" name="latitude" id="latitude"
+                                aria-describedby="helpId" placeholder="" value="{{ old('latitude') }}" required>
+                            <input type="text" class="form-control d-none" name="longitude" id="longitude"
+                                aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}" required>
+
+                            <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
 
 
                             <div class="form-check mb-3">
