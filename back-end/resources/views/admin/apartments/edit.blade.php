@@ -2,6 +2,7 @@
 
 @section('javascript')
     @vite(['resources/js/insertAddress.js'])
+    @vite(['resources/js/edit-apartment-validation.js'])
 @endsection
 
 @section('content')
@@ -26,7 +27,7 @@
                     <div>
                         <h4>Modifica l'annuncio!</h4>
                         <form action="{{ route('admin.apartments.update', $apartment) }}" method="post"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" id="edit_apartment_form">
                             @csrf
                             @method('PUT')
 
@@ -141,6 +142,33 @@
                                 aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}" required>
 
                             <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
+
+                            <div class="mb-3">
+                                <div class='form-group'>
+                                    <p>Seleziona i servizi:</p>
+                                    @foreach ($apartment_services as $service)
+                                        <div class="form-check @error('apartment_services') is-invalid @enderror">
+                                            <label class='form-check-label'>
+                                                @if ($errors->any())
+                                                    <!-- 1 (if) -->
+                                                    <input name="services[]" type="checkbox" value="{{ $service->id }}"
+                                                        class="form-check-input"
+                                                        {{ in_array($service->id, old('apartment_services', [])) ? 'checked' : '' }}>
+                                                @else
+                                                    <!-- 2 (else) -->
+                                                    <input name='services[]' type='checkbox' value='{{ $service->id }}'
+                                                        class='form-check-input'
+                                                        {{ $apartment->services->contains($service) ? 'checked' : '' }}>
+                                                @endif
+                                                {{ $service->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    @error('apartment_services')
+                                        <div class='invalid-feedback'>{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
 
 
                             <div class="form-check mb-3">
