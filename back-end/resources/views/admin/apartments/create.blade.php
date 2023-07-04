@@ -2,6 +2,7 @@
 
 @section('javascript')
 @vite(['resources/js/insertAddress.js'])
+@vite(['resources/js/create-apartment-validation.js'])
 @endsection
 
 @section('content')
@@ -25,7 +26,7 @@
       
         <div>
             <h4>Inserisci un annuncio!</h4>
-            <form action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
+            <form id="create_apartment_form" action="{{ route('admin.apartments.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -106,13 +107,13 @@
                     @enderror
                 </div>
 
-                <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId" placeholder="" value="{{ old('latitude') }}" required>
-                <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}" required>
+                <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId" placeholder="" value="{{ old('latitude') }}">
+                <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId" placeholder="" value="{{ old('longitude') }}">
 
                 <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
           
                 <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" value="1" id="visible" checked>
+                  <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" checked>
                   <label class="form-check-label" for="visible">
                   Appartamento disponibile da subito
                   </label>

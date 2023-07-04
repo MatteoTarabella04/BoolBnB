@@ -8,10 +8,7 @@ const dateEl = document.getElementById("date_of_birth");
 
 form.addEventListener("submit", (e) => {
   // SELECT SPAN WITH ERROR MESSAGE AND DELETE THEM IF ALREADY EXIST
-  const errorSpans = [];
-  errorSpans.push(document.getElementById("passwordConfirmationError"));
-  errorSpans.push(document.getElementById("dateError"));
-
+  const errorSpans = document.querySelectorAll('span[id$="Error"]');
   errorSpans.forEach(span => {
     if(span) {
       span.remove();
