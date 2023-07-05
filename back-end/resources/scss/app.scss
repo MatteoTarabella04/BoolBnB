@@ -1,4 +1,5 @@
 @use './partials/colors.scss' as *;
+@use './partials/apartment_description.scss' as *;
 @use "./partials/appHeader.scss";
 @use "./partials/dashboard.scss";
 @use "./partials/utilities_selector.scss";
@@ -18,30 +19,5 @@ body {
 
   font-family: 'Comfortaa', cursive;
 
-  .apartment_description {
-    font-size: 12px;
 
-
-  }
-
-  #addressSuggestionsWrapper ul {
-    position: absolute;
-    left: 0;
-    top: 38px;
-    border-radius: 6px;
-    width: 100%;
-    background-color: white;
-    z-index: 1;
-
-    li {
-      cursor: pointer;
-
-      &.selected {
-        background-color: $bg-selected-bootstrap;
-      }
-
-
-
-    }
-  }
 }
