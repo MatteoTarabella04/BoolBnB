@@ -81,7 +81,6 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-
         $apartment_types = ApartmentType::orderBy('name')->get();
         $apartment_services = Service::orderBy('name')->get();
 
@@ -100,7 +99,6 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-
         $apartment_types = ApartmentType::orderBy('name')->get();
         $apartment_services = Service::orderBy('name')->get();
 
@@ -131,6 +129,8 @@ class ApartmentController extends Controller
             }
             $imagePath = Storage::put("uploads", $val_data["image"]);
             $val_data["image"] = $imagePath;
+        } else {
+            $val_data["image"] = $apartment->image;
         }
         $apartment->update($val_data);
 
