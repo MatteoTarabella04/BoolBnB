@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('javascript')
-    @vite(['resources/js/dashboard.js'])
+@vite(['resources/js/dashboard.js'])
 @endsection
 
 @section('content')
@@ -39,7 +39,7 @@
                         <div class="card-header text-center text-uppercase p-2">
                             <h2 class="fw-bolder m-0 text-secondary">{{__('Operazioni')}}</h2>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body d-flex align-items-center justify-content-center">
                             <p class="operations_description">{{__('Mantieni aggiornata la tua dashboard, accedi alla pagina dei tuoi annunci, aggiungine di nuovi o elimina quelli obsoleti!')}}</p>
                         </div>
                         <div class="card-footer ">
