@@ -1,7 +1,6 @@
 //TODO implementare validazione doppia delle regole HTML
 // RETRIEVE DOM ELEMENTS
-const formEl = document.getElementById("create_apartment_form");
-const imageValidationEl = document.getElementById("image");
+const formEl = document.getElementById("edit_apartment_form");
 const nameValidationEl = document.getElementById("name");
 const descriptionValidationEl = document.getElementById("description");
 const apartmentTypeValidationEl = document.getElementById("apartment_type_id")
@@ -26,7 +25,6 @@ formEl.addEventListener("submit", (e) => {
   });
 
   // REMOVE is-invalid CLASS FROM PREVIOUS SUBMIT
-  imageValidationEl.classList.remove("is-invalid");
   nameValidationEl.classList.remove("is-invalid");
   descriptionValidationEl.classList.remove("is-invalid");
   apartmentTypeValidationEl.classList.remove("is-invalid");
@@ -38,13 +36,12 @@ formEl.addEventListener("submit", (e) => {
   addressValidationEl.classList.remove("is-invalid");
   latitudeValidationEl.classList.remove("is-invalid");
   longitudeValidationEl.classList.remove("is-invalid");
-
+  
   apartmentServicesValidationEls.forEach(apartmentService => {
     apartmentService.classList.remove("is-invalid");
   });
 
   // READ DOM ELEMENTS VALUES
-  let image = imageValidationEl.value;
   let name = nameValidationEl.value;
   let description = descriptionValidationEl.value;
   let apartmentType = apartmentTypeValidationEl.value;
@@ -56,29 +53,6 @@ formEl.addEventListener("submit", (e) => {
   let address = addressValidationEl.value;
   let latitude = latitudeValidationEl.value;
   let longitude = longitudeValidationEl.value;
-
-  if(image === "") {
-    e.preventDefault();
-
-    // ADD is-invalid CLASS
-    imageValidationEl.classList.add("is-invalid");
-    
-    // CREATE THE SPAN FOR THE ERROR MESSAGE
-    const imageValidationSpan = document.createElement("span");
-    imageValidationSpan.classList.add("mt-1");
-    imageValidationSpan.setAttribute("id", "imageError");
-    imageValidationSpan.setAttribute("role", "alert");
-    
-    // CREATE THE STRONG WITH THE ERROR MESSAGE
-    const imageValidationStrong = document.createElement("strong");
-    imageValidationStrong.style.fontSize = "14px";
-    imageValidationStrong.classList.add("text-danger");
-    imageValidationStrong.innerText = "Inserire un'immagine valida";
-    
-    // ADD THE ERROR MESSAGE TO THE DOM
-    imageValidationSpan.appendChild(imageValidationStrong);
-    imageValidationEl.insertAdjacentElement("afterend", imageValidationSpan);
-  }
 
   if(name.length < 3 || name.length > 255) {
     e.preventDefault();

@@ -13,4 +13,13 @@
         display: block;
         border-radius: 1rem;
     }
+
+    & .card_off{
+        background-color:$bg-special-light!important;
+    }
+
+    & .operations_description{
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
 }
