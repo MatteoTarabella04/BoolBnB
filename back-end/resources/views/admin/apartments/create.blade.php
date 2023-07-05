@@ -141,7 +141,7 @@
                                 <label class='form-check-label'>
                                     <input name='services[]' type='checkbox' value='{{ $service->id }}'
                                         class='form-check-input'
-                                        {{ in_array($service->id, old('apartment_services', [])) ? 'checked' : '' }}>
+                                        {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
                                     {{ $service->name }}
                                 </label>
                             </div>

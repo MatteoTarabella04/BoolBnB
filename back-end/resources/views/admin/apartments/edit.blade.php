@@ -168,7 +168,7 @@
                                                     <!-- 1 (if) -->
                                                     <input name="services[]" type="checkbox" value="{{ $service->id }}"
                                                         class="form-check-input"
-                                                        {{ in_array($service->id, old('apartment_services', [])) ? 'checked' : '' }}>
+                                                        {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
                                                 @else
                                                     <!-- 2 (else) -->
                                                     <input name='services[]' type='checkbox' value='{{ $service->id }}'
@@ -186,7 +186,11 @@
                             </div>
 
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" checked>
+                                @if($errors->any())
+                                    <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" {{ old('visible') == 1 ? 'checked' : '' }}>
+                                @else
+                                    <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" {{ $apartment->visible ? 'checked' : '' }}>
+                                @endif
                                 <label class="form-check-label" for="visible">
                                     Appartamento disponibile da subito
                                 </label>

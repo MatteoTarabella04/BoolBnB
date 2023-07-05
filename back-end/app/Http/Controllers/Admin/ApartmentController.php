@@ -61,6 +61,10 @@ class ApartmentController extends Controller
             $imagePath = Storage::put("uploads", $val_data["image"]);
             $val_data["image"] = $imagePath;
         }
+        if(!$request->has("visible")) {
+            $val_data["visible"] = 0;
+        }
+
         $newApartment = Apartment::create($val_data);
 
         // ATTACH TEH CHECKED TYPES
@@ -123,6 +127,10 @@ class ApartmentController extends Controller
         if (count(Apartment::where('slug', $val_data["slug"])->get()->toArray()) > 1) {
             return to_route("admin.apartments.edit", $apartment)->with("message", "Per favore usa un nome univoco, senza considerare la punteggiatura");
         }
+        if(!$request->has("visible")) {
+            $val_data["visible"] = 0;
+        }
+
         if ($request->hasFile("image")) {
             if ($apartment->image) {
                 Storage::delete($apartment->image);
