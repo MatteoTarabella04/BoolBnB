@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col">
                 <h1 class="fs-1 text-dark-emphasis my-4 text-center fw-bolder badge_special">
-                    {{ __('La tua Dashboard, "Nome"') }}
+                    {{ __('La tua Dashboard, ') . Auth::user()->first_name }} 
                 </h1>
             </div>
         </div>
@@ -31,7 +31,7 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <h3>{{ __('You are logged in!') }}</h3>
+                            <h3>{{ __('Accesso effettuato!') }}</h3>
                             
                         </div>
                     </div>
@@ -46,10 +46,10 @@
                             <div class="row d-flex justify-content-around">
 
 
-                                <a class="col-5 btn btn-dark text-uppercase" href="{{ route('admin.apartments.index') }}"
+                                <a class="col-5 btn btn-dark text-uppercase d-flex justify-content-center align-items-center" href="{{ route('admin.apartments.index') }}"
                                     role="button">{{__('Vedi annunci')}}</a>
 
-                                <a class="col-5 btn btn-dark text-uppercase" href="{{ route('admin.apartments.create') }}"
+                                <a class="col-5 btn btn-dark text-uppercase d-flex justify-content-center align-items-center" href="{{ route('admin.apartments.create') }}"
                                     role="button">{{__('Inserisci annuncio')}}</a>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-sm-12 col-lg-6">
-                    <div class="card card_bg_special">{{-- statistics card --}}
+                    <div class="card card_bg_special mb-4">{{-- statistics card --}}
                         <div class="card-header text-center">
                             <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{__('le tue statistiche')}}</h2>
 
