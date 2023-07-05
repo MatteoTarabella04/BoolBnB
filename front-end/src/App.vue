@@ -1,18 +1,15 @@
 <script>
-// import AppHeader from './components/AppHeader.vue';
+import AppHeader from './components/AppHeader.vue';
 export default {
-    // components: {
-    //     AppHeader,
-    // },
+    components: {
+        AppHeader,
+    },
 }
 </script>
 
 <template>
-
-    <!-- <AppHeader></AppHeader> -->
-    <h1>PROVA</h1>
+    <AppHeader></AppHeader>
     <router-view></router-view>
-
 </template>
 
 <style lang="scss"></style>
