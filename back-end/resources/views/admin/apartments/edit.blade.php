@@ -39,7 +39,8 @@
                                     <input type="file" class="form-control" name="image" id="image"
                                         aria-describedby="helpId" accept="image/*"
                                         value="{{ old('image', $apartment->image) }}">
-                                    <small>Se non inserisci alcuna immagine, verrà conservata quella precedentemente inserita</small>
+                                    <small>Se non inserisci alcuna immagine, verrà conservata quella precedentemente
+                                        inserita</small>
                                     @error('image')
                                         <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
                                     @enderror
@@ -83,7 +84,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="price_per_night" class="form-label">Prezzo a notte (€)</label>
                                 <input type="number" class="form-control" name="price_per_night" id="price_per_night"
@@ -141,8 +142,8 @@
                                 <label for="address" class="form-label">Indirizzo</label>
                                 <div class="position-relative" id="addressSuggestionsWrapper">
                                     <input type="text" class="form-control" name="address" id="address"
-                                    aria-describedby="helpId" placeholder=""
-                                    value="{{ old('address', $apartment->address) }}" required>
+                                        aria-describedby="helpId" placeholder=""
+                                        value="{{ old('address', $apartment->address) }}" required>
                                     <ul class="list-unstyled d-none list-group" id="addressSuggestions">
                                     </ul>
                                 </div>
@@ -152,9 +153,11 @@
                             </div>
 
                             <input type="text" class="d-none" name="latitude" id="latitude"
-                                aria-describedby="helpId" placeholder="" value="{{ old('latitude', $apartment->latitude) }}">
+                                aria-describedby="helpId" placeholder=""
+                                value="{{ old('latitude', $apartment->latitude) }}">
                             <input type="text" class="d-none" name="longitude" id="longitude"
-                                aria-describedby="helpId" placeholder="" value="{{ old('longitude', $apartment->longitude) }}">
+                                aria-describedby="helpId" placeholder=""
+                                value="{{ old('longitude', $apartment->longitude) }}">
 
                             <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
 
@@ -162,7 +165,8 @@
                                 <div class='form-group'>
                                     <p>Seleziona i servizi:</p>
                                     @foreach ($apartment_services as $service)
-                                        <div class="form-check @error('apartment_services') is-invalid @enderror apartment_services">
+                                        <div
+                                            class="form-check @error('apartment_services') is-invalid @enderror apartment_services">
                                             <label class='form-check-label'>
                                                 @if ($errors->any())
                                                     <!-- 1 (if) -->
@@ -191,6 +195,7 @@
                                 @else
                                     <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" {{ $apartment->visible ? 'checked' : '' }}>
                                 @endif
+                                
                                 <label class="form-check-label" for="visible">
                                     Appartamento disponibile da subito
                                 </label>

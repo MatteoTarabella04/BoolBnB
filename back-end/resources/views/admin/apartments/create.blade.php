@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('javascript')
-@vite(['resources/js/insertAddress.js'])
-@vite(['resources/js/insertPreviewApartment.js'])
-@vite(['resources/js/create-apartment-validation.js'])
+    @vite(['resources/js/insertAddress.js'])
+    @vite(['resources/js/insertPreviewApartment.js'])
+    @vite(['resources/js/create-apartment-validation.js'])
 @endsection
 
 @section('content')
@@ -38,6 +38,7 @@
                                 @error('image')
                                     <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
                                 @enderror
+                                
                             </div>
                             <div id="image-preview-container"
                                 class="mt-2 d-none col-12 col-md-4 d-flex justify-content-center">
@@ -45,7 +46,6 @@
                                     style="max-width: 100%;" class="p-3">
                             </div>
                         </div>
-
 
                         <div class="mb-3">
                             <label for="" class="form-label">Nome</label>
@@ -114,7 +114,6 @@
                             <small class="text-danger">Per favore, inserisci correttamente il numero di mq.</small>
                             @enderror
                         </div>
-
 
                         <div class="mb-3">
                             <label for="address" class="form-label">Indirizzo</label>
