@@ -1,25 +1,49 @@
-import Chart from 'chart.js/auto'; 
+import Chart from 'chart.js/auto';
+import { result } from 'lodash';
+
+getVisits();
 
 const ctx = document.getElementById('myChart');
+const baseData = {
+    labels: [],
+    datasets: [{
+        label: 'numero di visite',
+        data: [],
+        borderWidth: 1
+    }]
+};
 
-const myChart = new Chart(ctx, {
-    type: 'polarArea',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: 'number of ad',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+
+
+let results = []
+
+function getVisits() {
+
+    axios
+        .get(`http://127.0.0.1:8000/api/apartments`).then(response => {
+
+            results = response.data.apartments.data;
+
+            results.forEach(apartment => {
+                
+                baseData.labels.push(apartment.name)
+                
+                baseData.datasets[0].data.push(apartment.visits.length)
+                //console.log(apartment.name);
+                console.log(baseData);
+                
+            });
+            
+            const myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: baseData ,
+                options: {},
+            });
+        })
+        .catch(error => {
+            console.error(error.message);
+        })
+}
 
 const myTimeout = setTimeout(cardOff, 2000);
 
