@@ -1,6 +1,7 @@
 //TO MAKE THE ICONS APPEAR
 
 .icon svg {
+    margin-left: -3px;
     scale: 0;
     width: 0;
     transition-duration: 0.3s;
@@ -11,3 +12,5 @@ button:hover .icon svg {
     width: 20px;
     scale: 1,
 }
+
+// EFFECT

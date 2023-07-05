@@ -1,5 +1,5 @@
-<header>
-    <nav class="navbar navbar-expand-md navbar-light bg-light position-sticky top-0 z_index_1000">
+<header class="position-sticky top-0 z_index_1000 shadow">
+    <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
             <a class="text-decoration-none fw-bold fs-2 text-dark"
                 href="{{ route('admin.apartments.index') }}">BoolBnB</a>
@@ -47,11 +47,7 @@
                 </div>
             </li> -->
                 </ul>
-                <!-- <form class="d-flex my-2 my-lg-0">
-          <input class="form-control me-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
             </div>
         </div>
     </nav>
-    <header>
+</header>

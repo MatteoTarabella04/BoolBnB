@@ -2,21 +2,21 @@
 
 header {
 
-  & .navbar {
-      background-color: $bg-primary !important;
-  }
+    & .navbar {
+        background-color: $bg-selected-bootstrap ;
+    }
 
-  & .nav-link {
-      color: $text-primary !important;
-  }
+    & .nav-link {
+        color: $text-primary !important;
+    }
 
-  & .nav-item {
-      border-radius: .5rem;
-      transition-property: all;
-      transition-duration: .4s;
-  }
+    & .nav-item {
+        border-radius: .5rem;
+        transition-property: all;
+        transition-duration: .4s;
+    }
 
-  & .nav-item:hover {
-      background-color: $bg-primary-hover !important;
-  }
+    & .nav-item:hover {
+        background-color: $bg-primary-hover !important;
+    }
 }

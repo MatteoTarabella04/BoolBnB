@@ -6,10 +6,42 @@
     background-color: $bg-primary !important;
 }
 
+.bg_special {
+    background-color: $bg-card-special !important;
+}
+
+.bg_double_show {
+    position: fixed;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    background: rgb(243, 243, 243);
+    background: linear-gradient(315deg, rgba(243, 243, 243, 1) 80%, rgba(243, 243, 243, 1) 81%, $bg-card-special 81%);
+}
+
+
+//CONTAINER 
+
+.body_minus_header {
+    min-height: calc(100vh - 62px);
+}
+
+.body_minus_header_block {
+    height: calc(100vh - 62px);
+}
+
 
 //POSITION
 
 
 .z_index_1000 {
     z-index: 1000;
+}
+
+
+//VISUAL EFFECT
+
+.strong_shadow {
+    filter: drop-shadow(3px 3px 5px rgb(47, 47, 47));
 }
