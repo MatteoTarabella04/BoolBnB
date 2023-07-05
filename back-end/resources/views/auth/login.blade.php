@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('javascript')
+@vite(['resources/js/login-validation.js'])
+@endsection
+
 @section('content')
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -8,7 +12,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" id="login_form">
                         @csrf
 
                         <div class="mb-4 row">
