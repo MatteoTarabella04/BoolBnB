@@ -34,7 +34,7 @@
                             <div class="mb-3 col-12 col-md-8">
                                 <label for="image" class="form-label">Aggiungi un'immagine</label>
                                 <input type="file" class="form-control" name="image" id="image"
-                                    aria-describedby="helpId" accept="image/*">
+                                    aria-describedby="helpId" accept="image/*" required>
                                 @error('image')
                                     <small class="text-danger">Per favore, inserisci correttamente l'immagine.</small>
                                 @enderror
@@ -65,7 +65,7 @@
                         
                         <div class="mb-3">
                             <label for="apartment_type_id" class="form-label">Seleziona il tipo di struttura:</label>
-                            <select class="form-select @error('apartment_type_ids') is-invalid @enderror" name="apartment_type_id" id="apartment_type_id">
+                            <select class="form-select @error('apartment_type_ids') is-invalid @enderror" name="apartment_type_id" id="apartment_type_id" required>
                                 <option value="">-</option>
                                 @foreach ($apartment_types as $type)
                                     <option value="{{ $type->id }}" {{ $type?->id == old('apartment_type_id', []) ? 'selected' : '' }}>

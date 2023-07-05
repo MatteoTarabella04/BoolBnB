@@ -15,6 +15,10 @@ const longitudeValidationEl = document.getElementById("longitude");
 const apartmentServicesValidationEls = document.querySelectorAll("[name='services[]']");
 const apartmentTypesAmount = document.querySelectorAll("#apartment_type_id > option").length - 1;
 
+function scrollToTop() {
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
+}
+
 formEl.addEventListener("submit", (e) => {
   // SELECT SPAN WITH ERROR MESSAGE AND DELETE THEM IF ALREADY EXIST
   const errorSpans = document.querySelectorAll('span[id$="Error"]');
@@ -56,6 +60,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(name.length < 3 || name.length > 255) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     nameValidationEl.classList.add("is-invalid");
@@ -79,6 +84,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(description.length < 3 || description.length > 65535) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     descriptionValidationEl.classList.add("is-invalid");
@@ -102,6 +108,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(isNaN(parseInt(apartmentType)) || apartmentType === "" || apartmentType < 1 || apartmentType > apartmentTypesAmount) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     apartmentTypeValidationEl.classList.add("is-invalid");
@@ -125,6 +132,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(pricePerNight <= 0 || pricePerNight > 999999.99) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     pricePerNightValidationEl.classList.add("is-invalid");
@@ -148,6 +156,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(rooms < 1 || rooms > 255) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     roomsValidationEl.classList.add("is-invalid");
@@ -171,6 +180,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(beds < 0 || beds > 255) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     bedsValidationEl.classList.add("is-invalid");
@@ -194,6 +204,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(bathrooms < 0 || bathrooms > 255) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     bathroomsValidationEl.classList.add("is-invalid");
@@ -217,6 +228,7 @@ formEl.addEventListener("submit", (e) => {
 
   if(squareMeters <= 0 || squareMeters > 65535) {
     e.preventDefault();
+    scrollToTop();
 
     // ADD is-invalid CLASS
     squareMetersValidationEl.classList.add("is-invalid");
@@ -240,6 +252,8 @@ formEl.addEventListener("submit", (e) => {
 
   if(address === "" || latitude === "" || longitude === "" || latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
     e.preventDefault();
+    scrollToTop();
+
     // CLEAN THE PASSWORDS INPUTS
     latitude = "";
     longitude = "";
@@ -267,6 +281,7 @@ formEl.addEventListener("submit", (e) => {
   apartmentServicesValidationEls.forEach((apartmentService, index) => {
     if(isNaN(parseInt(apartmentService.value)) || apartmentService.value === "" || apartmentService.value < 1 || apartmentService.value > apartmentServicesValidationEls.length) {
       e.preventDefault();
+      scrollToTop();
 
       // SELECT THE LABEL OF THE CHECKBOX WITH THE ERROR
       const targetedLabel = document.querySelectorAll(".apartment_services > label")[index];

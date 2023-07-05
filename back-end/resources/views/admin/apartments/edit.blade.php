@@ -74,7 +74,7 @@
                             <div class="mb-3">
                                 <label for="apartment_type_id" class="form-label">Seleziona il tipo di struttura:</label>
                                 <select class="form-select @error('apartment_type_ids') is-invalid @enderror"
-                                    name="apartment_type_id" id="apartment_type_id">
+                                    name="apartment_type_id" id="apartment_type_id" required>
                                     <option value="">-</option>
                                     @foreach ($apartment_types as $type)
                                         <option value="{{ $type?->id }}"
