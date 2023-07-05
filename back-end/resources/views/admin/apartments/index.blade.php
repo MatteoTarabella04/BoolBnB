@@ -78,6 +78,7 @@
             </div>
             @endforelse
         </div>
+        {{ $apartments->links() }}
     </div>
 </section>
 @endsection
