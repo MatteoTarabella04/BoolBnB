@@ -30,7 +30,7 @@ function getVisits() {
                 
                 baseData.datasets[0].data.push(apartment.visits.length)
                 //console.log(apartment.name);
-                console.log(baseData);
+                //console.log(baseData);
                 
             });
             
