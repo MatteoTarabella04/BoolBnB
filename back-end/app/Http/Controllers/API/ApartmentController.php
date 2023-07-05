@@ -13,7 +13,7 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function index() {
-        $apartments = Apartment::with(['apartment_type'])->orderByDesc('id')->paginate(6);
+        $apartments = Apartment::with(['apartment_type', 'services'])->orderByDesc('id')->paginate(6);
 
         if (count($apartments) > 0) {
             return response()->json([
@@ -23,6 +23,20 @@ class ApartmentController extends Controller
         } else {
             return response()->json([
                 'success' => false
+            ]);
+        }
+    }
+
+    public function show($slug) {
+        $apartment = Apartment::with(['apartment_type', 'services'])->where("slug", $slug)->get();
+        if ($apartment) {
+            return response()->json([
+                "success" => true,
+                "apartment" => $apartment[0],
+            ]);
+        } else {
+            return response()->json([
+                "success" => false,
             ]);
         }
     }
