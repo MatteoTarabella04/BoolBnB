@@ -1,6 +1,7 @@
 
 <script>
 import axios from "axios";
+import JumboSection from "../components/JumboSection.vue";
 export default {
     name: "HomeView",
     data() {
@@ -125,12 +126,16 @@ export default {
     },
     mounted() {
         this.getAllApartments();
-    }
+    },
+    components: { JumboSection }
 }
 </script>
 
 <template>
+    <JumboSection></JumboSection>
     <div class="container">
+
+
 
         <div>
             <input @input="inputAddress.length >= 3 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="inputAddress">
