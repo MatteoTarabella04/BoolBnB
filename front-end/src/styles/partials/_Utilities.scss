@@ -1,13 +1,37 @@
-.border_special{
+@use "./colors.scss" as *;
+
+
+//BORDER
+
+.border_special {
     padding: .1rem .3rem;
     font-size: .9rem;
     border-width: 2px;
     border-color: rgb(10, 10, 74);
     border-radius: 1rem;
     border-style: solid;
-}
 
-.border_special:hover:hover{
-    background-color: whitesmoke;
+
+    &:hover {
+        background-color: whitesmoke;
 
     }
+}
+
+//BACKGROUND
+
+.bg_primary {
+    background-color: $snow;
+
+}
+
+
+//UTILITIES 
+
+.z_index_1000 {
+    z-index: 1000;
+}
+
+.z_index_999 {
+    z-index: 999;
+}

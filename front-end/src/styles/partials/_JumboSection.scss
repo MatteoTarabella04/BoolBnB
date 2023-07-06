@@ -1,22 +1,33 @@
-body {
-    background-color: #ffe9e0!important;
+.jumbotron {
+    height: calc(80vh - 62px);
+
+    .image_container {
+        height: 100%;
+        padding: 30px;
+
+        .jumbo_tron_img {
+            height: 100%;
+            width: 100%;
+            min-width: 70vw;
+            object-fit: cover;
+
+            // right: 0px;
+            // height: 700px;
+            // border-radius: 3rem 0 0 3rem;
+            // margin: 3rem 0;
+        }
+    }
 }
 
-.jumbo_tron_img {
-    position: absolute;
-    right: 0px;
-    height: 700px;
-    object-fit: fill;
-    border-radius: 3rem 0 0 3rem;
-    margin: 3rem 0;
-}
 
-.card_jumbo {
-    position: absolute !important;
-    left: 200px;
-    top: 120px;
-    /* width: 400px!important;
-    height: 500px!important; */
-    z-index: 1;
-    border-radius: 2rem !important;
-}
+
+
+// .card_jumbo {
+//     position: absolute !important;
+//     left: 200px;
+//     top: 120px;
+//     /* width: 400px!important;
+//     height: 500px!important; */
+//     z-index: 1;
+//     border-radius: 2rem !important;
+// }

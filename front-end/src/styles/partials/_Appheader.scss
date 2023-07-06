@@ -1,4 +1,9 @@
+@use "./colors.scss" as *;
 
-header{
-    background-color: #ffe9e0;
+header {
+
+    nav {
+
+        height: 62px;
+    }
 }
