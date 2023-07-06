@@ -95,7 +95,7 @@ export default {
     <div class="container">
 
         <div>
-            <input @input="inputAddress.length >= 5 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="inputAddress">
+            <input @input="inputAddress.length >= 3 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="inputAddress">
             <ul class="list-unstyled">
                 <li @click="getAllApartments(result), results = []" v-for="result in results">
                     {{ result.address.freeformAddress }}
