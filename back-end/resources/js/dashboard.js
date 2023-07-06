@@ -22,7 +22,7 @@ function getVisits() {
     axios
         .get(`http://127.0.0.1:8000/api/apartments`).then(response => {
 
-            results = response.data.apartments.data;
+            results = response.data.apartments;
 
             results.forEach(apartment => {
                 
