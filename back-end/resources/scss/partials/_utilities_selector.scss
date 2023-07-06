@@ -12,7 +12,7 @@
 
 .bg_double_show {
     position: fixed;
-    top: 62px;
+    top: 58px;
     left: 0;
     width: 100%;
     z-index: -1;
@@ -24,11 +24,11 @@
 //CONTAINER 
 
 .body_minus_header {
-    min-height: calc(100vh - 62px);
+    min-height: calc(100vh - 58px);
 }
 
 .body_minus_header_block {
-    height: calc(100vh - 62px);
+    height: calc(100vh - 58px);
 }
 
 
@@ -44,4 +44,13 @@
 
 .strong_shadow {
     filter: drop-shadow(3px 3px 5px rgb(47, 47, 47));
+}
+
+//DIMENSION
+
+
+//OF FUNCTIONALITY
+
+.transition_duration_1 {
+    transition-duration: 1s;
 }
