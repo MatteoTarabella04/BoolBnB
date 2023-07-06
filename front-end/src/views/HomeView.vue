@@ -6,34 +6,55 @@ export default {
     data() {
         return {
             apartments: [],
+            services: [],
             filteredApartments: [],
+            checkedServices: [],
             results: [],
+            filtering: false,
             inputAddress: "",
             selectedAddress: null,
             selectedLat: null,
             selectedLon: null,
             radius: 20,
-            filtering: false,
+            rooms: 0,
+            beds: 0,
         }
     },
     methods: {
         getAllApartments(address = null) {
-            axios
-            .get("http://127.0.0.1:8000/api/apartments")
-            .then(response => {
-                console.log(response);
-                this.apartments = response.data.apartments;
-                console.log(this.apartments);
-                if(address != null) {
-                    this.filtering = true;
-                }
-                if(this.filtering) {
-                    this.setCoordinates(address);
-                }
-            })
-            .catch(error => {
-                console.error(error.message);
-            })
+            if(!this.filtering) {
+                axios
+                .get("http://127.0.0.1:8000/api/apartments-and-services")
+                .then(response => {
+                    this.apartments = response.data.apartments;
+                    console.log(this.apartments);
+                    this.services = response.data.services;
+                    if(address != null) {
+                        this.filtering = true;
+                    }
+                    if(this.filtering) {
+                        this.setCoordinates(address);
+                    }
+                })
+                .catch(error => {
+                    console.error(error.message);
+                })
+            } else {
+                axios
+                .get("http://127.0.0.1:8000/api/apartments")
+                .then(response => {
+                    this.apartments = response.data.apartments;
+                    if(address != null) {
+                        this.filtering = true;
+                    }
+                    if(this.filtering) {
+                        this.setCoordinates(address);
+                    }
+                })
+                .catch(error => {
+                    console.error(error.message);
+                })
+            }
         },
         getRealtimeResults() {
             axios
@@ -45,11 +66,12 @@ export default {
                 console.error(error.message);
             })
         },
-        setCoordinates(result) {
-            this.selectedAddress = result.address.freeformAddress;
-            this.selectedLat = result.position.lat;
-            this.selectedLon = result.position.lon;
-            this.filteredApartments = this.apartments.filter(apartment => {
+        setCoordinates(address) {
+            this.selectedAddress = address.address.freeformAddress;
+            this.selectedLat = address.position.lat;
+            this.selectedLon = address.position.lon;
+            this.checkOtherFilters();
+            this.apartments = this.filteredApartments.filter(apartment => {
                 const lat1 = this.selectedLat;
                 const lon1 = this.selectedLon;
                 const lat2 = apartment.latitude;
@@ -61,13 +83,12 @@ export default {
                 }
                 return false;
             });
-            this.filteredApartments.sort((a, b) => a.distance_from_point - b.distance_from_point);
-            this.apartments = this.filteredApartments;
+            this.apartments.sort((a, b) => a.distance_from_point - b.distance_from_point);
         },
         calculateDistance(lat1, lat2, lon1, lon2) {
 
             // The math module contains a function named toRadians which converts from degrees to radians.
-            lon1 =  lon1 * Math.PI / 180;
+            lon1 = lon1 * Math.PI / 180;
             lon2 = lon2 * Math.PI / 180;
             lat1 = lat1 * Math.PI / 180;
             lat2 = lat2 * Math.PI / 180;
@@ -83,6 +104,23 @@ export default {
     
             // calculate the result
             return(c * r);
+        },
+        checkOtherFilters() {
+            let apartmentsByRooms = [];
+            let apartmentsByBeds = [];
+            //  && this.services.length > 0 ADD THIS TO CHECK FOR SERVICES TOO
+            if(this.rooms > 0 && this.beds > 0) {
+                apartmentsByRooms = this.apartments.filter(apartment => apartment.rooms >= this.rooms ? true : false);
+                apartmentsByBeds = apartmentsByRooms.filter(apartment => apartment.beds >= this.beds ? true : false);
+                // ADD NESTED FILTERS TO CHECK FOR SERVICES
+                this.filteredApartments = apartmentsByBeds;
+            } else if(this.rooms > 0) {
+                this.filteredApartments = this.apartments.filter(apartment => apartment.rooms >= this.rooms ? true : false);
+            } else if(this.beds > 0) {
+                this.filteredApartments = this.apartments.filter(apartment => apartment.beds >= this.beds ? true : false);
+            } else {
+                this.filteredApartments = this.apartments;
+            }
         }
     },
     mounted() {
@@ -95,7 +133,7 @@ export default {
     <div class="container">
 
         <div>
-            <input @input="inputAddress.length >= 5 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="inputAddress">
+            <input @input="inputAddress.length >= 3 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="inputAddress">
             <ul class="list-unstyled">
                 <li @click="getAllApartments(result), results = []" v-for="result in results">
                     {{ result.address.freeformAddress }}
@@ -135,6 +173,17 @@ export default {
                     <div class="modal-body">
                         <h5>Distanza dall'indirizzo cercato ({{ radius }}km)</h5>
                         <input type="range" class="form-range" min="1" max="100" step="1" id="radius_range" v-model="radius">
+                        <h5>Numero minimo di stanze ({{ rooms }})</h5>
+                        <input type="number" class="form-range" min="0" max="255" step="1" id="min_rooms" v-model="rooms">
+                        <h5>Numero minimo di posti letto ({{ beds }})</h5>
+                        <input type="number" class="form-range" min="0" max="255" step="1" id="min_beds" v-model="beds">
+                        <h5>Servizi aggiuntivi</h5>
+                        <div class="d-flex flex-wrap">
+                            <div v-for="(service, index) in services" class="w-50">
+                                <input :value="service.id" type="checkbox" class="form-checkbox" :id="service.name + '-' + index" v-model="checkedServices">
+                                <label :for="service.name + '-' + index" class="ms-2">{{ service.name }}</label>
+                            </div>
+                        </div>
                         <h5>Tipo di alloggio?</h5>
                         <!-- TODO aggiungere form per invio -->
                         <div class="btn-group my-3" role="group" aria-label="Basic radio toggle button group">
@@ -162,10 +211,10 @@ export default {
         <div class="row row-cols-3">
             <div class="col" v-for="apartment in apartments">
                 <div class="card">
-                    {{ apartment.name }}
-                    {{ apartment.id }}
-                    {{ apartment.slug }}
-                    {{ filtering ? Math.round(apartment.distance_from_point * 100) / 100 + "km" : ""}}
+                    <h3>{{ apartment.name }}</h3>
+                    <p>{{ filtering ? "DISTANCE " + Math.round(apartment.distance_from_point * 100) / 100 + "km" : ""}}</p>
+                    <p>ROOMS {{ apartment.rooms }}</p>
+                    <p>BEDS {{ apartment.beds }}</p>
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }">DETTAGLI</router-link>
                 </div>
             </div>

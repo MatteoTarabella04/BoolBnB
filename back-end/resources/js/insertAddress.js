@@ -32,7 +32,7 @@ addressEl.addEventListener("input", () => {
   lonEl.value = "";
 
   // IF ADDRESS IS MORE THAN 5 CHARSACTERS LONG, STARTS SHOWING THE SUGGESTIONS
-  if (inputAddress.length >= 5) {
+  if (inputAddress.length >= 3) {
     getRealtimeResults();
   } else {
     suggestedAddressesContainer.innerHTML = "";
