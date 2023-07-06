@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="password-confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                            <label for="password-confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Conferma password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" min="8">
@@ -96,7 +96,7 @@
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary w-100">
-                                    {{ __('Register') }}
+                                    {{ __('Registrati') }}
                                 </button>
                             </div>
                         </div>
