@@ -1,0 +1,22 @@
+body {
+    background-color: #ffe9e0!important;
+}
+
+.jumbo_tron_img {
+    position: absolute;
+    right: 0px;
+    height: 700px;
+    object-fit: fill;
+    border-radius: 3rem 0 0 3rem;
+    margin: 3rem 0;
+}
+
+.card_jumbo {
+    position: absolute !important;
+    left: 200px;
+    top: 120px;
+    /* width: 400px!important;
+    height: 500px!important; */
+    z-index: 1;
+    border-radius: 2rem !important;
+}
