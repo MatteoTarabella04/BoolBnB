@@ -1,4 +1,8 @@
 // Import all of Bootstrap's CSS
-@use './partials/colors.scss' as *;
+@use './partials/Colors.scss' as *;
+@use './partials/HomeView.scss';
+@use './partials/Utilities.scss';
+@use './partials/Appheader.scss';
+@use './partials/JumboSection';
 @import "/node_modules/bootstrap/scss/bootstrap";
 
