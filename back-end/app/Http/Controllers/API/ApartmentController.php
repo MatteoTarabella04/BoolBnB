@@ -13,9 +13,9 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function index() {
-        $apartments = Apartment::with(['apartment_type', 'services', 'visits'])->orderByDesc('id')->paginate(6);
+        $apartments = Apartment::with(['apartment_type', 'services', 'visits'])->orderByDesc('id')->get();
 
-        if (count($apartments) > 0) {
+        if ($apartments) {
             return response()->json([
                 'success' => true,
                 'apartments' => $apartments
