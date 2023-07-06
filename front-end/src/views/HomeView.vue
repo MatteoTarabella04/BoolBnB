@@ -6,27 +6,115 @@ export default {
     data() {
         return {
             apartments: [],
+            filteredApartments: [],
+            results: [],
+            inputAddress: "",
+            selectedAddress: null,
+            selectedLat: null,
+            selectedLon: null,
+            radius: 20,
+            filtering: false,
         }
     },
     methods: {
-
-    },
-    mounted() {
-        axios
+        getAllApartments(address = null) {
+            axios
             .get("http://127.0.0.1:8000/api/apartments")
             .then(response => {
                 console.log(response);
-                this.apartments = response.data.apartments.data;
+                this.apartments = response.data.apartments;
+                console.log(this.apartments);
+                if(address != null) {
+                    this.filtering = true;
+                }
+                if(this.filtering) {
+                    this.setCoordinates(address);
+                }
             })
             .catch(error => {
                 console.error(error.message);
             })
+        },
+        getRealtimeResults() {
+            axios
+            .get(`https://api.tomtom.com/search/2/search/${this.inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+            .then(response => {
+                this.results = response.data.results
+            })
+            .catch(error => {
+                console.error(error.message);
+            })
+        },
+        setCoordinates(result) {
+            this.selectedAddress = result.address.freeformAddress;
+            this.selectedLat = result.position.lat;
+            this.selectedLon = result.position.lon;
+            this.filteredApartments = this.apartments.filter(apartment => {
+                const lat1 = this.selectedLat;
+                const lon1 = this.selectedLon;
+                const lat2 = apartment.latitude;
+                const lon2 = apartment.longitude;
+                const distance = this.calculateDistance(lat1, lat2, lon1, lon2);
+                if (distance <= this.radius) {
+                    apartment.distance_from_point = distance;
+                    return true;
+                }
+                return false;
+            });
+            this.filteredApartments.sort((a, b) => a.distance_from_point - b.distance_from_point);
+            this.apartments = this.filteredApartments;
+        },
+        calculateDistance(lat1, lat2, lon1, lon2) {
+
+            // The math module contains a function named toRadians which converts from degrees to radians.
+            lon1 =  lon1 * Math.PI / 180;
+            lon2 = lon2 * Math.PI / 180;
+            lat1 = lat1 * Math.PI / 180;
+            lat2 = lat2 * Math.PI / 180;
+    
+            // Haversine formula
+            let diffLon = lon2 - lon1;
+            let diffLat = lat2 - lat1;
+            let a = Math.pow(Math.sin(diffLat / 2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(diffLon / 2),2);
+            let c = 2 * Math.asin(Math.sqrt(a));
+    
+            // Radius of earth in kilometers. Use 3956 for miles
+            let r = 6371;
+    
+            // calculate the result
+            return(c * r);
+        }
+    },
+    mounted() {
+        this.getAllApartments();
     }
 }
 </script>
 
 <template>
     <div class="container">
+
+        <div>
+            <input @input="inputAddress.length >= 5 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="inputAddress">
+            <ul class="list-unstyled">
+                <li @click="getAllApartments(result), results = []" v-for="result in results">
+                    {{ result.address.freeformAddress }}
+                </li>
+            </ul>
+            <!-- <h2 v-if="selectedAddress">Address: {{ this.selectedAddress }}</h2>
+            <h2 v-if="selectedLat">Lat: {{ this.selectedLat }}</h2>
+            <h2 v-if="selectedLon">Lon: {{ this.selectedLon }}</h2> -->
+            <!-- <div class="d-flex align-items-start">
+                <ul class="list-unstyled" style="width: 40vw" v-if="addresses.length > 0">
+                    <li v-for="singleAddress in addresses">
+                        {{ singleAddress.address.freeformAddress }}
+                        <hr>
+                    </li>
+                </ul>
+                <div id="map" style="width: 60vw; aspect-ratio: 3 / 2; margin-inline: auto;"></div>
+            </div> -->
+        </div>
+
         <!-- Modal trigger button -->
         <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal" data-bs-target="#modalId">
             Filtri (icona)
@@ -45,6 +133,8 @@ export default {
                         <!-- <div class="space"></div> -->
                     </div>
                     <div class="modal-body">
+                        <h5>Distanza dall'indirizzo cercato ({{ radius }}km)</h5>
+                        <input type="range" class="form-range" min="1" max="100" step="1" id="radius_range" v-model="radius">
                         <h5>Tipo di alloggio?</h5>
                         <!-- TODO aggiungere form per invio -->
                         <div class="btn-group my-3" role="group" aria-label="Basic radio toggle button group">
@@ -58,7 +148,7 @@ export default {
                             <label class="btn btn-outline-dark btn-lg" for="btnradio3">Alloggi</label>
                         </div>
                         <h5>Fascia di prezzo</h5>
-                        <input type="range" class="form-range" min="0" id="range">
+                        <input type="range" class="form-range" min="0" id="price_range">
                     </div>
                     <div class="modal-footer">
                         <b class="me-auto">
@@ -75,6 +165,7 @@ export default {
                     {{ apartment.name }}
                     {{ apartment.id }}
                     {{ apartment.slug }}
+                    {{ filtering ? Math.round(apartment.distance_from_point * 100) / 100 + "km" : ""}}
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }">DETTAGLI</router-link>
                 </div>
             </div>
