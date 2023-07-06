@@ -7,10 +7,12 @@
 @endsection
 
 @section('content')
+    <div class="bg_double_show body_minus_header_block"></div>
+
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="card p-3 my-5 ">
+                <div class=" p-3 my-5 ">
                     @if (session('message'))
                         <div class="alert alert-danger" role="alert">
                             <strong>{{ session('message') }}</strong>
@@ -36,7 +38,7 @@
                             <div class="d-flex justify-content-between flex-wrap align-items-center">
                                 <div class="mb-3 col-12 col-md-8">
                                     <label for="image" class="form-label">Aggiungi un'immagine</label>
-                                    <input type="file" class="form-control" name="image" id="image"
+                                    <input type="file" class="form-control shadow" name="image" id="image"
                                         aria-describedby="helpId" accept="image/*"
                                         value="{{ old('image', $apartment->image) }}">
                                     <small>Se non inserisci alcuna immagine, verrà conservata quella precedentemente
@@ -46,7 +48,7 @@
                                     @enderror
                                 </div>
                                 <div id="image-preview-container"
-                                    class="mt-2 col-12 col-md-4 d-flex justify-content-center">
+                                    class="mt-2 col-12 col-md-4 d-flex justify-content-center strong_shadow">
                                     <img id="image-preview" src="{{ asset('storage/' . old('image', $apartment->image)) }}"
                                         alt="Preview dell'immagine" style="max-width: 100%;" class="p-3" />
                                 </div>
@@ -55,7 +57,7 @@
 
                             <div class="mb-3">
                                 <label for="" class="form-label">Nome</label>
-                                <input type="text" class="form-control" name="name" id="name"
+                                <input type="text" class="form-control shadow" name="name" id="name"
                                     aria-describedby="helpId" placeholder="" value="{{ old('name', $apartment->name) }}"
                                     required>
                                 @error('name')
@@ -65,7 +67,7 @@
 
                             <div class="mb-3">
                                 <label for="description" class="form-label">Descrizione</label>
-                                <textarea class="form-control" name="description" id="description" required rows="3">{{ old('description', $apartment->description) }}</textarea>
+                                <textarea class="form-control shadow" name="description" id="description" required rows="3">{{ old('description', $apartment->description) }}</textarea>
                                 @error('description')
                                     <small class="text-danger">Per favore, inserisci correttamente la descrizione.</small>
                                 @enderror
@@ -73,7 +75,7 @@
 
                             <div class="mb-3">
                                 <label for="apartment_type_id" class="form-label">Seleziona il tipo di struttura:</label>
-                                <select class="form-select @error('apartment_type_ids') is-invalid @enderror"
+                                <select class="form-select shadow @error('apartment_type_ids') is-invalid @enderror"
                                     name="apartment_type_id" id="apartment_type_id" required>
                                     <option value="">-</option>
                                     @foreach ($apartment_types as $type)
@@ -87,8 +89,8 @@
 
                             <div class="mb-3">
                                 <label for="price_per_night" class="form-label">Prezzo a notte (€)</label>
-                                <input type="number" class="form-control" name="price_per_night" id="price_per_night"
-                                    aria-describedby="helpId" placeholder=""
+                                <input type="number" class="form-control shadow" name="price_per_night"
+                                    id="price_per_night" aria-describedby="helpId" placeholder=""
                                     value="{{ old('price_per_night', $apartment->price_per_night) }}" required>
                                 @error('price_per_night')
                                     <small class="text-danger">Per favore, inserisci correttamente il prezzo per notte.</small>
@@ -97,7 +99,7 @@
 
                             <div class="mb-3">
                                 <label for="rooms" class="form-label">Numero di stanze</label>
-                                <input type="number" class="form-control" name="rooms" id="rooms"
+                                <input type="number" class="form-control shadow" name="rooms" id="rooms"
                                     aria-describedby="helpId" placeholder="" value="{{ old('rooms', $apartment->rooms) }}"
                                     required>
                                 @error('rooms')
@@ -108,7 +110,7 @@
 
                             <div class="mb-3">
                                 <label for="beds" class="form-label">Numero di letti</label>
-                                <input type="number" class="form-control" name="beds" id="beds"
+                                <input type="number" class="form-control shadow" name="beds" id="beds"
                                     aria-describedby="helpId" placeholder="" value="{{ old('beds', $apartment->beds) }}"
                                     required>
                                 @error('beds')
@@ -119,7 +121,7 @@
 
                             <div class="mb-3">
                                 <label for="bathrooms" class="form-label">Numero di bagni</label>
-                                <input type="number" class="form-control" name="bathrooms" id="bathrooms"
+                                <input type="number" class="form-control shadow" name="bathrooms" id="bathrooms"
                                     aria-describedby="helpId" placeholder=""
                                     value="{{ old('bathrooms', $apartment->bathrooms) }}" required>
                                 @error('bathrooms')
@@ -129,8 +131,8 @@
 
                             <div class="mb-3">
                                 <label for="square_meters" class="form-label">Metri quadri</label>
-                                <input type="number" class="form-control" name="square_meters" id="square_meters"
-                                    aria-describedby="helpId" placeholder=""
+                                <input type="number" class="form-control shadow" name="square_meters"
+                                    id="square_meters" aria-describedby="helpId" placeholder=""
                                     value="{{ old('square_meters', $apartment->square_meters) }}" required>
                                 @error('square_meters')
                                     <small class="text-danger">Per favore, inserisci correttamente il numero di mq.</small>
@@ -141,7 +143,7 @@
                             <div class="mb-3">
                                 <label for="address" class="form-label">Indirizzo</label>
                                 <div class="position-relative" id="addressSuggestionsWrapper">
-                                    <input type="text" class="form-control" name="address" id="address"
+                                    <input type="text" class="form-control shadow" name="address" id="address"
                                         aria-describedby="helpId" placeholder=""
                                         value="{{ old('address', $apartment->address) }}" required>
                                     <ul class="list-unstyled d-none list-group" id="addressSuggestions">
@@ -159,11 +161,12 @@
                                 aria-describedby="helpId" placeholder=""
                                 value="{{ old('longitude', $apartment->longitude) }}">
 
-                            <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none"></div>
+                            <div id="map" style="width: 100%; aspect-ratio: 16 / 9" class="d-none strong_shadow">
+                            </div>
 
                             <div class="mb-3">
                                 <div class='form-group'>
-                                    <p>Seleziona i servizi:</p>
+                                    <p class="mt-3">Seleziona i servizi:</p>
                                     @foreach ($apartment_services as $service)
                                         <div
                                             class="form-check @error('apartment_services') is-invalid @enderror apartment_services">
@@ -171,7 +174,7 @@
                                                 @if ($errors->any())
                                                     <!-- 1 (if) -->
                                                     <input name="services[]" type="checkbox" value="{{ $service->id }}"
-                                                        class="form-check-input"
+                                                        class="form-check-input shadow"
                                                         {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
                                                 @else
                                                     <!-- 2 (else) -->
@@ -190,12 +193,14 @@
                             </div>
 
                             <div class="form-check mb-3">
-                                @if($errors->any())
-                                    <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" {{ old('visible') == 1 ? 'checked' : '' }}>
+                                @if ($errors->any())
+                                    <input class="form-check-input" type="checkbox" value="1" id="visible"
+                                        name="visible" {{ old('visible') == 1 ? 'checked' : '' }}>
                                 @else
-                                    <input class="form-check-input" type="checkbox" value="1" id="visible" name="visible" {{ $apartment->visible ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" value="1" id="visible"
+                                        name="visible" {{ $apartment->visible ? 'checked' : '' }}>
                                 @endif
-                                
+
                                 <label class="form-check-label" for="visible">
                                     Appartamento disponibile da subito
                                 </label>
@@ -205,7 +210,7 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary w-100 text-uppercase">salva le
+                            <button type="submit" class="btn btn-dark w-100 text-uppercase strong_shadow">salva le
                                 modifiche</button>
                         </form>
                     </div>

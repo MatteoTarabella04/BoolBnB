@@ -22,8 +22,9 @@
 
             <div class="info_container mt-4 d-flex justify-content-center flex-wrap">
                 <div
-                    class="mt-4 mt-md-0 col-12 col-md-6 col-lg-8 d-flex flex-column align-items-start justify-content-center">
+                    class="mt-2 mt-md-0 col-12 col-md-6 col-lg-8 d-flex flex-column align-items-start justify-content-center">
                     <h1 class="fw-bold">{{ $apartment->name }}</h1>
+                    <h3 class="fw-bold">{{ $apartment->apartment_type->name }}</h3>
                     <p><strong>Descrizione:</strong> {{ $apartment->description }}</p>
                     <p><strong>Prezzo per notte:</strong> {{ $apartment->price_per_night }}€</p>
                     <p><strong>Numero di stanze:</strong> {{ $apartment->rooms }}</p>
@@ -31,9 +32,22 @@
                     <p><strong>Bagni:</strong> {{ $apartment->bathrooms }}</p>
                     <p><strong>Grandezza dell'appartamento:</strong> {{ $apartment->square_meters }}mq</p>
                     <p><strong>Indirizzo:</strong>{{ $apartment->address }}</p>
-                    <p><strong>Quest'appartamento è ancora disponibile?:</strong> <input type="checkbox"
-                            class="form-check-input" {{ $apartment->visible ? 'checked' : '' }} disabled></p>
+                    <p class="fw-bold {{ $apartment->visible ? 'text-success' : 'text-danger' }}">
+                        @if ($apartment->visible)
+                            Disponibile &#x2713;
+                        @else
+                            Non Disponibile &#x2717;
+                        @endif
+                    </p>
 
+                    <h5 class="fw-bold">Services</h5>
+                    <p>
+                        <?php
+                        for ($i = 0; $i < count($apartment->services); $i++) {
+                            echo '<span class="me-2 fw-bold">' . $apartment->services[$i]->name . ' ' . '</span>';
+                        }
+                        ?>
+                    </p>
                     <div class="d-flex justify-content-start flex-wrap">
                         <a class="btn me-2 btn-dark shadow" href="{{ route('admin.apartments.edit', $apartment) }}"> <span
                                 class="icon">
