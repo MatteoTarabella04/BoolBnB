@@ -40,6 +40,7 @@
                         @endif
                     </p>
 
+                    @if($apartment->services->isNotEmpty())
                     <h5 class="fw-bold">Services</h5>
                     <p>
                         <?php
@@ -48,6 +49,7 @@
                         }
                         ?>
                     </p>
+                    @endif
                     <div class="d-flex justify-content-start flex-wrap">
                         <a class="btn me-2 btn-dark shadow" href="{{ route('admin.apartments.edit', $apartment) }}"> <span
                                 class="icon">
