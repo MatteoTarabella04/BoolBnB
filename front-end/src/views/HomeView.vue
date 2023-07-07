@@ -1,91 +1,79 @@
-
 <script>
 import axios from "axios";
-
-
+import { store } from "../store.js";
 export default {
     name: "HomeView",
     data() {
         return {
-            apartments: [],
-            services: [],
-            filteredApartments: [],
-            checkedServices: [],
-            results: [],
-            filtering: false,
-            inputAddress: "",
-            selectedAddress: null,
-            selectedLat: null,
-            selectedLon: null,
-            radius: 20,
-            rooms: 0,
-            beds: 0,
+            store,
         }
     },
     methods: {
         getAllApartments(address = null) {
-            if (!this.filtering) {
+            store.filteringApartments = [];
+            if (!store.filtering) {
                 axios
-                    .get("http://127.0.0.1:8000/api/apartments-and-services")
-                    .then(response => {
-                        this.apartments = response.data.apartments;
-                        console.log(this.apartments);
-                        this.services = response.data.services;
-                        if (address != null) {
-                            this.filtering = true;
-                        }
-                        if (this.filtering) {
-                            this.setCoordinates(address);
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error.message);
-                    })
-            } else {
-                axios
-                    .get("http://127.0.0.1:8000/api/apartments")
-                    .then(response => {
-                        this.apartments = response.data.apartments;
-                        if (address != null) {
-                            this.filtering = true;
-                        }
-                        if (this.filtering) {
-                            this.setCoordinates(address);
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error.message);
-                    })
-            }
-        },
-        getRealtimeResults() {
-            axios
-                .get(`https://api.tomtom.com/search/2/search/${this.inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+                .get("http://127.0.0.1:8000/api/apartments-types-services")
                 .then(response => {
-                    this.results = response.data.results
+                    store.apartments = response.data.apartments;
+                    store.services = response.data.services;
+                    store.apartmentTypes = response.data.apartment_types;
+                    if (address != null) {
+                        store.filtering = true;
+                    }
+                    if (store.filtering) {
+                        this.setCoordinates(address);
+                    }
                 })
                 .catch(error => {
                     console.error(error.message);
                 })
+            } else {
+                axios
+                .get("http://127.0.0.1:8000/api/apartments")
+                .then(response => {
+                    store.apartments = response.data.apartments;
+                    if (address != null) {
+                        store.filtering = true;
+                    }
+                    if (store.filtering) {
+                        this.setCoordinates(address);
+                    }
+                })
+                .catch(error => {
+                    console.error(error.message);
+                })
+            }
+        },
+        getRealtimeResults() {
+            axios
+            .get(`https://api.tomtom.com/search/2/search/${store.inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+            .then(response => {
+                store.results = response.data.results
+            })
+            .catch(error => {
+                console.error(error.message);
+            })
         },
         setCoordinates(address) {
-            this.selectedAddress = address.address.freeformAddress;
-            this.selectedLat = address.position.lat;
-            this.selectedLon = address.position.lon;
+            store.selectedAddress = address.address.freeformAddress;
+            store.selectedLat = address.position.lat;
+            store.selectedLon = address.position.lon;
+            store.filteringApartments = store.apartments;
             this.checkOtherFilters();
-            this.apartments = this.filteredApartments.filter(apartment => {
-                const lat1 = this.selectedLat;
-                const lon1 = this.selectedLon;
+            store.apartments = store.filteringApartments.filter(apartment => {
+                const lat1 = store.selectedLat;
+                const lon1 = store.selectedLon;
                 const lat2 = apartment.latitude;
                 const lon2 = apartment.longitude;
                 const distance = this.calculateDistance(lat1, lat2, lon1, lon2);
-                if (distance <= this.radius) {
+                if (distance <= store.radius) {
                     apartment.distance_from_point = distance;
                     return true;
                 }
                 return false;
             });
-            this.apartments.sort((a, b) => a.distance_from_point - b.distance_from_point);
+            store.apartments.sort((a, b) => a.distance_from_point - b.distance_from_point);
         },
         calculateDistance(lat1, lat2, lon1, lon2) {
 
@@ -108,20 +96,34 @@ export default {
             return (c * r);
         },
         checkOtherFilters() {
-            let apartmentsByRooms = [];
-            let apartmentsByBeds = [];
-            //  && this.services.length > 0 ADD THIS TO CHECK FOR SERVICES TOO
-            if (this.rooms > 0 && this.beds > 0) {
-                apartmentsByRooms = this.apartments.filter(apartment => apartment.rooms >= this.rooms ? true : false);
-                apartmentsByBeds = apartmentsByRooms.filter(apartment => apartment.beds >= this.beds ? true : false);
-                // ADD NESTED FILTERS TO CHECK FOR SERVICES
-                this.filteredApartments = apartmentsByBeds;
-            } else if (this.rooms > 0) {
-                this.filteredApartments = this.apartments.filter(apartment => apartment.rooms >= this.rooms ? true : false);
-            } else if (this.beds > 0) {
-                this.filteredApartments = this.apartments.filter(apartment => apartment.beds >= this.beds ? true : false);
-            } else {
-                this.filteredApartments = this.apartments;
+            let stepFilteringApartments = [];
+            if(store.rooms > 0) {
+                stepFilteringApartments = store.filteringApartments.filter(apartment => apartment.rooms >= store.rooms ? true : false);
+                store.filteringApartments = stepFilteringApartments;
+            }
+            if(store.beds > 0) {
+                stepFilteringApartments = store.filteringApartments.filter(apartment => apartment.beds >= store.beds ? true : false);
+                store.filteringApartments = stepFilteringApartments;
+            }
+            if(store.apartmentType > 0) {
+                stepFilteringApartments = store.filteringApartments.filter(apartment => apartment.apartment_type.id === store.apartmentType ? true : false);
+                store.filteringApartments = stepFilteringApartments;
+            }
+            if(store.services.length > 0) {
+                stepFilteringApartments = [];
+                store.filteringApartments.forEach(apartment => {
+                    let apartmentServices = [];
+                    apartment.services.forEach(service => {
+                        apartmentServices.push(service.id);
+                    })
+                    const allServicesChecked = store.checkedServices.every(service => {
+                        return apartmentServices.indexOf(service) >= 0;
+                    })
+                    if(allServicesChecked) {
+                        stepFilteringApartments.push(apartment);
+                    }
+                })
+                store.filteringApartments = stepFilteringApartments;
             }
         }
     },
@@ -139,78 +141,53 @@ export default {
                 <h5>Scopri tutti gli alloggi</h5>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
-                    <input @input="inputAddress.length >= 3 ? getRealtimeResults() : ''" type="text" id="address"
-                        name="address" v-model="inputAddress" class="form-control">
+                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="store.inputAddress" class="form-control">
                     <ul class="list-unstyled">
-                        <li @click="getAllApartments(result), results = []" v-for="result in results">
+                        <li @click="getAllApartments(result), store.results = []" v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
                     </ul>
-                    <!-- <h2 v-if="selectedAddress">Address: {{ this.selectedAddress }}</h2>
-            <h2 v-if="selectedLat">Lat: {{ this.selectedLat }}</h2>
-            <h2 v-if="selectedLon">Lon: {{ this.selectedLon }}</h2> -->
-                    <!-- <div class="d-flex align-items-start">
-                <ul class="list-unstyled" style="width: 40vw" v-if="addresses.length > 0">
-                    <li v-for="singleAddress in addresses">
-                        {{ singleAddress.address.freeformAddress }}
-                        <hr>
-                    </li>
-                </ul>
-                <div id="map" style="width: 60vw; aspect-ratio: 3 / 2; margin-inline: auto;"></div>
-            </div> -->
                     <!-- Modal trigger button -->
-                    <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
-                        data-bs-target="#modalId">
+                    <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal" data-bs-target="#modalId">
                         Filtri (icona)
                     </button>
 
                     <!-- Modal Body -->
                     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-                        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
                                     <h5 class="modal-title m-auto" id="modalTitleId">Filtri</h5>
                                     <!-- <div class="space"></div> -->
                                 </div>
                                 <div class="modal-body">
-                                    <h5>Distanza dall'indirizzo cercato ({{ radius }}km)</h5>
-                                    <input type="range" class="form-range" min="1" max="100" step="1" id="radius_range"
-                                        v-model="radius">
-                                    <h5>Numero minimo di stanze ({{ rooms }})</h5>
-                                    <input type="number" class="form-range" min="0" max="255" step="1" id="min_rooms"
-                                        v-model="rooms">
-                                    <h5>Numero minimo di posti letto ({{ beds }})</h5>
-                                    <input type="number" class="form-range" min="0" max="255" step="1" id="min_beds"
-                                        v-model="beds">
-                                    <h5>Servizi aggiuntivi</h5>
+                                    <h5>Distanza dall'indirizzo cercato ({{ store.radius }}km)</h5>
+                                    <input type="range" class="form-range" min="1" max="100" step="1" id="radius_range" v-model="store.radius">
+                                    <h5>Numero minimo di stanze {{ store.rooms >= 1 ? `(${store.rooms})` : "" }}</h5>
+                                    <input type="number" class="form-range" min="0" max="255" step="1" id="min_rooms" v-model="store.rooms">
+                                    <h5>Numero minimo di posti letto {{ store.beds >= 1 ? `(${store.beds})` : "" }}</h5>
+                                    <input type="number" class="form-range" min="0" max="255" step="1" id="min_beds" v-model="store.beds">
+                                    <h5>Servizi aggiuntivi {{ store.checkedServices.length > 0 ? `(${store.checkedServices.length})` : "" }}</h5>
                                     <div class="d-flex flex-wrap">
-                                        <div v-for="(service, index) in services" class="w-50">
-                                            <input :value="service.id" type="checkbox" class="form-checkbox"
-                                                :id="service.name + '-' + index" v-model="checkedServices">
+                                        <div v-for="(service, index) in store.services" class="w-50">
+                                            <input :value="service.id" type="checkbox" class="form-checkbox" :id="service.name + '-' + index" v-model="store.checkedServices">
                                             <label :for="service.name + '-' + index" class="ms-2">{{ service.name }}</label>
                                         </div>
                                     </div>
                                     <h5>Tipo di alloggio?</h5>
-                                    <!-- TODO aggiungere form per invio -->
                                     <div class="btn-group my-3" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
-                                            autocomplete="off" checked>
-                                        <label class="btn btn-outline-dark btn-lg" for="btnradio1">Tutti</label>
-
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
-                                            autocomplete="off">
-                                        <label class="btn btn-outline-dark btn-lg" for="btnradio2">Stanze</label>
-
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3"
-                                            autocomplete="off">
-                                        <label class="btn btn-outline-dark btn-lg" for="btnradio3">Alloggi</label>
+                                        <input type="radio" class="btn-check" name="apartment_type" id="allTypes" value="0" autocomplete="off" checked v-model="store.apartmentType">
+                                        <label class="btn btn-outline-dark btn-lg d-flex align-items-center justify-content-center" for="allTypes">Tutti</label>
+                                        <template v-for="singleType in store.apartmentTypes">
+                                            <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name" :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
+                                            <label class="btn btn-outline-dark btn-lg d-flex align-items-center justify-content-center" :for="singleType.name">{{ singleType.name }}</label>
+                                        </template>
                                     </div>
+                                    <!-- VEDERE SE E COME IMPLEMENTARE
                                     <h5>Fascia di prezzo</h5>
-                                    <input type="range" class="form-range" min="0" id="price_range">
+                                    <input type="range" class="form-range" min="0" id="price_range"> -->
                                 </div>
                                 <div class="modal-footer">
                                     <b class="me-auto">
@@ -233,10 +210,10 @@ export default {
 
 
             <div class="row row-cols-3">
-                <div class="col" v-for="apartment in apartments">
+                <div class="col" v-for="apartment in store.apartments">
                     <div class="card">
                         <h3>{{ apartment.name }}</h3>
-                        <p>{{ filtering ? "DISTANCE " + Math.round(apartment.distance_from_point * 100) / 100 + "km" : "" }}
+                        <p>{{ store.filtering ? "DISTANCE " + Math.round(apartment.distance_from_point * 100) / 100 + "km" : "" }}
                         </p>
                         <p>ROOMS {{ apartment.rooms }}</p>
                         <p>BEDS {{ apartment.beds }}</p>
