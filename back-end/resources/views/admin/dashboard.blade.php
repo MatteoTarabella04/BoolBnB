@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="container dashboard">
+        <div class="bg_double_show body_minus_header_block"></div>
 
         <div class="row">
             <div class="col">
