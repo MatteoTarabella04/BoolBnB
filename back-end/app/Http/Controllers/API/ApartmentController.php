@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Apartment;
 use App\Models\Service;
 use App\Http\Controllers\Controller;
+use App\Models\ApartmentType;
 
 class ApartmentController extends Controller
 {
@@ -28,14 +29,16 @@ class ApartmentController extends Controller
         }
     }
 
-    public function both() {
+    public function all() {
         $apartments = Apartment::with(['apartment_type', 'services', 'visits'])->orderByDesc('id')->get();
+        $apartment_types = ApartmentType::orderBy("name")->get();
         $services = Service::orderBy("name")->get();
 
         if ($apartments && $services) {
             return response()->json([
                 'success' => true,
                 'apartments' => $apartments,
+                'apartment_types' => $apartment_types,
                 'services' => $services
             ]);
         } else {
