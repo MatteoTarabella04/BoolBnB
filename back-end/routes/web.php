@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MessageController;
 // REMOVED BECAUSE OF BRIEF INDICATIONS
 // use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 // REDIRECT TO LOGIN PAGE WHEN A GUEST LANDS ON THE HOMEPAGE
 Route::get('/', function () {
@@ -31,16 +32,17 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // responds to url /admin
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); // admin.dashboard
     Route::resource('apartments', ApartmentController::class)->parameters([
-        'apartments' => 'apartment:slug'
+        'apartments' => 'apartment:slug',
     ]);
+    Route::get('/message', [MessageController::class, 'index'])->name('message');
 
     /* Route::resource('categories', CategoryController::class)->parameters([
-        'categories' => 'category:slug'
-    ])->only(['index', 'store', 'update', 'destroy']);
+'categories' => 'category:slug'
+])->only(['index', 'store', 'update', 'destroy']);
 
-    Route::resource('tags', TagController::class)->parameters([
-        'tags' => 'tag:slug'
-    ])->only(['index', 'store', 'update', 'destroy']); */
+Route::resource('tags', TagController::class)->parameters([
+'tags' => 'tag:slug'
+])->only(['index', 'store', 'update', 'destroy']); */
 });
 
 // REMOVED BECAUSE OF BRIEF INDICATIONS
