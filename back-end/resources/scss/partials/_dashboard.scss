@@ -1,24 +1,28 @@
 @use "./colors.scss" as *;
 
 .dashboard {
-
-    & .card_bg_special{
-        background-color: $bg-card-special!important;
+    h1 {
+        box-shadow: 2px 2px 3px rgb(63, 63, 63);
     }
 
-    & .badge_special{
+    .card_bg_special {
+        background-color: $bg-snow !important;
+        box-shadow: 2px 2px 3px rgb(63, 63, 63);
+    }
+
+    .badge_special {
         text-align: center;
         padding: 1.5rem;
-        background-color: $bg-card-special!important;
+        background-color: $bg-snow !important;
         display: block;
         border-radius: 1rem;
     }
 
-    & .card_off{
-        background-color:$bg-special-light!important;
+    .card_off {
+        background-color: $bg-snow !important;
     }
 
-    & .operations_description{
+    .operations_description {
         font-size: 1.25rem;
         font-weight: 600;
     }

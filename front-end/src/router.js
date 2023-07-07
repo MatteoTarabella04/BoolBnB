@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from './views/HomeView.vue';
+import SearchPage from './views/SearchPage.vue';
 import SingleApartment from "./views/SingleApartment.vue";
 
 const router = createRouter({
@@ -9,6 +10,11 @@ const router = createRouter({
             'path': '/',
             'name': 'home',
             'component': HomeView
+        },
+        {
+            'path': '/search-page',
+            'name': 'searchPage',
+            'component': SearchPage
         },
         {
             'path': '/apartment/:slug',
