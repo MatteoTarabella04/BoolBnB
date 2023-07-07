@@ -11,29 +11,19 @@ export default {
         <nav class="navbar navbar-expand-md navbar-light">
             <div class="container ">
                 <a class="text-decoration-none fw-bold fs-2 text-dark" href="/">BoolBnB</a>
-                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+
+                    <font-awesome-icon icon="fa-solid fa-user" />
+
+                    <!-- <span class="navbar-toggler-icon"></span> -->
                 </button>
                 <div class="collapse navbar-collapse  " id="collapsibleNavId">
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0 bg_primary z_index_999 rounded-4">
                         <li class="nav-item">
                             <a class="nav-link text-center" href="http://127.0.0.1:8000/register">Area Personale</a>
                         </li>
-                        <!--@guest--------fare dei controlli per vedere se l'utente sia loggato  -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8000/login">Accedi</a>
-                        </li> -->
-                        <!--@if (Route::has('register'))  -->
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8000/register">Registrati</a>
-                        </li> -->
-
-                        <!--@endif
-                    @else -->
-                        <!--@endguest -->
-
                     </ul>
                 </div>
             </div>
