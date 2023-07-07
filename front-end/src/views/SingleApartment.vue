@@ -1,5 +1,8 @@
 <script>
 import axios from "axios";
+import tt from "@tomtom-international/web-sdk-maps";
+import { nextTick } from "vue";
+/* import { showMap } from "../js/map.js"; */
 // import AppHeader from '../components/AppHeader.vue';
 export default {
   components: {
@@ -11,6 +14,7 @@ export default {
       fullName: "",
       senderEmail: "",
       content: "",
+      apiKey: 'EzjZV0IZ4ed8DMmJXesJTqZNFMWxQ0E5',
     }
   },
   methods: {
@@ -21,12 +25,14 @@ export default {
         content: this.content,
         apartment_id: this.apartment.id,
       }
+
       axios
         .post("http://127.0.0.1:8000/api/contacts", data)
         .then(response => {
           console.log(response);
         })
-    }
+    },
+
   },
   mounted() {
     axios
@@ -34,17 +40,41 @@ export default {
       .then(response => {
         console.log(response);
         this.apartment = response.data.apartment;
-        console.log(this.apartment);
+
+        nextTick(() => {
+
+          const lon = response.data.apartment.longitude;
+          const lat = response.data.apartment.latitude;
+
+          let map = tt.map({
+            key: this.apiKey,
+            container: 'map',
+            center: [lon, lat],
+            zoom: 14,
+          })
+          let marker = new tt.Marker()
+            .setLngLat([lon, lat])
+            .addTo(map)
+          console.log(
+            document.getElementById('map')
+          );
+
+        })
+
+
+
       })
       .catch(error => {
         console.log(error.message);
-      })
+      });
+
+
   }
 }
 </script>
 
 <template>
-  <!-- TODO aggiungere header + completare pagina -->
+  <!-- TODO completare pagina -->
   <div v-if="apartment" class="container">
     <h2>
       {{ apartment.name }}
@@ -111,6 +141,16 @@ export default {
       </p>
     </div>
 
+    <div class="bottom">
+      <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId"
+        placeholder="" :value="apartment.latitude" required>
+      <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId"
+        placeholder="" :value="apartment.longitude" required>
+
+      <div id="map" class="rounded-2 strong_shadow my-4">
+      </div>
+    </div>
+
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Contatta il proprietario</h5>
@@ -154,5 +194,11 @@ export default {
 
   background-color: transparent;
   border: none;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+
 }
 </style>
