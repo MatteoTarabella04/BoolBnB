@@ -22,7 +22,7 @@ export default {
                 <div class="collapse navbar-collapse  " id="collapsibleNavId">
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0 bg_primary z_index_999 rounded-4">
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="http://127.0.0.1:8000/register">Area Personale</a>
+                            <a class="nav-link text-center" href="http://127.0.0.1:8000/">Area Personale</a>
                         </li>
                     </ul>
                 </div>
