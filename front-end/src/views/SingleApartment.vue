@@ -83,7 +83,7 @@ export default {
               :alt="apartment.name + ' image'">
           </a>
           <!-- Modal Body -->
-          <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+          <div class="modal fade text-center" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl position-relative"
               role="document">
