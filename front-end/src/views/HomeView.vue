@@ -154,7 +154,7 @@ export default {
 </script>
 
 <template>
-    <main class="bg_primary">
+    <main class="bg_primary overflow-hidden">
         <div class="jumbotron d-flex align-items-center justify-content-end">
             <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4">
                 <h5>Scopri tutti gli alloggi</h5>
@@ -235,11 +235,11 @@ export default {
                                 <div class="d-flex flex-column flex-md-row align-items-stretch">
                                     <div class="apartment_type_wrapper g-1 d-flex" :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group">
                                         <input type="radio" class="btn-check" name="apartment_type" id="allTypes" :value="0" autocomplete="off" v-model="store.apartmentType">
-                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1" for="allTypes">Tutti</label>
+                                        <label class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1" for="allTypes">Tutti</label>
                                     </div>
                                     <div class="apartment_type_wrapper g-1 d-flex" :class="store.apartmentType === index + 1 ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group" v-for="(singleType, index) in store.apartmentTypes">
                                         <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name" :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
-                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1" :for="singleType.name">{{ singleType.name }}</label>
+                                        <label class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1" :for="singleType.name">{{ singleType.name }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -281,8 +281,7 @@ export default {
                             <img :src="getImagePath(apartment.image)" class="card-img-top moving_image pointer card_shadow h-100" :alt="apartment.name + ' image'">
                             <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
-                            <p> {{ apartment.description }}</p>
-                            <!-- <p>BEDS {{ apartment.beds }}</p> -->
+                            <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' : apartment.description }}</p>
                         </div>
                     </router-link>
                 </div>
