@@ -14,6 +14,7 @@ export default {
       fullName: "",
       senderEmail: "",
       content: "",
+      // TODO mettere api-key in file separato, non pushato su GitHub, ed importarlo in alto
       apiKey: 'EzjZV0IZ4ed8DMmJXesJTqZNFMWxQ0E5',
     }
   },
@@ -55,10 +56,6 @@ export default {
           let marker = new tt.Marker()
             .setLngLat([lon, lat])
             .addTo(map)
-          console.log(
-            document.getElementById('map')
-          );
-
         })
 
 
@@ -80,22 +77,19 @@ export default {
       {{ apartment.name }}
     </h2>
 
-    <div class="top d-flex gap-3 mb-3">
-      <div class="col-7 image_container">
+    <div class="top d-flex flex-wrap gap-3 mb-3">
+      <div class="col-12 col-md-7 image_container">
 
         <!-- Modal trigger button -->
 
         <a class="open_modal" type="button" data-bs-toggle="modal" data-bs-target="#modalId">
-          <img :src="`http://127.0.0.1:8000/storage/` + apartment.image" :alt="apartment.name"
-            class="img-fluid rounded-3">
+          <img :src="`http://127.0.0.1:8000/storage/` + apartment.image" :alt="apartment.name" class="img-fluid rounded-3">
         </a>
 
         <!-- Modal Body -->
         <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-          role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl position-relative"
-            role="document">
+        <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl position-relative" role="document">
             <div class="modal-content">
               <div class="modal-body p-0">
                 <button type="button" class="modal_close_button" data-bs-dismiss="modal" aria-label="Close">
@@ -108,14 +102,13 @@ export default {
         </div>
 
       </div>
-      <div class="col-3">
+      <div class="col-12 col-md-3">
         <div class="card mb-2">
           <div class="card-body">
-            <span>
+            <span class="d-block">
               <strong class="fs-4">{{ apartment.price_per_night }}€</strong> notte
             </span>
-            <a class="btn btn-dark my-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-              aria-controls="offcanvasExample">
+            <a class="btn btn-dark mt-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
               Richiedi informazioni
             </a>
           </div>
@@ -142,10 +135,8 @@ export default {
     </div>
 
     <div class="bottom">
-      <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId"
-        placeholder="" :value="apartment.latitude" required>
-      <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId"
-        placeholder="" :value="apartment.longitude" required>
+      <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId" placeholder="" :value="apartment.latitude" required>
+      <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId" placeholder="" :value="apartment.longitude" required>
 
       <div id="map" class="rounded-2 strong_shadow my-4">
       </div>
@@ -164,8 +155,7 @@ export default {
           </div>
           <div class="mb-3">
             <label for="sender_email" class="form-label">La tua Mail:</label>
-            <input type="email" class="form-control" id="sender_email" name="sender_email" v-model="senderEmail"
-              placeholder="name@example.com">
+            <input type="email" class="form-control" id="sender_email" name="sender_email" v-model="senderEmail" placeholder="name@example.com">
           </div>
           <div class="mb-3">
             <label for="content" class="form-label">Scrivi un messaggio:</label>
