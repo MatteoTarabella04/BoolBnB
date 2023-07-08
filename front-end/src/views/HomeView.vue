@@ -155,7 +155,6 @@ export default {
 
 <template>
     <main class="bg_primary">
-        <!-- <JumboSection></JumboSection> -->
         <div class="jumbotron d-flex align-items-center justify-content-end">
             <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4">
                 <h5>Scopri tutti gli alloggi</h5>
@@ -202,13 +201,13 @@ export default {
 
                             <div class="row mb-4">
                                 <div class="col-6">
-                                    <div class=""><!-- min_rooms input -->
+                                    <div><!-- min_rooms input -->
                                         <h5 for="min_rooms" class="form-label">Numero di stanze</h5>
                                         <input type="number" class="form-control" min="0" max="255" step="1" name="min_rooms" id="min_rooms" v-model="store.rooms">
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class=""><!-- min_beds input -->
+                                    <div><!-- min_beds input -->
                                         <h5 for="min_beds" class="form-label">Posti letto</h5>
                                         <input type="number" class="form-control" min="0" max="255" step="1" name="min_beds" id="min_beds" v-model="store.beds">
                                     </div>
@@ -231,7 +230,7 @@ export default {
                                 </div>
                             </div>
 
-                            <div class="mb-3 "><!-- apartment_type input----------test -->
+                            <div class="mb-3 "><!-- apartment_type input -->
                                 <h5>Tipo di alloggio?</h5>
                                 <div class="d-flex flex-column flex-md-row align-items-stretch">
                                     <div class="apartment_type_wrapper g-1 d-flex" :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group">
@@ -259,7 +258,7 @@ export default {
                 </div>
             </div>
             <div class="image_container px-0 px-sm-4">
-                <img class="jumbo_tron_img" src="../assets/images/pexels-quang-nguyen-vinh-2131772.jpg" alt="">
+                <img class="jumbo_tron_img" src="../assets/images/pexels-quang-nguyen-vinh-2131772.jpg" alt="Jumbotron image">
             </div>
         </div>
 
@@ -280,7 +279,7 @@ export default {
                             </svg> -->
                             <DrawingPin></DrawingPin>
                             <img :src="getImagePath(apartment.image)" class="card-img-top moving_image pointer card_shadow h-100" :alt="apartment.name + ' image'">
-                            <h2 class="">{{ apartment.name }}</h2>
+                            <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
                             <p> {{ apartment.description }}</p>
                             <!-- <p>BEDS {{ apartment.beds }}</p> -->

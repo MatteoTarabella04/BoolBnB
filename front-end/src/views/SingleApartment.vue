@@ -133,7 +133,7 @@ export default {
             Numero stanze :
           </h5>
           <span class="mb-3">
-            {{ apartment.rooms + ' mq' }}
+            {{ apartment.rooms }}
           </span>
           <h5 class="mb-3 fw-bold">
             Numero bagni :
