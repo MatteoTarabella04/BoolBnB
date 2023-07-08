@@ -40,10 +40,22 @@
     z-index: 999;
 }
 
+.z_index_998 {
+    z-index: 999;
+}
+
 .strong_shadow {
     filter: drop-shadow(2px 2px 2px $bg-carbon);
 }
 
+.aspect_ratio_1 {
+    aspect-ratio: 1/1 !important;
+}
 
 
 //CUSTOMIZATION
+
+.box_shadow {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.2);
+
+}

@@ -50,6 +50,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 600/300;
+    object-fit: cover;
 }
 
 .post_card>h2 {
@@ -58,14 +59,14 @@
     font-weight: normal;
     font-size: 2rem;
     color: #4a4a7d;
-    text-align: center;
+    // text-align: center;
 }
 
 .post_card>p {
     font-family: "Kalam", cursive;
     font-size: 1rem;
     color: #5e5e89;
-    text-align: center;
+    // text-align: center;
 }
 
 
