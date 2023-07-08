@@ -8,6 +8,7 @@ export default {
         return {
             store,
             selectedResult: "",
+            searchError: false,
         }
     },
     components: {
@@ -131,6 +132,13 @@ export default {
                 store.filteringApartments = stepFilteringApartments;
             }
         },
+        resetFilters() {
+            store.radius = 20;
+            store.rooms = 0;
+            store.beds = 0;
+            store.checkedServices = [];
+            store.apartmentType = 0;
+        },
         randomRotate() {
             const deg = Math.random() * (5 - -5) + -5;
             return 'rotate(' + deg + 'deg)';
@@ -155,17 +163,20 @@ export default {
                 <div>
                     <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], selectedResult = ''" type="text" id="address" name="address" v-model="store.inputAddress" class="form-control">
                     <ul class="list-unstyled">
-                        <li @click="selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress" v-for="result in store.results">
+                        <li @click="selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false" v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
                     </ul>
+                    <h6 v-if="searchError" class="text-danger">
+                        Attenzione: selezionare un indirizzo dall'elenco a discesa che compare digitando
+                    </h6>
                     <div class="d-flex align-items-center gap-3">
                         <!-- Modal trigger button -->
                         <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal" data-bs-target="#modalId">
                             Filtri
                             <font-awesome-icon icon="fa-solid fa-filter" />
                         </button>
-                        <button @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : ''" type="button" class="btn btn-outline-primary my-3">
+                        <button @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : searchError = true" type="button" class="btn btn-outline-primary my-3">
                             Mostra risultati
                             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                         </button>
@@ -223,9 +234,13 @@ export default {
                             <div class="mb-3 "><!-- apartment_type input----------test -->
                                 <h5>Tipo di alloggio?</h5>
                                 <div class="d-flex flex-column flex-md-row align-items-stretch">
-                                    <div class="apartment_type_wrapper btn-group g-1" role="group" aria-label="Basic_radio_toggle_button_group" v-for="singleType in store.apartmentTypes">
+                                    <div class="apartment_type_wrapper g-1" :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group">
+                                        <input type="radio" class="btn-check" name="apartment_type" id="allTypes" value="0" autocomplete="off" v-model="store.apartmentType">
+                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1">Tutti</label>
+                                    </div>
+                                    <div class="apartment_type_wrapper g-1" :class="store.apartmentType === index ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group" v-for="(singleType, index) in store.apartmentTypes">
                                         <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name" :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
-                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1" :for="singleType.name">{{ singleType.name }}</label>
+                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1">{{ singleType.name }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -235,9 +250,9 @@ export default {
                             <input type="range" class="form-range" min="0" id="price_range"> -->
                             <div class="modal-footer">
                                 <b class="me-auto">
-                                    <a type="reset" class="btn btn-dark">Cancella filtri</a>
+                                    <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
                                 </b>
-                                <button @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : ''" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalId">Mostra risultati</button>
+                                <button @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : searchError = true" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalId">Mostra risultati</button>
                             </div>
                         </div>
                     </div>
