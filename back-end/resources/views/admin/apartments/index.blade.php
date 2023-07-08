@@ -6,7 +6,7 @@
         <div class="container">
             @if (session('message'))
                 <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
-                    <strong>{{ session('message') }}</strong> You should check in on some of those fields below.
+                    <strong>{{ session('message') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
