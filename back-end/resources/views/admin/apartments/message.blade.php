@@ -8,7 +8,6 @@
             <h4>Messaggi Ricevuti</h4>
         </div>
         <div class="row">
-            {{-- {{dd($messages)}} --}}
             @if($messages)
                 <ul>
                     @foreach($messages as $message)
