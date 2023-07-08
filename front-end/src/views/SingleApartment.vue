@@ -122,11 +122,11 @@ export default {
         </div>
         <div class="card">
           <div class="card-body card_scrollable">
-            <h5>
+            <h5 class="mb-3">
               Servizi:
             </h5>
-            <ul class="" v-for="service in apartment.services">
-              <li>
+            <ul class="m-0">
+              <li class="mb-3" v-for="service in apartment.services">
                 {{ service.name }}
               </li>
             </ul>
@@ -180,8 +180,12 @@ export default {
 
 <style lang="scss">
 .card_scrollable {
-  height: 370px;
+  max-height: 370px;
   overflow-y: auto;
+
+  li:last-child {
+    margin: 0 !important;
+  }
 }
 
 .modal_close_button {
@@ -199,6 +203,5 @@ export default {
 #map {
   width: 100%;
   height: 400px;
-
 }
 </style>
