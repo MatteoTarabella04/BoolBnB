@@ -3,11 +3,7 @@ import axios from "axios";
 import tt from "@tomtom-international/web-sdk-maps";
 import { nextTick } from "vue";
 /* import { showMap } from "../js/map.js"; */
-// import AppHeader from '../components/AppHeader.vue';
 export default {
-  components: {
-    // AppHeader,
-  },
   data() {
     return {
       apartment: null,
@@ -37,35 +33,29 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
-      .then(response => {
-        console.log(response);
-        this.apartment = response.data.apartment;
+    .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
+    .then(response => {
+      this.apartment = response.data.apartment;
 
-        nextTick(() => {
+      nextTick(() => {
+        const lon = response.data.apartment.longitude;
+        const lat = response.data.apartment.latitude;
 
-          const lon = response.data.apartment.longitude;
-          const lat = response.data.apartment.latitude;
-
-          let map = tt.map({
-            key: this.apiKey,
-            container: 'map',
-            center: [lon, lat],
-            zoom: 14,
-          })
-          let marker = new tt.Marker()
-            .setLngLat([lon, lat])
-            .addTo(map)
+        let map = tt.map({
+          key: this.apiKey,
+          container: 'map',
+          center: [lon, lat],
+          zoom: 14,
         })
 
-
-
+        let marker = new tt.Marker()
+          .setLngLat([lon, lat])
+          .addTo(map)
       })
-      .catch(error => {
-        console.log(error.message);
-      });
-
-
+    })
+    .catch(error => {
+      console.error(error.message);
+    });
   }
 }
 </script>
@@ -77,17 +67,15 @@ export default {
       {{ apartment.name }}
     </h2>
 
-    <div class="top d-flex flex-wrap gap-3 mb-3">
+    <div class="top row flex-wrap g-3 mb-3">
       <div class="col-12 col-md-7 image_container">
 
         <!-- Modal trigger button -->
-
         <a class="open_modal" type="button" data-bs-toggle="modal" data-bs-target="#modalId">
           <img :src="`http://127.0.0.1:8000/storage/` + apartment.image" :alt="apartment.name" class="img-fluid rounded-3">
         </a>
 
         <!-- Modal Body -->
-        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
         <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
           <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl position-relative" role="document">
             <div class="modal-content">
@@ -102,8 +90,8 @@ export default {
         </div>
 
       </div>
-      <div class="col-12 col-md-3">
-        <div class="card mb-2">
+      <div class="col-12 col-md-5">
+        <div class="card mb-3">
           <div class="card-body">
             <span class="d-block">
               <strong class="fs-4">{{ apartment.price_per_night }}€</strong> notte

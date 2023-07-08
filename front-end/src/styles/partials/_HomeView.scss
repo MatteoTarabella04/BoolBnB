@@ -1,5 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap");
 
+.modal-dialog {
+    max-width: 800px !important;
+}
+
+.apartment_type {
+    border: 1px solid black;
+}
+
+.apartment_type_wrapper:first-child .apartment_type {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+}
+
+.apartment_type_wrapper:last-child .apartment_type {
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+}
 
 .sponsored_apartment {
     font: 500 100%/1.4 system-ui;
@@ -7,7 +24,6 @@
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 0rem;
     // padding: 1rem;
-
 }
 
 .post_card {
@@ -43,4 +59,16 @@
     font-size: 1rem;
     color: #5e5e89;
     text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .apartment_type_wrapper:first-child .apartment_type {
+        border-top-right-radius: 0 !important;
+        border-bottom-left-radius: 12px !important;
+    }
+    
+    .apartment_type_wrapper:last-child .apartment_type {
+        border-bottom-left-radius: 0 !important;
+        border-top-right-radius: 12px !important;
+    }
 }
