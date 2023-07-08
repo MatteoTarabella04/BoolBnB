@@ -35,14 +35,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         'apartments' => 'apartment:slug',
     ]);
     Route::get('/message', [MessageController::class, 'index'])->name('message');
-
-    /* Route::resource('categories', CategoryController::class)->parameters([
-'categories' => 'category:slug'
-])->only(['index', 'store', 'update', 'destroy']);
-
-Route::resource('tags', TagController::class)->parameters([
-'tags' => 'tag:slug'
-])->only(['index', 'store', 'update', 'destroy']); */
 });
 
 // REMOVED BECAUSE OF BRIEF INDICATIONS
