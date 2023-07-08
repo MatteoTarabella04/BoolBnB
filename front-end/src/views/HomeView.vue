@@ -14,47 +14,47 @@ export default {
             store.filteringApartments = [];
             if (!store.filtering) {
                 axios
-                    .get("http://127.0.0.1:8000/api/apartments-types-services")
-                    .then(response => {
-                        store.apartments = response.data.apartments;
-                        store.services = response.data.services;
-                        store.apartmentTypes = response.data.apartment_types;
-                        if (address != null) {
-                            store.filtering = true;
-                        }
-                        if (store.filtering) {
-                            this.setCoordinates(address);
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error.message);
-                    })
-            } else {
-                axios
-                    .get("http://127.0.0.1:8000/api/apartments")
-                    .then(response => {
-                        store.apartments = response.data.apartments;
-                        if (address != null) {
-                            store.filtering = true;
-                        }
-                        if (store.filtering) {
-                            this.setCoordinates(address);
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error.message);
-                    })
-            }
-        },
-        getRealtimeResults() {
-            axios
-                .get(`https://api.tomtom.com/search/2/search/${store.inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+                .get("http://127.0.0.1:8000/api/apartments-types-services")
                 .then(response => {
-                    store.results = response.data.results
+                    store.apartments = response.data.apartments;
+                    store.services = response.data.services;
+                    store.apartmentTypes = response.data.apartment_types;
+                    if (address != null) {
+                        store.filtering = true;
+                    }
+                    if (store.filtering) {
+                        this.setCoordinates(address);
+                    }
                 })
                 .catch(error => {
                     console.error(error.message);
                 })
+            } else {
+                axios
+                .get("http://127.0.0.1:8000/api/apartments")
+                .then(response => {
+                    store.apartments = response.data.apartments;
+                    if (address != null) {
+                        store.filtering = true;
+                    }
+                    if (store.filtering) {
+                        this.setCoordinates(address);
+                    }
+                })
+                .catch(error => {
+                    console.error(error.message);
+                })
+            }
+        },
+        getRealtimeResults() {
+            axios
+            .get(`https://api.tomtom.com/search/2/search/${store.inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+            .then(response => {
+                store.results = response.data.results
+            })
+            .catch(error => {
+                console.error(error.message);
+            })
         },
         setCoordinates(address) {
             store.selectedAddress = address.address.freeformAddress;
@@ -137,7 +137,6 @@ export default {
     },
     mounted() {
         this.getAllApartments();
-
     },
 }
 </script>
@@ -150,29 +149,25 @@ export default {
                 <h5>Scopri tutti gli alloggi</h5>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
-                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : ''" type="text" id="address"
-                        name="address" v-model="store.inputAddress" class="form-control">
+                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : ''" type="text" id="address" name="address" v-model="store.inputAddress" class="form-control">
                     <ul class="list-unstyled">
                         <li @click="getAllApartments(result), store.results = []" v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
                     </ul>
                     <!-- Modal trigger button -->
-                    <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
-                        data-bs-target="#modalId">
+                    <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal" data-bs-target="#modalId">
                         Filtri
                         <font-awesome-icon icon="fa-solid fa-filter" />
                     </button>
 
                 </div>
             </div>
-            <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-                aria-hidden="true">
+            <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg px-5 mx-auto" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
                             <h5 class="modal-title m-auto" id="modalTitleId">Affina la tua ricerca</h5>
                             <!-- <div class="space"></div> -->
                         </div>
@@ -275,49 +270,42 @@ export default {
                                     <!-- VEDERE SE E COME IMPLEMENTARE
                             <h5>Fascia di prezzo</h5>
                             <input type="range" class="form-range" min="0" id="price_range"> -->
-                                </div>
                                 <div class="modal-footer">
                                     <b class="me-auto">
                                         <a type="reset" class="btn btn-dark">Cancella filtri</a>
                                     </b>
                                     <button type="button" class="btn btn-primary">Mostra risultati</button>
                                 </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="image_container px-0 px-sm-4">
-                        <img class="jumbo_tron_img" src="../assets/images/pexels-quang-nguyen-vinh-2131772.jpg" alt="">
-                    </div>
-                </div>
-
-                <div class="container">
-
-
-                    <h1 class="text-center my-5">In primo piano</h1>
-                    <div class="d-flex flex-wrap">
-                        <div class=" col-12 col-sm-6 col-md-4 col-xl-3 sponsored_apartment"
-                            :style="{ transform: randomRotate() }" v-for="apartment in store.apartments">
-                            <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
-                                class="text-decoration-none">
-                                <div class="post_card">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
-                                        class="bi bi-bookmark-star-fill position-absolute top-0 end-0 me-2 text-warning"
-                                        viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z" />
-                                    </svg>
-                                    <img :src="getImagePath(apartment.image)"
-                                    class="card-img-top moving_image pointer card_shadow h-100"
-                                    :alt="apartment.name + ' image'">
-                                <h2 class="">{{ apartment.name }}</h2>
-                                <p> {{ apartment.address }}</p>
-                                <p> {{ apartment.description }}</p>
-                                <!-- <p>BEDS {{ apartment.beds }}</p> -->
-                            </div>
-                        </router-link>
                     </div>
                 </div>
             </div>
+                <div class="image_container px-0 px-sm-4">
+                    <img class="jumbo_tron_img" src="../assets/images/pexels-quang-nguyen-vinh-2131772.jpg" alt="">
+                </div>
+        </div>
+
+        <div class="container">
+
+
+            <h1 class="text-center my-5">In primo piano</h1>
+            <div class="d-flex flex-wrap">
+                <div class=" col-12 col-sm-6 col-md-4 col-xl-3 sponsored_apartment" :style="{ transform: randomRotate() }" v-for="apartment in store.apartments">
+                    <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }" class="text-decoration-none">
+                        <div class="post_card">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-bookmark-star-fill position-absolute top-0 end-0 me-2 text-warning" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z" />
+                            </svg>
+                            <img :src="getImagePath(apartment.image)" class="card-img-top moving_image pointer card_shadow h-100" :alt="apartment.name + ' image'">
+                            <h2 class="">{{ apartment.name }}</h2>
+                            <p> {{ apartment.address }}</p>
+                            <p> {{ apartment.description }}</p>
+                            <!-- <p>BEDS {{ apartment.beds }}</p> -->
+                        </div>
+                    </router-link>
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
