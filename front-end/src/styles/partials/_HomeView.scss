@@ -34,7 +34,14 @@
     background: #f8f3e8;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
-    overflow: hidden;
+    position: relative;
+
+
+    .drawing_pin {
+        transform: scale(0.45);
+        top: -51px;
+        left: 27%;
+    }
 
 
 }
@@ -61,14 +68,26 @@
     text-align: center;
 }
 
+
+//MEDIA QUERY
+
 @media screen and (min-width: 768px) {
     .apartment_type_wrapper:first-child .apartment_type {
         border-top-right-radius: 0 !important;
         border-bottom-left-radius: 12px !important;
     }
-    
+
     .apartment_type_wrapper:last-child .apartment_type {
         border-bottom-left-radius: 0 !important;
         border-top-right-radius: 12px !important;
     }
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+
+    .drawing_pin {
+
+        left: 21% !important;
+    }
+
 }
