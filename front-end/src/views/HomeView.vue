@@ -160,7 +160,8 @@ export default {
                     <!-- Modal trigger button -->
                     <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
                         data-bs-target="#modalId">
-                        Filtri (icona)
+                        Filtri
+                        <font-awesome-icon icon="fa-solid fa-filter" />
                     </button>
 
                 </div>
@@ -172,7 +173,7 @@ export default {
                         <div class="modal-header">
                             <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
-                            <h5 class="modal-title m-auto" id="modalTitleId">Filtri</h5>
+                            <h5 class="modal-title m-auto" id="modalTitleId">Affina ricerca</h5>
                             <!-- <div class="space"></div> -->
                         </div>
                         <div class="modal-body">
@@ -194,7 +195,53 @@ export default {
                                     <label :for="service.name + '-' + index" class="ms-2">{{ service.name }}</label>
                                 </div>
                             </div>
-                            <h5>Tipo di alloggio?</h5>
+                            
+                            <!-- apartment_type input----------ORIGINAAAAAAAAAL -->
+                                    <!-- <div class="mb-3">
+                                        <h5>Tipo di alloggio?</h5>
+                                        <div class="btn-group rounded-1 max-w-max" role="group" aria-label="Basic_radio_toggle_button_group">
+                                            <input type="radio" class="btn-check" name="apartment_type" id="allTypes"
+                                                value="0" autocomplete="off" checked v-model="store.apartmentType">
+                                            <label
+                                                class="btn btn-outline-dark btn-lg d-flex align-items-center justify-content-center"
+                                                for="allTypes">Tutti
+                                            </label>
+                                            <template class="" v-for="singleType in store.apartmentTypes">
+
+                                                <input type="radio" class="btn-check" name="apartment_type"
+                                                    :id="singleType.name" :value="singleType.id" autocomplete="off"
+                                                    v-model="store.apartmentType">
+                                                <label
+                                                    class="btn btn-outline-dark btn-lg d-flex align-items-center justify-content-center"
+                                                    :for="singleType.name">{{ singleType.name }}
+                                                </label>
+                                            </template>
+                                        </div>
+                                    </div> -->
+
+
+
+                                    <div class="mb-3 "><!-- apartment_type input----------test -->
+                                        <h5>Tipo di alloggio?</h5>
+                                        <div class="btn-group rounded-1 g-1 d-flex flex-wrap-reverse" role="group" aria-label="Basic_radio_toggle_button_group" v-for="singleType in store.apartmentTypes">
+                                            <!-- <input type="radio" class="btn-check" name="apartment_type" id="allTypes"
+                                                value="0" autocomplete="off" checked v-model="store.apartmentType">
+                                            <label
+                                                class="btn btn-outline-dark btn-lg d-flex align-items-center justify-content-center"
+                                                for="allTypes">Tutti
+                                            </label> -->
+
+                                                <input type="radio" class="btn-check" name="apartment_type"
+                                                    :id="singleType.name" :value="singleType.id" autocomplete="off"
+                                                    v-model="store.apartmentType">
+                                                <label
+                                                    class="btn btn-outline-dark btn-lg d-flex align-items-center justify-content-center"
+                                                    :for="singleType.name">{{ singleType.name }}
+                                                </label>
+                                        </div>
+                                    </div>
+                                    
+                            <!-- <h5>Tipo di alloggio?</h5>
                             <div class="btn-group my-3" role="group" aria-label="Basic radio toggle button group">
                                 <input type="radio" class="btn-check" name="apartment_type" id="allTypes" value="0"
                                     autocomplete="off" checked v-model="store.apartmentType">
@@ -207,7 +254,8 @@ export default {
                                         class="btn btn-outline-dark btn-lg d-flex align-items-center justify-content-center"
                                         :for="singleType.name">{{ singleType.name }}</label>
                                 </template>
-                            </div>
+                            </div> -->
+                            
                             <!-- VEDERE SE E COME IMPLEMENTARE
                             <h5>Fascia di prezzo</h5>
                             <input type="range" class="form-range" min="0" id="price_range"> -->
@@ -242,7 +290,6 @@ export default {
                                 <path fill-rule="evenodd"
                                     d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z" />
                             </svg>
-
                             <img :src="getImagePath(apartment.image)"
                                 class="card-img-top moving_image pointer card_shadow h-100"
                                 :alt="apartment.name + ' image'">

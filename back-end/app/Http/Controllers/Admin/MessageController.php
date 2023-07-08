@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Message;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -15,7 +17,15 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Auth::user()->apartments;
+        $messages = [];
+        foreach ($apartments as $apartment) {
+            $apartment_messages = $apartment->messages;
+            array_push($messages, $apartment_messages);
+        }
+
+        return view('admin.apartments.message', compact('messages'));
+
     }
 
     /**
