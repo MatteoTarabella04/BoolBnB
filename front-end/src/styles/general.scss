@@ -6,3 +6,8 @@
 @use './partials/jumboSection';
 @import "/node_modules/bootstrap/scss/bootstrap";
 @import "/node_modules/@tomtom-international/web-sdk-maps/dist/maps.css";
+
+
+body {
+    font-family: 'Comfortaa', cursive;
+}

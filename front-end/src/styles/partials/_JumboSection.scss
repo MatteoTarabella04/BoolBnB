@@ -3,7 +3,8 @@
 
     .image_container {
         height: 100%;
-        padding: 30px;
+        transition-duration: 0.5s;
+        // padding: 30px;
 
         .jumbo_tron_img {
             height: 100%;
@@ -11,23 +12,16 @@
             min-width: 70vw;
             object-fit: cover;
 
-            // right: 0px;
-            // height: 700px;
-            // border-radius: 3rem 0 0 3rem;
-            // margin: 3rem 0;
         }
     }
 }
 
 
 
+@media screen and (min-width:576px) {
+    .jumbo_tron_img {
 
-// .card_jumbo {
-//     position: absolute !important;
-//     left: 200px;
-//     top: 120px;
-//     /* width: 400px!important;
-//     height: 500px!important; */
-//     z-index: 1;
-//     border-radius: 2rem !important;
-// }
+        border-radius: 30px;
+
+    }
+}

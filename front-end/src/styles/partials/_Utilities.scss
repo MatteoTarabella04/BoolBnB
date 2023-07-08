@@ -25,6 +25,10 @@
 
 }
 
+.bg_street {
+    background-color: #ccc;
+}
+
 
 //UTILITIES 
 
@@ -35,3 +39,11 @@
 .z_index_999 {
     z-index: 999;
 }
+
+.strong_shadow {
+    filter: drop-shadow(2px 2px 2px $bg-carbon);
+}
+
+
+
+//CUSTOMIZATION
