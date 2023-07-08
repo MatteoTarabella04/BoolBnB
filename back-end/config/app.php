@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
-
+    'frontend_url' => 'http://localhost:5174',
     /*
     |--------------------------------------------------------------------------
     | Application Name

@@ -1,8 +1,10 @@
 <header class="position-sticky top-0 z_index_1000 shadow">
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
-            <a class="text-decoration-none fw-bold fs-2 text-dark" href="/">BoolBnB</a>
+            <a class="text-decoration-none fw-bold fs-2 text-dark" href="/">BoolBnB <span
+                    class="text-black-50 font_size_20">Admin</span></a>
             {{-- config('app.name', 'Laravel') --}}
+
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                 aria-label="{{ __('Toggle navigation') }}">
@@ -21,11 +23,12 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle p-2" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ config('app.frontend_url') }}">{{ __('BoolBnB') }}</a>
                                 <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                                 <a class="dropdown-item"
                                     href="{{ route('admin.apartments.index') }}">{{ __('I tuoi annunci') }}</a>
