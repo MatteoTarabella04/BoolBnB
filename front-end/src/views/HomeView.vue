@@ -234,13 +234,13 @@ export default {
                             <div class="mb-3 "><!-- apartment_type input----------test -->
                                 <h5>Tipo di alloggio?</h5>
                                 <div class="d-flex flex-column flex-md-row align-items-stretch">
-                                    <div class="apartment_type_wrapper g-1" :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group">
-                                        <input type="radio" class="btn-check" name="apartment_type" id="allTypes" value="0" autocomplete="off" v-model="store.apartmentType">
-                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1">Tutti</label>
+                                    <div class="apartment_type_wrapper g-1 d-flex" :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group">
+                                        <input type="radio" class="btn-check" name="apartment_type" id="allTypes" :value="0" autocomplete="off" v-model="store.apartmentType">
+                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1" for="allTypes">Tutti</label>
                                     </div>
-                                    <div class="apartment_type_wrapper g-1" :class="store.apartmentType === index ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group" v-for="(singleType, index) in store.apartmentTypes">
+                                    <div class="apartment_type_wrapper g-1 d-flex" :class="store.apartmentType === index + 1 ? 'bg-dark text-light' : ''" role="group" aria-label="Basic_radio_toggle_button_group" v-for="(singleType, index) in store.apartmentTypes">
                                         <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name" :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
-                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1">{{ singleType.name }}</label>
+                                        <label class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1" :for="singleType.name">{{ singleType.name }}</label>
                                     </div>
                                 </div>
                             </div>

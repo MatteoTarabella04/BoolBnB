@@ -4,16 +4,16 @@
     max-width: 800px !important;
 }
 
-.apartment_type {
+.apartment_type_wrapper {
     border: 1px solid black;
 }
 
-.apartment_type_wrapper:first-child .apartment_type {
+.apartment_type_wrapper:first-child {
     border-top-left-radius: 12px !important;
     border-top-right-radius: 12px !important;
 }
 
-.apartment_type_wrapper:last-child .apartment_type {
+.apartment_type_wrapper:last-child {
     border-bottom-left-radius: 12px !important;
     border-bottom-right-radius: 12px !important;
 }
@@ -73,12 +73,12 @@
 //MEDIA QUERY
 
 @media screen and (min-width: 768px) {
-    .apartment_type_wrapper:first-child .apartment_type {
+    .apartment_type_wrapper:first-child {
         border-top-right-radius: 0 !important;
         border-bottom-left-radius: 12px !important;
     }
 
-    .apartment_type_wrapper:last-child .apartment_type {
+    .apartment_type_wrapper:last-child {
         border-bottom-left-radius: 0 !important;
         border-top-right-radius: 12px !important;
     }
