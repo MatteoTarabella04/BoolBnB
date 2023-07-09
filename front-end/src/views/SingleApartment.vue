@@ -98,6 +98,7 @@ export default {
             </div>
           </div>
           <h2 class="fs-2 fw-bold">{{ apartment.name }}</h2>
+          <h4>{{ apartment.apartment_type.name }}</h4>
           <p class="fs-6"> {{ apartment.address }}</p>
           <p> {{ apartment.description }}</p>
         </div>
