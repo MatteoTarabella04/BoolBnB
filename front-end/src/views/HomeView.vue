@@ -1,7 +1,7 @@
 <script>
 import axios from "axios";
-import DrawingPin from '../components/DrawingPin.vue';
 import { store } from "../store.js";
+import DrawingPin from '../components/DrawingPin.vue';
 export default {
     name: "HomeView",
     data() {
@@ -17,19 +17,13 @@ export default {
     methods: {
         getAllApartments(address = null) {
             store.filteringApartments = [];
-            if (!store.filtering) {
+            if (address == null) {
                 axios
                 .get(store.base_admin_URL + "api/apartments-types-services")
                 .then(response => {
                     store.apartments = response.data.apartments;
                     store.services = response.data.services;
                     store.apartmentTypes = response.data.apartment_types;
-                    if (address != null) {
-                        store.filtering = true;
-                    }
-                    if (store.filtering) {
-                        this.setCoordinates(address);
-                    }
                 })
                 .catch(error => {
                     console.error(error.message);
@@ -39,12 +33,7 @@ export default {
                 .get(store.base_admin_URL + "api/apartments")
                 .then(response => {
                     store.apartments = response.data.apartments;
-                    if (address != null) {
-                        store.filtering = true;
-                    }
-                    if (store.filtering) {
-                        this.setCoordinates(address);
-                    }
+                    this.setCoordinates(address);
                 })
                 .catch(error => {
                     console.error(error.message);
@@ -140,7 +129,7 @@ export default {
             store.apartmentType = 0;
         },
         randomRotate() {
-            const deg = Math.random() * (5 - -5) + -5;
+            const deg = Math.random() * 10 - 5;
             return 'rotate(' + deg + 'deg)';
         },
         getImagePath(path) {
@@ -268,7 +257,7 @@ export default {
             <h1 class="text-center my-5">In primo piano</h1>
             <div class="d-flex flex-wrap">
 
-                <div class=" col-12 col-sm-6 col-md-4 col-xl-3 sponsored_apartment" :style="{ transform: randomRotate() }" v-for="apartment in store.apartments">
+                <div class="col-12 col-md-6 col-xl-4 sponsored_apartment" :style="{ transform: randomRotate() }" v-for="apartment in store.apartments">
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }" class="text-decoration-none">
                         <div class="post_card text-center">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
