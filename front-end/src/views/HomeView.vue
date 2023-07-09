@@ -149,7 +149,7 @@ export default {
                 <h5>Scopri tutti gli alloggi</h5>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
-                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], selectedResult = ''" type="text" id="address" name="address" v-model="store.inputAddress" class="form-control">
+                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], selectedResult = ''" class="form-control" type="text" id="address" name="address" placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled">
                         <li @click="selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false" v-for="result in store.results">
                             {{ result.address.freeformAddress }}
@@ -182,10 +182,10 @@ export default {
                         </div>
                         <div class="modal-body">
                             <div class="mb-3"><!-- radius_range distance input -->
-                                <h5 for="radius_range" class="form-label">Distanza massima
+                                <h5 class="form-label">Distanza massima
                                     <span class="badge text-bg-primary">{{ store.radius }} km</span>
                                 </h5>
-                                <input type="range" class="form-range" min="1" max="100" step="1" name="radius_range" id="radius_range" v-model="store.radius">
+                                <input type="range" min="1" max="100" step="1" name="radius_range" id="radius_range" v-model="store.radius">
                             </div>
 
                             <div class="row mb-4">
