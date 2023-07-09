@@ -154,7 +154,7 @@ export default {
 </script>
 
 <template>
-    <main class="bg_primary">
+    <main class="bg_primary overflow-hidden">
         <div class="jumbotron d-flex align-items-center justify-content-end">
             <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4">
                 <h4 class="fw-bold">Scopri tutti gli alloggi</h4>
@@ -234,10 +234,13 @@ export default {
                                     </span>
                                 </h5>
                                 <div class="d-flex flex-wrap">
-                                    <div v-for="(service, index) in store.services" class="w-50">
+
+
+                                    <div v-for="(service, index) in store.services" class="col-12 col-md-6">
                                         <input :value="service.id" type="checkbox" class="form-checkbox"
                                             :id="service.name + '-' + index" v-model="store.checkedServices">
-                                        <label :for="service.name + '-' + index" class="ms-2">
+                                        <label :for="service.name + '-' + index" class="ms-2 d-inline">
+
                                             {{ service.name }}
                                         </label>
                                     </div>
@@ -247,13 +250,14 @@ export default {
                             <div class="mb-3 "><!-- apartment_type input -->
                                 <h5>Tipo di alloggio?</h5>
                                 <div class="d-flex flex-column flex-md-row align-items-stretch">
+
                                     <div class="apartment_type_wrapper g-1 d-flex"
                                         :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group"
                                         aria-label="Basic_radio_toggle_button_group">
                                         <input type="radio" class="btn-check" name="apartment_type" id="allTypes" :value="0"
                                             autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
                                             for="allTypes">Tutti</label>
                                     </div>
                                     <div class="apartment_type_wrapper g-1 d-flex"
@@ -263,7 +267,7 @@ export default {
                                         <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name"
                                             :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
                                             :for="singleType.name">{{ singleType.name }}</label>
                                     </div>
                                 </div>
@@ -272,7 +276,7 @@ export default {
                             <!-- VEDERE SE E COME IMPLEMENTARE
                             <h5>Fascia di prezzo</h5>
                             <input type="range" class="form-range" min="0" id="price_range"> -->
-                            <div class="modal-footer">
+                            <div class="modal-footer justify-content-center justify-content-sm-between">
                                 <b class="me-auto">
                                     <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
                                 </b>
@@ -314,8 +318,8 @@ export default {
                                 :alt="apartment.name + ' image'">
                             <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
-                            <p> {{ apartment.description }}</p>
-                            <!-- <p>BEDS {{ apartment.beds }}</p> -->
+                            <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
+                                apartment.description }}</p>
                         </div>
                     </router-link>
                 </div>
