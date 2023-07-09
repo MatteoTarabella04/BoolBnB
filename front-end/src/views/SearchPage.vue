@@ -1,13 +1,12 @@
 <script>
 import axios from "axios";
-import DrawingPin from '../components/DrawingPin.vue';
 import { store } from "../store.js";
+import DrawingPin from '../components/DrawingPin.vue';
 export default {
     name: "HomeView",
     data() {
         return {
             store,
-            selectedResult: "",
             searchError: false,
         }
     },
@@ -17,23 +16,17 @@ export default {
     methods: {
         getAllApartments(address = null) {
             store.filteringApartments = [];
-            if (!store.filtering) {
+            if (address == null) {
                 axios
-                    .get(store.base_admin_URL + "api/apartments-types-services")
-                    .then(response => {
-                        store.apartments = response.data.apartments;
-                        store.services = response.data.services;
-                        store.apartmentTypes = response.data.apartment_types;
-                        if (address != null) {
-                            store.filtering = true;
-                        }
-                        if (store.filtering) {
-                            this.setCoordinates(address);
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error.message);
-                    })
+                .get(store.base_admin_URL + "api/apartments-types-services")
+                .then(response => {
+                    store.apartments = response.data.apartments;
+                    store.services = response.data.services;
+                    store.apartmentTypes = response.data.apartment_types;
+                })
+                .catch(error => {
+                    console.error(error.message);
+                })
             } else {
                 axios
                     .get(store.base_admin_URL + "api/apartments")
@@ -140,31 +133,26 @@ export default {
             store.apartmentType = 0;
         },
         randomRotate() {
-            const deg = Math.random() * (5 - -5) + -5;
+            const deg = Math.random() * 10 - 5;
             return 'rotate(' + deg + 'deg)';
         },
         getImagePath(path) {
             return store.base_admin_URL + 'storage/' + path
         }
     },
-    mounted() {
-        this.getAllApartments();
-    },
 }
 </script>
 
 <template>
-    <main class="bg_primary">
+    <main class="bg_primary overflow-hidden">
         <div class="jumbotron d-flex align-items-center justify-content-end">
             <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4">
-                <h5>Scopri tutti gli alloggi</h5>
+                <h4 class="fw-bold">Scopri tutti gli alloggi</h4>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
-                    <input
-                        @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], selectedResult = ''"
-                        type="text" id="address" name="address" v-model="store.inputAddress" class="form-control">
+                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = ''" class="form-control" type="text" id="address" name="address" placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled">
-                        <li @click="selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false"
+                        <li @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false"
                             v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
@@ -172,17 +160,17 @@ export default {
                     <h6 v-if="searchError" class="text-danger">
                         Attenzione: selezionare un indirizzo dall'elenco a discesa che compare digitando
                     </h6>
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center justify-content-end justify-content-sm-between gap-3">
                         <!-- Modal trigger button -->
                         <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
                             data-bs-target="#modalId">
-                            Filtri
+                            <span class="d-none d-sm-inline me-2">Filtri</span>
                             <font-awesome-icon icon="fa-solid fa-filter" />
                         </button>
                         <button
-                            @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : searchError = true"
-                            type="button" class="btn btn-outline-primary my-3">
-                            Mostra risultati
+                            @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : searchError = true"
+                            type="button" class="btn btn-outline-dark my-3">
+                            <span class="d-none d-sm-inline me-2">Mostra risultati</span>
                             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                         </button>
                     </div>
@@ -202,11 +190,10 @@ export default {
                         </div>
                         <div class="modal-body">
                             <div class="mb-3"><!-- radius_range distance input -->
-                                <h5 for="radius_range" class="form-label">Distanza massima
+                                <h5 class="form-label">Distanza massima
                                     <span class="badge text-bg-primary">{{ store.radius }} km</span>
                                 </h5>
-                                <input type="range" class="form-range" min="1" max="100" step="1" name="radius_range"
-                                    id="radius_range" v-model="store.radius">
+                                <input type="range" min="1" max="100" step="1" name="radius_range" id="radius_range" v-model="store.radius">
                             </div>
 
                             <div class="row mb-4">
@@ -234,10 +221,13 @@ export default {
                                     </span>
                                 </h5>
                                 <div class="d-flex flex-wrap">
-                                    <div v-for="(service, index) in store.services" class="w-50">
+
+
+                                    <div v-for="(service, index) in store.services" class="col-12 col-md-6">
                                         <input :value="service.id" type="checkbox" class="form-checkbox"
                                             :id="service.name + '-' + index" v-model="store.checkedServices">
-                                        <label :for="service.name + '-' + index" class="ms-2">
+                                        <label :for="service.name + '-' + index" class="ms-2 d-inline">
+
                                             {{ service.name }}
                                         </label>
                                     </div>
@@ -247,13 +237,14 @@ export default {
                             <div class="mb-3 "><!-- apartment_type input -->
                                 <h5>Tipo di alloggio?</h5>
                                 <div class="d-flex flex-column flex-md-row align-items-stretch">
+
                                     <div class="apartment_type_wrapper g-1 d-flex"
                                         :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group"
                                         aria-label="Basic_radio_toggle_button_group">
                                         <input type="radio" class="btn-check" name="apartment_type" id="allTypes" :value="0"
                                             autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
                                             for="allTypes">Tutti</label>
                                     </div>
                                     <div class="apartment_type_wrapper g-1 d-flex"
@@ -263,21 +254,18 @@ export default {
                                         <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name"
                                             :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center p-3 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
                                             :for="singleType.name">{{ singleType.name }}</label>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- VEDERE SE E COME IMPLEMENTARE
-                            <h5>Fascia di prezzo</h5>
-                            <input type="range" class="form-range" min="0" id="price_range"> -->
-                            <div class="modal-footer">
-                                <b class="me-auto">
+                            <div class="modal-footer justify-content-center justify-content-sm-between">
+                                <b>
                                     <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
                                 </b>
                                 <button
-                                    @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : searchError = true"
+                                    @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : searchError = true"
                                     type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalId">Mostra risultati</button>
                             </div>
@@ -294,33 +282,34 @@ export default {
         <div class="container">
 
 
-        <h1 class="text-center my-5">In primo piano</h1>
-        <div class="d-flex flex-wrap">
+            <h1 class="text-center my-5">In primo piano</h1>
+            <div class="d-flex flex-wrap">
 
-            <div class=" col-12 col-sm-6 col-md-4 col-xl-3 sponsored_apartment" :style="{ transform: randomRotate() }"
-                v-for="apartment in store.apartments">
-                <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
-                    class="text-decoration-none">
-                    <div class="post_card text-center">
-                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+
+                <div class="col-12 col-md-6 col-xl-4 sponsored_apartment" :style="{ transform: randomRotate() }" v-for="apartment in store.apartments">
+                    <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }" class="text-decoration-none">
+                        <div class="post_card text-center">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
                                 class="bi bi-bookmark-star-fill position-absolute top-0 end-0 me-2 text-warning"
                                 viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
                                     d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z" />
                             </svg> -->
-                        <DrawingPin></DrawingPin>
-                        <img :src="getImagePath(apartment.image)"
-                            class="card-img-top moving_image pointer card_shadow h-100"
-                            :alt="apartment.name + ' image'">
-                        <h2>{{ apartment.name }}</h2>
-                        <p> {{ apartment.address }}</p>
-                        <p> {{ apartment.description }}</p>
-                        <!-- <p>BEDS {{ apartment.beds }}</p> -->
-                    </div>
-                </router-link>
+                            <DrawingPin></DrawingPin>
+                            <img :src="getImagePath(apartment.image)"
+                                class="card-img-top moving_image pointer card_shadow h-100"
+                                :alt="apartment.name + ' image'">
+                            <h2>{{ apartment.name }}</h2>
+                            <p> {{ apartment.address }}</p>
+                            <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
+                                apartment.description }}</p>
+                            <p>{{ Math.floor(apartment.distance_from_point * 100) / 100 + "km" }}</p>
+                        </div>
+                    </router-link>
+                </div>
             </div>
         </div>
-    </div>
-</main></template>
+    </main>
+</template>
 
 <style lang="scss" scoped></style>

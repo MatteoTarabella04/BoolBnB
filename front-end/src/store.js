@@ -9,6 +9,7 @@ export const store = new reactive({
   apartmentType: 0,
   checkedServices: [],
   results: [],
+  selectedResult: "",
   inputAddress: "",
   selectedAddress: null,
   selectedLat: null,

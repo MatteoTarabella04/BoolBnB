@@ -7,7 +7,6 @@ export default {
     data() {
         return {
             store,
-            selectedResult: "",
             searchError: false,
         }
     },
@@ -74,6 +73,9 @@ export default {
                 return false;
             });
             store.apartments.sort((a, b) => a.distance_from_point - b.distance_from_point);
+            this.$router.push({
+                name: "searchPage"
+            });
         },
         calculateDistance(lat1, lat2, lon1, lon2) {
 
@@ -154,9 +156,9 @@ export default {
                 <h4 class="fw-bold">Scopri tutti gli alloggi</h4>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
-                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], selectedResult = ''" class="form-control" type="text" id="address" name="address" placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
+                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = ''" class="form-control" type="text" id="address" name="address" placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled">
-                        <li @click="selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false"
+                        <li @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false"
                             v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
@@ -172,7 +174,7 @@ export default {
                             <font-awesome-icon icon="fa-solid fa-filter" />
                         </button>
                         <button
-                            @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : searchError = true"
+                            @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : searchError = true"
                             type="button" class="btn btn-outline-dark my-3">
                             <span class="d-none d-sm-inline me-2">Mostra risultati</span>
                             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
@@ -272,7 +274,7 @@ export default {
                                     <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
                                 </b>
                                 <button
-                                    @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : searchError = true"
+                                    @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : searchError = true"
                                     type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalId">Mostra risultati</button>
                             </div>
