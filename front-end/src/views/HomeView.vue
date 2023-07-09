@@ -158,7 +158,7 @@ export default {
                 <div>
                     <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = ''" class="form-control" type="text" id="address" name="address" placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled">
-                        <li @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false"
+                        <li class="cursor_pointer" @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false"
                             v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
@@ -250,7 +250,7 @@ export default {
                                         <input type="radio" class="btn-check" name="apartment_type" id="allTypes" :value="0"
                                             autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1 cursor_pointer"
                                             for="allTypes">Tutti</label>
                                     </div>
                                     <div class="apartment_type_wrapper g-1 d-flex"
@@ -260,7 +260,7 @@ export default {
                                         <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name"
                                             :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1 cursor_pointer"
                                             :for="singleType.name">{{ singleType.name }}</label>
                                     </div>
                                 </div>
