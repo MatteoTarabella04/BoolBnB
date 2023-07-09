@@ -158,27 +158,6 @@ export default {
             <li class="mb-3" v-for="service in apartment.services">
               {{ service.name }}
             </li>
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
           </ul>
         </div>
 
