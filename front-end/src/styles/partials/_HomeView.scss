@@ -3,9 +3,11 @@
 #radius_range {
     -webkit-appearance: none;
     width: 100%;
+
     &:focus {
         outline: none;
     }
+
     &::-webkit-slider-runnable-track {
         width: 100%;
         height: 7px;
@@ -14,6 +16,7 @@
         border-radius: 6px;
         border: 1px solid #DEE2E6;
     }
+
     &::-webkit-slider-thumb {
         border: 1px solid #0D6EFD;
         width: 16px;
@@ -24,6 +27,7 @@
         -webkit-appearance: none;
         margin-top: -6px;
     }
+
     &::-moz-range-track {
         width: 100%;
         height: 7px;
@@ -32,6 +36,7 @@
         border-radius: 6px;
         border: 1px solid #DEE2E6;
     }
+
     &::-moz-range-thumb {
         border: 1px solid #0D6EFD;
         width: 16px;
@@ -40,6 +45,7 @@
         background: #0D6EFD;
         cursor: pointer;
     }
+    
     &::-ms-track {
         width: 100%;
         height: 7px;
@@ -49,16 +55,19 @@
         border-width: 16px 0;
         color: transparent;
     }
+    
     &::-ms-fill-lower {
         background: #2a6495;
         border: 1px solid #DEE2E6;
         border-radius: 2.6px;
     }
+    
     &::-ms-fill-upper {
         background: #FFFFFF;
         border: 1px solid #DEE2E6;
         border-radius: 2.6px;
     }
+    
     &::-ms-thumb {
         border: 1px solid #0D6EFD;
         width: 16px;
@@ -105,14 +114,11 @@
     border-radius: 3px;
     position: relative;
 
-
     .drawing_pin {
         transform: scale(0.45);
         top: -51px;
         left: 27%;
     }
-
-
 }
 
 .post_card>img {
@@ -154,10 +160,8 @@
 }
 
 @media screen and (min-width: 576px) and (max-width: 992px) {
-
     .drawing_pin {
 
         left: 21% !important;
     }
-
 }

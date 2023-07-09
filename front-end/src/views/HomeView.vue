@@ -237,7 +237,7 @@ export default {
                             <h5>Fascia di prezzo</h5>
                             <input type="range" class="form-range" min="0" id="price_range"> -->
                             <div class="modal-footer justify-content-center justify-content-sm-between">
-                                <b class="me-auto">
+                                <b>
                                     <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
                                 </b>
                                 <button @click="selectedResult != '' && selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(selectedResult) : searchError = true" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalId">Mostra risultati</button>
