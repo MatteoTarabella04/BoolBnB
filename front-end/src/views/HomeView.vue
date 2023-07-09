@@ -221,9 +221,9 @@ export default {
                                     </span>
                                 </h5>
                                 <div class="d-flex flex-wrap">
-                                    <div v-for="(service, index) in store.services" class="w-50">
+                                    <div v-for="(service, index) in store.services" class="col-12 col-md-6">
                                         <input :value="service.id" type="checkbox" class="form-checkbox" :id="service.name + '-' + index" v-model="store.checkedServices">
-                                        <label :for="service.name + '-' + index" class="ms-2">
+                                        <label :for="service.name + '-' + index" class="ms-2 d-inline">
                                             {{ service.name }}
                                         </label>
                                     </div>
@@ -247,7 +247,7 @@ export default {
                             <!-- VEDERE SE E COME IMPLEMENTARE
                             <h5>Fascia di prezzo</h5>
                             <input type="range" class="form-range" min="0" id="price_range"> -->
-                            <div class="modal-footer">
+                            <div class="modal-footer justify-content-center justify-content-sm-between">
                                 <b class="me-auto">
                                     <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
                                 </b>
