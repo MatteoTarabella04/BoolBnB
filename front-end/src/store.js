@@ -16,5 +16,4 @@ export const store = new reactive({
   radius: 20,
   rooms: 0,
   beds: 0,
-  filtering: false,
 });
