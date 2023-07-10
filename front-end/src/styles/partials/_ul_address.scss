@@ -1,0 +1,21 @@
+@use "./Colors.scss" as *;
+
+.apartment_description {
+    font-size: 12px;
+
+
+}
+
+#addressSuggestions {
+
+    position: absolute;
+    z-index: 990;
+
+    li {
+        cursor: pointer;
+
+        &.selected {
+            background-color: $bg-selected-bootstrap;
+        }
+    }
+}

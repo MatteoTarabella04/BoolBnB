@@ -6,8 +6,7 @@ export default {
     name: "HomeView",
     data() {
         return {
-            store,
-            searchError: false,
+            store
         }
     },
     components: {
@@ -18,15 +17,15 @@ export default {
             store.filteringApartments = [];
             if (address == null) {
                 axios
-                .get(store.base_admin_URL + "api/apartments-types-services")
-                .then(response => {
-                    store.apartments = response.data.apartments;
-                    store.services = response.data.services;
-                    store.apartmentTypes = response.data.apartment_types;
-                })
-                .catch(error => {
-                    console.error(error.message);
-                })
+                    .get(store.base_admin_URL + "api/apartments-types-services")
+                    .then(response => {
+                        store.apartments = response.data.apartments;
+                        store.services = response.data.services;
+                        store.apartmentTypes = response.data.apartment_types;
+                    })
+                    .catch(error => {
+                        console.error(error.message);
+                    })
             } else {
                 axios
                     .get(store.base_admin_URL + "api/apartments")
@@ -138,38 +137,60 @@ export default {
         },
         getImagePath(path) {
             return store.base_admin_URL + 'storage/' + path
+        },
+        resetTheSearch() {
+            this.resetFilters();
+            this.store.results = [];
+            this.store.inputAddress = "";
+            this.store.selectedAddress = null;
+            this.store.selectedLat = null;
+            this.store.selectedLon = null;
+            this.getAllApartments();
+            this.store.searchError = false;
+            this.store.arrowKeysFunction();
+
         }
-    },
+    }
 }
 </script>
 
 <template>
-    <main class="bg_primary overflow-hidden">
-        <div class="jumbotron d-flex align-items-center justify-content-end">
-            <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4">
-                <h4 class="fw-bold">Scopri tutti gli alloggi</h4>
+    <main class="viewport_without_header bg_primary overflow-hidden">
+        <div class="d-flex p-4">
+            <div class="col-12 card p-4 strong_shadow rounded-4">
+                <h4 class="fw-bold">Trova alloggi su BoolBnB</h4>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
-                    <input @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = ''" class="form-control" type="text" id="address" name="address" placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
-                    <ul class="list-unstyled">
-                        <li @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, searchError = false"
+                    <input
+                        @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
+                        class="form-control" type="text" id="address" name="address"
+                        placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
+                    <ul class="list-unstyled position-absolute bg-white w-75 rounded-3 list-group" id="addressSuggestions">
+                        <li class="cursor_pointer p-1 list-group-item list-group-item-action"
+                            @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, store.searchError = false"
                             v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
                     </ul>
-                    <h6 v-if="searchError" class="text-danger">
-                        Attenzione: selezionare un indirizzo dall'elenco a discesa che compare digitando
+                    <h6 v-if="store.searchError" class="text-danger">
+                        Attenzione: selezionare un indirizzo dall'elenco a discesa che appare dopo aver digitato.
                     </h6>
-                    <div class="d-flex align-items-center justify-content-end justify-content-sm-between gap-3">
+                    <div class="d-flex align-items-center justify-content-end justify-content-sm-between">
                         <!-- Modal trigger button -->
-                        <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
-                            data-bs-target="#modalId">
-                            <span class="d-none d-sm-inline me-2">Filtri</span>
-                            <font-awesome-icon icon="fa-solid fa-filter" />
-                        </button>
+                        <div>
+                            <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId">
+                                <span class="d-none d-sm-inline me-2">Filtri</span>
+                                <font-awesome-icon icon="fa-solid fa-filter" />
+                            </button>
+                            <button type="button" class="btn btn-outline-dark my-3 ms-2" @click="resetTheSearch()">
+                                <span class="d-none d-sm-inline me-2">Azzera</span>
+                                <font-awesome-icon icon="fa-solid fa-undo" />
+                            </button>
+                        </div>
                         <button
-                            @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : searchError = true"
-                            type="button" class="btn btn-outline-dark my-3">
+                            @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
+                            type="button" class="btn btn-outline-dark my-3 ms-2">
                             <span class="d-none d-sm-inline me-2">Mostra risultati</span>
                             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                         </button>
@@ -193,7 +214,8 @@ export default {
                                 <h5 class="form-label">Distanza massima
                                     <span class="badge text-bg-primary">{{ store.radius }} km</span>
                                 </h5>
-                                <input type="range" min="1" max="100" step="1" name="radius_range" id="radius_range" v-model="store.radius">
+                                <input type="range" min="1" max="100" step="1" name="radius_range" id="radius_range"
+                                    v-model="store.radius">
                             </div>
 
                             <div class="row mb-4">
@@ -265,7 +287,7 @@ export default {
                                     <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
                                 </b>
                                 <button
-                                    @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : searchError = true"
+                                    @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
                                     type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalId">Mostra risultati</button>
                             </div>
@@ -273,21 +295,24 @@ export default {
                     </div>
                 </div>
             </div>
-            <div class="image_container px-0 px-sm-4">
+            <!-- <div class="image_container px-0 px-sm-4">
                 <img class="jumbo_tron_img" src="../assets/images/pexels-quang-nguyen-vinh-2131772.jpg"
                     alt="Jumbotron image">
-            </div>
+            </div> -->
         </div>
 
-        <div class="container">
+        <div v-if="store.apartments.length > 0" class="container">
 
 
-            <h1 class="text-center my-5">In primo piano</h1>
+            <h1 v-if="store.selectedAddress" class="text-center my-5">Risultati</h1>
+            <h1 class="text-center my-5" v-else>In primo piano</h1>
             <div class="d-flex flex-wrap">
 
 
-                <div class="col-12 col-md-6 col-xl-4 sponsored_apartment" :style="{ transform: randomRotate() }" v-for="apartment in store.apartments">
-                    <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }" class="text-decoration-none">
+                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" :style="{ transform: randomRotate() }"
+                    v-for="apartment in store.apartments">
+                    <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
+                        class="text-decoration-none">
                         <div class="post_card text-center">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
                                 class="bi bi-bookmark-star-fill position-absolute top-0 end-0 me-2 text-warning"
@@ -301,13 +326,17 @@ export default {
                                 :alt="apartment.name + ' image'">
                             <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
-                            <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
-                                apartment.description }}</p>
-                            <p>{{ Math.floor(apartment.distance_from_point * 100) / 100 + "km" }}</p>
+                            <p class="fs-5">{{ Math.floor(apartment.distance_from_point * 100) / 100 + "km" }}</p>
+                            <!-- <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
+                                apartment.description }}</p> -->
                         </div>
                     </router-link>
                 </div>
             </div>
+        </div>
+        <div class="container" v-else>
+            <h1 class="text-center mt-5">Nessun risultato disponibile</h1>
+            <h6 class="text-center ">Modifica la tua ricerca</h6>
         </div>
     </main>
 </template>
