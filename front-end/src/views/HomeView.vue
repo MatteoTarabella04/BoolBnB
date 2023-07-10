@@ -154,6 +154,14 @@ export default {
             } else {
                 e.target.setAttribute("checked", true)
             }
+        },
+        control() {
+            console.log(store.inputAddress);
+            console.log(store.results);
+            console.log(store.selectedResult);
+            console.log(store.selectedLat);
+            console.log(store.selectedLon);
+            console.log(store.searchError);
         }
     },
     mounted() {
@@ -178,11 +186,12 @@ export default {
                 <div>
                     <input
                         @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
-                        @keydown.enter="store.selectedLat != null && store.selectedLon != null ? getAllApartments(store.selectedResult) : ''" class="form-control" type="text" id="address" name="address"
+                        @keydown.enter="store.selectedLat != null && store.selectedLon != null ? getAllApartments(store.selectedResult) : ''"
+                        class="form-control" type="text" id="address" name="address"
                         placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled bg-white w-75 rounded-3 list-group" id="addressSuggestions">
                         <li class="cursor_pointer p-1 list-group-item list-group-item-action"
-                            @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, store.searchError = false"
+                            @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, store.searchError = false, control()"
                             v-for="result in store.results">
                             {{ result.address.freeformAddress }}
                         </li>
@@ -256,7 +265,8 @@ export default {
 
                                     <div v-for="(service, index) in store.services" class="col-12 col-md-6">
                                         <input :value="service.id" type="checkbox" class="form-checkbox"
-                                            :id="service.name + '-' + index" v-model="store.checkedServices" @click.stop="checkOrUncheck">
+                                            :id="service.name + '-' + index" v-model="store.checkedServices"
+                                            @click.stop="checkOrUncheck">
                                         <label :for="service.name + '-' + index" class="ms-2 d-inline">
                                             {{ service.name }}
                                         </label>
