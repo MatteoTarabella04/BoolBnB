@@ -232,35 +232,106 @@
       "Stanza singola"
     ],
     "services" => [
-      "Accesso diretto alle piste da sci",
-      "Allarme antincendio",
-      "Animali ammessi",
-      "Aria condizionata",
-      "Asciugacapelli",
-      "Asciugatrice",
-      "Balcone",
-      "Camino",
-      "Cancellazione gratuita",
-      "Colazione",
-      "Cucina",
-      "Culla",
-      "E' permesso fumare",
-      "Ferro da stiro",
-      "Giardino privato",
-      "Griglia per barbecue",
-      "Idromassaggio",
-      "Intera unità disponibile ai disabili",
-      "Lavatrice",
-      "Palestra",
-      "Parcheggio privato",
-      "Piscina",
-      "Postazione di ricarica per veicoli elettrici",
-      "Rilevatore di monossido di carbonio",
-      "Riscaldamento",
-      "Spazio di lavoro dedicato",
-      "TV",
-      "Vista mare",
-      "Wi-Fi"
+      [
+        "name" => "Accesso diretto alle piste da sci",
+        "icon" => "fa-solid fa-person-skiing"
+      ],
+      [
+        "name" => "Allarme antincendio",
+        "icon" => "fa-solid fa-bell"
+      ],
+      [
+        "name" => "Animali ammessi",
+        "icon" => "fa-solid fa-dog"
+      ],
+      [
+        "name" => "Aria condizionata",
+        "icon" => "fa-solid fa-fan"
+      ],
+      [
+        "name" => "Balcone",
+        "icon" => "fa-solid fa-panorama"
+      ],
+      [
+        "name" => "Camino",
+        "icon" => "fa-solid fa-fire"
+      ],
+      [
+        "name" => "Cancellazione gratuita",
+        "icon" => "fa-solid fa-rotate-left"
+      ],
+      [
+        "name" => "Colazione",
+        "icon" => "fa-solid fa-mug-saucer"
+      ],
+      [
+        "name" => "Cucina",
+        "icon" => "fa-solid fa-kitchen-set"
+      ],
+      [
+        "name" => "Culla",
+        "icon" => "fa-solid fa-baby-carriage"
+      ],
+      [
+        "name" => "Area fumatori esterna",
+        "icon" => "fa-solid fa-smoking"
+      ],
+      [
+        "name" => "Giardino privato",
+        "icon" => "fa-solid fa-seedling"
+      ],
+      [
+        "name" => "Idromassaggio",
+        "icon" => "fa-solid fa-hot-tub-person"
+      ],
+      [
+        "name" => "Intera unità disponibile ai disabili",
+        "icon" => "fa-solid fa-wheelchair"
+      ],
+      [
+        "name" => "Palestra",
+        "icon" => "fa-solid fa-dumbbell"
+      ],
+      [
+        "name" => "Parcheggio privato",
+        "icon" => "fa-solid fa-square-parking"
+      ],
+      [
+        "name" => "Piscina",
+        "icon" => "fa-solid fa-water-ladder"
+      ],
+      [
+        "name" => "Postazione di ricarica per veicoli elettrici",
+        "icon" => "fa-solid fa-car-on"
+      ],
+      [
+        "name" => "Rilevatore di monossido di carbonio",
+        "icon" => "fa-solid fa-smog"
+      ],
+      [
+        "name" => "Riscaldamento",
+        "icon" => "fa-solid fa-dumpster-fire"
+      ],
+      [
+        "name" => "Spazio di lavoro dedicato",
+        "icon" => "fa-solid fa-laptop"
+      ],
+      [
+        "name" => "Servizi di lavanderia",
+        "icon" => "fa-solid fa-shirt"
+      ],
+      [
+        "name" => "TV in camera",
+        "icon" => "fa-solid fa-tv"
+      ],
+      [
+        "name" => "Vista mare",
+        "icon" => "fa-solid fa-water"
+      ],
+      [
+        "name" => "Wi-Fi",
+        "icon" => "fa-solid fa-wifi"
+      ]
     ],
     "sponsorization_plans" => [
       [
