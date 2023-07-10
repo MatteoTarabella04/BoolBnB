@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+    <a href="{{ route('admin.payment') }}">SPONSOR1</a>
+    <a href="{{ route('admin.payment') }}">SPONSOR2</a>
+    <a href="{{ route('admin.payment') }}">SPONSOR3</a>
     <div>
         <div class="bg_double_show body_minus_header_block"></div>
 
