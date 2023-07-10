@@ -18,7 +18,8 @@ class ServiceSeeder extends Seeder
         $services = config("db.services");
         foreach ($services as $service) {
             $newService = new Service();
-            $newService->name = $service;
+            $newService->name = $service["name"];
+            $newService->icon = $service["icon"];
             $newService->save();
         }
     }

@@ -267,9 +267,11 @@ export default {
                                         <input :value="service.id" type="checkbox" class="form-checkbox"
                                             :id="service.name + '-' + index" v-model="store.checkedServices"
                                             @click.stop="checkOrUncheck">
-                                        <label :for="service.name + '-' + index" class="ms-2 d-inline">
-                                            {{ service.name }}
-                                        </label>
+                                            <label :for="service.name + '-' + index" class="ms-2 d-inline">
+                                                {{ service.name }}
+                                            </label>
+                                            <font-awesome-icon :icon=" service.icon " />
+
                                     </div>
                                 </div>
                             </div>
@@ -329,8 +331,7 @@ export default {
             <div class="d-flex flex-wrap">
 
 
-                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" 
-                    v-for="apartment in store.apartments">
+                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" v-for="apartment in store.apartments">
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                         class="text-decoration-none">
                         <div class="post_card text-center">
