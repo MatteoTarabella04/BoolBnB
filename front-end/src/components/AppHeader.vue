@@ -10,8 +10,11 @@ export default {
     <header class="position-sticky top-0 z_index_1000 bg_primary shadow">
         <nav class="navbar navbar-expand-md navbar-light">
             <div class="container ">
-                <router-link :to="{ name: 'home' }"
-                    class="text-decoration-none fw-bold fs-2 text-dark">BoolBnB</router-link>
+
+                <router-link :to="{name: 'home'}" class="text-decoration-none fw-bold fs-2 text-dark">
+                <img class="logo" src="../assets/logo/second-01.svg" alt="">
+                </router-link>
+
                 <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
