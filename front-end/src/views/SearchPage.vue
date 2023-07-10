@@ -3,7 +3,7 @@ import axios from "axios";
 import { store } from "../store.js";
 import DrawingPin from '../components/DrawingPin.vue';
 export default {
-    name: "HomeView",
+    name: "SearchPage",
     data() {
         return {
             store
@@ -154,23 +154,32 @@ export default {
             this.store.selectedLon = null;
             this.getAllApartments();
             this.store.searchError = false;
-            this.store.arrowKeysFunction();
 
+
+        },
+        control() {
+            console.log(store.inputAddress);
+            console.log(store.results);
+            console.log(store.selectedResult);
+            console.log(store.selectedLat);
+            console.log(store.selectedLon);
+            console.log(store.searchError);
         }
     },
     mounted() {
+        this.store.arrowKeysFunction();
         axios
-        .get(store.base_admin_URL + "api/apartments-types-services")
-        .then(response => {
-            if(store.apartments.length === 0) {
-                store.apartments = response.data.apartments;
-            }
-            store.services = response.data.services;
-            store.apartmentTypes = response.data.apartment_types;
-        })
-        .catch(error => {
-            console.error(error.message);
-        })
+            .get(store.base_admin_URL + "api/apartments-types-services")
+            .then(response => {
+                if (store.apartments.length === 0) {
+                    store.apartments = response.data.apartments;
+                }
+                store.services = response.data.services;
+                store.apartmentTypes = response.data.apartment_types;
+            })
+            .catch(error => {
+                console.error(error.message);
+            });
     }
 }
 </script>
@@ -183,7 +192,7 @@ export default {
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
                     <input
-                        @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
+                        @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false, control()"
                         class="form-control" type="text" id="address" name="address"
                         placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled position-absolute bg-white w-75 rounded-3 list-group" id="addressSuggestions">
@@ -268,7 +277,8 @@ export default {
 
                                     <div v-for="(service, index) in store.services" class="col-12 col-md-6">
                                         <input :value="service.id" type="checkbox" class="form-checkbox"
-                                            :id="service.name + '-' + index" v-model="store.checkedServices" @click.stop="checkOrUncheck">
+                                            :id="service.name + '-' + index" v-model="store.checkedServices"
+                                            @click.stop="checkOrUncheck">
                                         <label :for="service.name + '-' + index" class="ms-2 d-inline">
 
                                             {{ service.name }}
@@ -347,7 +357,8 @@ export default {
                                 :alt="apartment.name + ' image'">
                             <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
-                            <p v-if="store.selectedAddress" class="fs-5">{{ Math.floor(apartment.distance_from_point * 100) / 100 + "km" }}</p>
+                            <p v-if="store.selectedAddress" class="fs-5">{{ Math.floor(apartment.distance_from_point * 100)
+                                / 100 + "km" }}</p>
                             <!-- <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
                                 apartment.description }}</p> -->
                         </div>
