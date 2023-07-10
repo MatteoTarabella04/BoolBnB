@@ -42,8 +42,20 @@ export default {
     },
     getImagePath(path) {
       return this.base_URL + 'storage/' + path
-    }
+    },
+    // setPostsContainerHeight() {
+    //   const infoContainer = document.getElementById('info_container');
+    //   const leftSide = document.querySelector('.left_side');
 
+    //   if (infoContainer && leftSide) {
+    //     const infoContainerHeight = infoContainer.getBoundingClientRect().height;
+    //     const leftSideHeight = leftSide.getBoundingClientRect().height;
+
+    //     const maxHeight = Math.min(infoContainerHeight, leftSideHeight);
+    //     infoContainer.style.height = `${maxHeight}px`;
+    //     leftSide.style.height = `${maxHeight}px`;
+    //   }
+    // }
   },
   mounted() {
     axios
@@ -51,7 +63,7 @@ export default {
       .then(response => {
         this.apartment = response.data.apartment;
 
-        nextTick(() => {
+        this.$nextTick(() => {
           const lon = response.data.apartment.longitude;
           const lat = response.data.apartment.latitude;
 
@@ -60,17 +72,21 @@ export default {
             container: 'map',
             center: [lon, lat],
             zoom: 14,
-          })
+          });
 
           let marker = new tt.Marker()
             .setLngLat([lon, lat])
-            .addTo(map)
-        })
+            .addTo(map);
+        });
       })
       .catch(error => {
         console.error(error.message);
       });
+
+    // this.setPostsContainerHeight();
+    // window.addEventListener('resize', this.setPostsContainerHeight);
   }
+
 }
 </script>
 
@@ -80,7 +96,7 @@ export default {
 
     <div class="posts_container d-flex flex-wrap mb-3">
 
-      <div class=" col-12 col-md-7 mt-3 p-2">
+      <div class=" col-12 col-md-7 mt-3 p-2 left_side">
         <div class="post_card image_container">
           <a class="open_modal" type="button" data-bs-toggle="modal" data-bs-target="#modalId">
             <img :src="getImagePath(apartment.image)" class="card-img-top moving_image pointer card_shadow h-100"
@@ -101,15 +117,18 @@ export default {
               </div>
             </div>
           </div>
-          <h2 class="fs-2 fw-bold">{{ apartment.name }}</h2>
-          <h4>{{ apartment.apartment_type.name }}</h4>
-          <p class="fs-6"> {{ apartment.address }}</p>
-          <p> {{ apartment.description }}</p>
+          <h2 class="fs-2 fw-bold confortaa_font">{{ apartment.name }}</h2>
+          <h5>{{ apartment.apartment_type.name }}</h5>
+          <p class="fs-6 text-dark"> {{ apartment.address }}</p>
+          <p class="confortaa_font text-dark"> {{ apartment.description }}</p>
         </div>
 
         <div class="mt-3 text-center">
-          <div class="card mb-3 shadow">
+          <div class="card shadow">
             <div class="card-body">
+
+              <div class="purple_text mb-1" v-if="apartment.visible == 1">Ancora Disponibile</div>
+              <div class="text-danger mb-1" v-else>Non Disponibile</div>
               <span class="d-block">
                 <strong class="fs-4">{{ apartment.price_per_night }}€</strong> /notte
               </span>
@@ -124,28 +143,28 @@ export default {
       </div>
 
 
-      <div class=" col-12 col-md-5">
-        <div class="p-2">
-          <div class="post_card image_container mt-3">
-            <h5 class="mb-2 fw-bold">
+      <div id="info_container" class="info_container col-12 col-md-5 d-flex flex-column">
+        <div class="p-2 ">
+          <div class="post_card image_container mt-md-3">
+            <h5 class="mb-2 fw-bold purple_text">
               Dimensioni :
             </h5>
             <span class="mb-2">
               {{ apartment.square_meters + ' mq' }}
             </span>
-            <h5 class="mb-2 fw-bold">
+            <h5 class="mb-2 fw-bold purple_text">
               Numero stanze :
             </h5>
             <span class="mb-2">
               {{ apartment.rooms }}
             </span>
-            <h5 class="mb-2 fw-bold">
+            <h5 class="mb-2 fw-bold purple_text">
               Numero bagni :
             </h5>
-            <span class="mb-2">
+            <span class="mb-2 purple_text">
               {{ apartment.bathrooms }}
             </span>
-            <h5 class="mb-2 fw-bold">
+            <h5 class="mb-2 fw-bold purple_text">
               Letti disponibili :
             </h5>
             <span class="">
@@ -153,10 +172,10 @@ export default {
             </span>
           </div>
         </div>
-        <div class="p-2">
-          <div v-if="apartment.services.length > 0" class="post_card services_container image_container">
+        <div class="p-2 ">
+          <div v-if="apartment.services.length > 0" class="post_card  image_container services_container h-100">
 
-            <h5 class=" mb-3">
+            <h5 class=" mb-3 purple_text fw-bold">
               Servizi inclusi nel prezzo:
             </h5>
             <ul class="m-0">
@@ -221,6 +240,10 @@ export default {
   }
 }
 
+.left_side {
+  height: fit-content;
+}
+
 .modal_close_button {
   position: absolute;
 
@@ -236,5 +259,13 @@ export default {
 #map {
   width: 100%;
   height: 400px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .services_container {
+    overflow: auto;
+    max-height: 100%;
+  }
 }
 </style>

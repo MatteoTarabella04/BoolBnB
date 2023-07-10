@@ -24,6 +24,16 @@
     min-height: calc(100vh - 62px);
 }
 
+//TEXT
+
+.confortaa_font {
+    font-family: 'Comfortaa', cursive !important;
+}
+
+.purple_text {
+    color: $bg-hippo;
+}
+
 //BACKGROUND
 
 .bg_primary {
@@ -33,6 +43,15 @@
 
 .bg_street {
     background-color: #ccc;
+}
+
+.bg_post {
+    background: #f8f3e8 !important;
+}
+
+.bg_purple {
+    background-color: $bg-hippo !important;
+    ;
 }
 
 
@@ -66,6 +85,11 @@
     border-bottom: 2px solid black;
 
     padding-bottom: 2px;
+}
+
+.border_radius_30 {
+    border-radius: 30px !important;
+    ;
 }
 
 //CUSTOMIZATION

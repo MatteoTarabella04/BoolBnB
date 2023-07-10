@@ -1,0 +1,47 @@
+@use "./colors.scss" as *;
+//TO MAKE THE ICONS APPEAR
+
+.icon svg {
+    margin-left: -3px;
+    scale: 0;
+    width: 0;
+    transition-duration: 0.3s;
+}
+
+a:hover .icon svg,
+button:hover .icon svg {
+    width: 20px;
+    scale: 1,
+}
+
+// EFFECT
+
+
+// .hover_button:hover {
+//     background-color: $bg-hippo;
+//     opacity: 80%;
+//     border-radius: 30px;
+//     transition-duration: 0.4s;
+// }
+
+.hover_button {
+    background-color: $bg-hippo;
+    opacity: 100%;
+
+}
+
+.hover_button:hover {
+    animation: buttonHover 0.4s ease both;
+}
+
+@keyframes buttonHover {
+    0% {
+        background-color: $bg-hippo;
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 80%;
+
+    }
+}

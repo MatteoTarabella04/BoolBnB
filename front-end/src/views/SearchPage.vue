@@ -183,20 +183,20 @@ export default {
         this.store.arrowKeysFunction();
         axios
 
-        .get(store.base_admin_URL + "api/apartments-types-services")
-        .then(response => {
-            store.services = response.data.services;
-            store.apartmentTypes = response.data.apartment_types;
-            nextTick(() => {
-                let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
-                loadedApartmentsEls.forEach(loadedApartmentsEl => {
-                    loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
-                })
-            });
-        })
-        .catch(error => {
-            console.error(error.message);
-        })
+            .get(store.base_admin_URL + "api/apartments-types-services")
+            .then(response => {
+                store.services = response.data.services;
+                store.apartmentTypes = response.data.apartment_types;
+                nextTick(() => {
+                    let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
+                    loadedApartmentsEls.forEach(loadedApartmentsEl => {
+                        loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
+                    })
+                });
+            })
+            .catch(error => {
+                console.error(error.message);
+            })
 
     }
 }
@@ -226,21 +226,22 @@ export default {
                     <div class="d-flex align-items-center justify-content-end justify-content-sm-between">
                         <!-- Modal trigger button -->
                         <div>
-                            <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-outline-dark my-3 border_radius_30 " data-bs-toggle="modal"
                                 data-bs-target="#modalId">
                                 <span class="d-none d-sm-inline me-2">Filtri</span>
                                 <font-awesome-icon icon="fa-solid fa-filter" />
                             </button>
-                            <button type="button" class="btn btn-outline-dark my-3 ms-2" @click="resetTheSearch()">
+                            <button type="button" class="btn btn-outline-dark my-3 ms-2 border_radius_30 "
+                                @click="resetTheSearch()">
                                 <span class="d-none d-sm-inline me-2">Azzera</span>
                                 <font-awesome-icon icon="fa-solid fa-undo" />
                             </button>
                         </div>
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
-                            type="button" class="btn btn-outline-dark my-3 ms-2">
-                            <span class="d-none d-sm-inline me-2">Mostra risultati</span>
-                            <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            type="button" class="btn bg_purple hover_button text-white my-3 ms-2 border_radius_30 px-3">
+                            <span class="d-none d-sm-inline me-2 text-white ">Mostra risultati</span>
+                            <font-awesome-icon icon="fa-solid fa-magnifying-glass " class="text-white" />
                         </button>
                     </div>
 
@@ -250,7 +251,7 @@ export default {
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg px-5 mx-auto"
                     role="document">
-                    <div class="modal-content">
+                    <div class="modal-content bg_post">
                         <div class="modal-header">
                             <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
@@ -260,7 +261,7 @@ export default {
                         <div class="modal-body">
                             <div class="mb-3"><!-- radius_range distance input -->
                                 <h5 class="form-label">Distanza massima
-                                    <span class="badge text-bg-primary">{{ store.radius }} km</span>
+                                    <span class="badge bg_purple">{{ store.radius }} km</span>
                                 </h5>
                                 <input type="range" min="1" max="100" step="1" name="radius_range" id="radius_range"
                                     v-model="store.radius">
@@ -310,22 +311,22 @@ export default {
                                 <div class="d-flex flex-column flex-md-row align-items-stretch">
 
                                     <div class="apartment_type_wrapper g-1 d-flex"
-                                        :class="store.apartmentType === 0 ? 'bg-dark text-light' : ''" role="group"
+                                        :class="store.apartmentType === 0 ? 'bg_purple text-light' : ''" role="group"
                                         aria-label="Basic_radio_toggle_button_group">
                                         <input type="radio" class="btn-check" name="apartment_type" id="allTypes" :value="0"
                                             autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1 cursor_pointer"
                                             for="allTypes">Tutti</label>
                                     </div>
                                     <div class="apartment_type_wrapper g-1 d-flex"
-                                        :class="store.apartmentType === index + 1 ? 'bg-dark text-light' : ''" role="group"
-                                        aria-label="Basic_radio_toggle_button_group"
+                                        :class="store.apartmentType === index + 1 ? 'bg_purple text-light' : ''"
+                                        role="group" aria-label="Basic_radio_toggle_button_group"
                                         v-for="(singleType, index) in store.apartmentTypes">
                                         <input type="radio" class="btn-check" name="apartment_type" :id="singleType.name"
                                             :value="singleType.id" autocomplete="off" v-model="store.apartmentType">
                                         <label
-                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1"
+                                            class="apartment_type d-flex align-items-center justify-content-center px-3 py-1 text-center flex-grow-1 cursor_pointer"
                                             :for="singleType.name">{{ singleType.name }}</label>
                                     </div>
                                 </div>
@@ -333,12 +334,15 @@ export default {
 
                             <div class="modal-footer justify-content-center justify-content-sm-between">
                                 <b>
-                                    <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
+                                    <a @click="resetFilters()" type="reset"
+                                        class="btn btn-outline-dark border_radius_30 px-3"><span class="icon">
+                                            <font-awesome-icon icon="fa-solid fa-undo" /></span>Azzera filtri</a>
                                 </b>
                                 <button
                                     @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
-                                    type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalId">Mostra risultati</button>
+                                    type="button" class="btn bg_purple text-white border_radius_30 px-3"
+                                    data-bs-toggle="modal" data-bs-target="#modalId"><span class="icon"><font-awesome-icon
+                                            icon="fa-solid fa-magnifying-glass" /></span>Mostra risultati</button>
                             </div>
                         </div>
                     </div>
@@ -358,11 +362,10 @@ export default {
             <div class="d-flex flex-wrap">
 
 
-                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment"
-                    v-for="apartment in store.apartments">
+                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" v-for="apartment in store.apartments">
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                         class="text-decoration-none">
-                        <div class="post_card text-center">
+                        <div class="post_card text-center mb-2">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
                                 class="bi bi-bookmark-star-fill position-absolute top-0 end-0 me-2 text-warning"
                                 viewBox="0 0 16 16">

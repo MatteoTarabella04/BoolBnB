@@ -1,10 +1,12 @@
 // Import all of Bootstrap's CSS
 @use './partials/colors.scss' as *;
+@use './partials/hover_effect.scss' as *;
 @use './partials/homeView.scss';
 @use './partials/ul_address.scss';
 @use './partials/utilities.scss';
 @use './partials/appheader.scss';
 @use './partials/jumboSection';
+@use './partials/single_apartment';
 @import "/node_modules/bootstrap/scss/bootstrap";
 @import "/node_modules/@tomtom-international/web-sdk-maps/dist/maps.css";
 
