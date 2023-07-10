@@ -35,6 +35,10 @@ export default {
         .then(response => {
           console.log(response);
         })
+
+      this.fullName = '';
+      this.senderEmail = '';
+      this.content = '';
     },
     getImagePath(path) {
       return this.base_URL + 'storage/' + path
