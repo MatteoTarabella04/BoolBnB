@@ -44,7 +44,7 @@ addressEl.addEventListener("input", () => {
  */
 function getRealtimeResults() {
   axios
-    .get(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+    .get(`https://api.tomtom.com/search/2/search/${inputAddress}.json?key=${apiKey}&typeahead=true&language=it-IT&limit=10`)
     .then(response => {
       suggestedAddressesContainer.innerHTML = "";
       results = response.data.results;
