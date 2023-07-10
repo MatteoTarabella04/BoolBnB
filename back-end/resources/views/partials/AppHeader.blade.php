@@ -29,9 +29,19 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ config('app.frontend_url') }}">{{ __('BoolBnB') }}</a>
+
+                                @if(Route::currentRouteName() != "admin.dashboard")
                                 <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                <a class="dropdown-item"
-                                    href="{{ route('admin.apartments.index') }}">{{ __('I tuoi annunci') }}</a>
+                                @endif
+                                
+                                @if(Route::currentRouteName() != "admin.apartments.index")
+                                <a class="dropdown-item" href="{{ route('admin.apartments.index') }}">{{ __('I tuoi annunci') }}</a>
+                                @endif
+
+                                @if(Route::currentRouteName() != "admin.messages")
+                                <a class="dropdown-item" href="{{ route('admin.messages') }}">{{ __('Messaggi ricevuti') }}</a>
+                                @endif
+                                
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
