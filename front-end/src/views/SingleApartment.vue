@@ -80,7 +80,7 @@ export default {
 
     <div class="posts_container d-flex flex-wrap mb-3">
 
-      <div class=" col-12 col-md-7 mt-3 ">
+      <div class=" col-12 col-md-7 mt-3 p-2">
         <div class="post_card image_container">
           <a class="open_modal" type="button" data-bs-toggle="modal" data-bs-target="#modalId">
             <img :src="getImagePath(apartment.image)" class="card-img-top moving_image pointer card_shadow h-100"
@@ -125,47 +125,47 @@ export default {
 
 
       <div class=" col-12 col-md-5">
-
-        <div class="post_card image_container mt-3 aspect_ratio_1 card_scrollable"
-          style="transform: rotate(-2deg);top: -10px;">
-          <h5 class="mb-3 fw-bold">
-            Dimensioni :
-          </h5>
-          <span class="mb-3">
-            {{ apartment.square_meters + ' mq' }}
-          </span>
-          <h5 class="mb-3 fw-bold">
-            Numero stanze :
-          </h5>
-          <span class="mb-3">
-            {{ apartment.rooms }}
-          </span>
-          <h5 class="mb-3 fw-bold">
-            Numero bagni :
-          </h5>
-          <span class="mb-3">
-            {{ apartment.bathrooms }}
-          </span>
-          <h5 class="mb-3 fw-bold">
-            Letti disponibili :
-          </h5>
-          <span class="">
-            {{ apartment.beds }}
-          </span>
+        <div class="p-2">
+          <div class="post_card image_container mt-3">
+            <h5 class="mb-2 fw-bold">
+              Dimensioni :
+            </h5>
+            <span class="mb-2">
+              {{ apartment.square_meters + ' mq' }}
+            </span>
+            <h5 class="mb-2 fw-bold">
+              Numero stanze :
+            </h5>
+            <span class="mb-2">
+              {{ apartment.rooms }}
+            </span>
+            <h5 class="mb-2 fw-bold">
+              Numero bagni :
+            </h5>
+            <span class="mb-2">
+              {{ apartment.bathrooms }}
+            </span>
+            <h5 class="mb-2 fw-bold">
+              Letti disponibili :
+            </h5>
+            <span class="">
+              {{ apartment.beds }}
+            </span>
+          </div>
         </div>
-        <div v-if="apartment.services.length > 0" class="post_card services_container image_container card_scrollable"
-          style="transform: rotate(2deg);">
+        <div class="p-2">
+          <div v-if="apartment.services.length > 0" class="post_card services_container image_container">
 
-          <h5 class="mb-3">
-            Servizi inclusi nel prezzo:
-          </h5>
-          <ul class="m-0">
-            <li class="mb-3" v-for="service in apartment.services">
-              {{ service.name }}
-            </li>
-          </ul>
+            <h5 class=" mb-3">
+              Servizi inclusi nel prezzo:
+            </h5>
+            <ul class="m-0">
+              <li class="mb-2" v-for="service in apartment.services">
+                {{ service.name }}
+              </li>
+            </ul>
+          </div>
         </div>
-
       </div>
 
     </div>
