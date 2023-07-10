@@ -156,7 +156,7 @@ export default {
 </script>
 
 <template>
-    <main class="viewport_without_header bg_primary overflow-hidden">
+    <main class="viewport_without_header bg_primary overflow-hidden" @click.stop="store.results = []">
         <div class="jumbotron d-flex align-items-center justify-content-end">
             <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4">
                 <h4 class="fw-bold">Trova alloggi su BoolBnB</h4>

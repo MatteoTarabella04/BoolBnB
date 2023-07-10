@@ -1,13 +1,18 @@
 
 <script>
+import { store } from "../store.js";
 export default {
-    name: 'AppHeader'
-
+    name: 'AppHeader',
+    data() {
+        return {
+            store,
+        }
+    }
 }
 </script>
 
 <template>
-    <header class="position-sticky top-0 z_index_1000 bg_primary shadow">
+    <header class="position-sticky top-0 z_index_1000 bg_primary shadow" @click.stop="store.results = []">
         <nav class="navbar navbar-expand-md navbar-light">
             <div class="container ">
 
