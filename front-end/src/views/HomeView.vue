@@ -164,7 +164,7 @@ export default {
                 <div>
                     <input
                         @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
-                        class="form-control" type="text" id="address" name="address"
+                        @keydown.enter="store.selectedLat != null && store.selectedLon != null ? getAllApartments(store.selectedResult) : ''" class="form-control" type="text" id="address" name="address"
                         placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled bg-white w-75 rounded-3 list-group" id="addressSuggestions">
                         <li class="cursor_pointer p-1 list-group-item list-group-item-action"

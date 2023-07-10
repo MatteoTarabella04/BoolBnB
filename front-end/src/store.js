@@ -52,21 +52,20 @@ export const store = new reactive({
           console.log(selectedIndex);
         }
 
-      } else if (key === 'Enter') {
-
-        event.preventDefault();
-        store.selectedResult = store.results[selectedIndex];
-        store.results = [];
-        store.inputAddress = store.selectedResult.address.freeformAddress;
-        store.selectedLat = store.selectedResult.position.lat;
-        store.selectedLon = store.selectedResult.position.lon;
-        suggestedAddressesContainer.innerHTML = "";
-        console.log(store.inputAddress);
-        console.log(store.selectedResult);
-        console.log(store.selectedLat);
-        console.log(store.selectedLon);
-        console.log(store.searchError);
-        // showMap(selectedResult.position.lat, selectedResult.position.lon);
+      } else if (key === 'Enter' && store.selectedLat == null && store.selectedLon == null) {
+          event.preventDefault();
+          store.selectedResult = store.results[selectedIndex];
+          store.results = [];
+          store.inputAddress = store.selectedResult.address.freeformAddress;
+          store.selectedLat = store.selectedResult.position.lat;
+          store.selectedLon = store.selectedResult.position.lon;
+          suggestedAddressesContainer.innerHTML = "";
+          console.log(store.inputAddress);
+          console.log(store.selectedResult);
+          console.log(store.selectedLat);
+          console.log(store.selectedLon);
+          console.log(store.searchError);
+          // showMap(selectedResult.position.lat, selectedResult.position.lon);
       }
     }
     );
