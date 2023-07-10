@@ -1,23 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-
 <section>
     <div class="container">
-        <div class="row">
-            <h4>Messaggi Ricevuti</h4>
-        </div>
+        <h4>Messaggi Ricevuti</h4>
         <div class="row">
             @if($messages)
                 <ul>
                     @foreach($messages as $message)
-                        @foreach($message as $single_message)
                         <li>
-                            <strong>Nome:</strong> {{ $single_message->full_name }} <br>
-                            <strong>Email:</strong> {{ $single_message->sender_email }} <br>
-                            <strong>Contenuto del messaggio:</strong> {{ $single_message->content }}
+                            <strong>Nome:</strong> {{ $message->full_name }} <br>
+                            <strong>Email:</strong> {{ $message->sender_email }} <br>
+                            <strong>Contenuto del messaggio:</strong> {{ $message->content }}
+                            <br>
+                            <strong>Data del messaggio:</strong> {{ $message->send_date }}
+                            <br>
+                            <strong>Appartamento:</strong>
+                            @foreach($apartments as $apartment)
+                                @if($apartment->id == $message->apartment_id)
+                                {{ $apartment->name }}
+                                @endif
+                            @endforeach
                         </li>
-                        @endforeach
                     @endforeach
                 </ul>
             @else
@@ -26,3 +30,4 @@
         </div>
     </div>
 </section>
+@endsection

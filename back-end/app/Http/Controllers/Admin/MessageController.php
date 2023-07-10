@@ -16,16 +16,30 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {        
         $apartments = Auth::user()->apartments;
         $messages = [];
+
         foreach ($apartments as $apartment) {
-            $apartment_messages = $apartment->messages;
-            array_push($messages, $apartment_messages);
+            $apartment_messages = $apartment->messages->sortByDesc('send_date');
+        
+            if(count($apartment_messages) > 0) {
+                foreach ($apartment_messages as $apartment_message) {
+                    array_push($messages, $apartment_message);
+                }
+            }
+        };
+
+        usort($messages, array("App\Http\Controllers\Admin\MessageController", "sortByDescDate"));
+
+        return view('admin.apartments.message', compact('messages', 'apartments'));
+    }
+
+    public function sortByDescDate($messageA, $messageB) {
+        if ($messageA->send_date == $messageB->send_date) {
+            return 0;
         }
-
-        return view('admin.apartments.message', compact('messages'));
-
+        return $messageA->send_date < $messageB->send_date ? 1 : -1;
     }
 
     /**
