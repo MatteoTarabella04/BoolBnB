@@ -3,15 +3,17 @@ import axios from "axios";
 import { store } from "../store.js";
 import { nextTick } from "vue";
 import DrawingPin from '../components/DrawingPin.vue';
+import SiteCarousel from '../components/SiteCarousel.vue';
 export default {
     name: "HomeView",
     data() {
         return {
-            store,
+            store
         }
     },
     components: {
         DrawingPin,
+        SiteCarousel
     },
     methods: {
         getAllApartments(address = null) {
@@ -180,7 +182,7 @@ export default {
 <template>
     <main class="viewport_without_header bg_primary overflow-hidden" @click.stop="store.results = []">
         <div class="jumbotron d-flex align-items-center justify-content-end">
-            <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4">
+            <div class="col-8 col-md-6 card p-4 ms-5 position-absolute start-0 strong_shadow rounded-4 z_index_998">
                 <h4 class="fw-bold">Trova alloggi su BoolBnB</h4>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
@@ -199,18 +201,18 @@ export default {
                     <h6 v-if="store.searchError" class="text-danger">
                         Attenzione: selezionare un indirizzo dall'elenco a discesa che compare digitando
                     </h6>
-                    <div class="d-flex align-items-center justify-content-end justify-content-sm-between gap-3">
+                    <div class="d-flex align-items-center justify-content-end  gap-3">
                         <!-- Modal trigger button -->
-                        <button type="button" class="btn btn-outline-dark my-3" data-bs-toggle="modal"
+                        <!-- <button type="button" class="btn btn-outline-dark border_radius_30 my-3" data-bs-toggle="modal"
                             data-bs-target="#modalId">
                             <span class="d-none d-sm-inline me-2">Filtri</span>
                             <font-awesome-icon icon="fa-solid fa-filter" />
-                        </button>
+                        </button> -->
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
-                            type="button" class="btn btn-outline-dark my-3">
-                            <span class="d-none d-sm-inline me-2">Mostra risultati</span>
-                            <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            type="button" class="btn bg_purple border_radius_30 my-3 hover_button px-3">
+                            <span class="d-none d-sm-inline me-2 text-white ">Mostra risultati</span>
+                            <font-awesome-icon icon="fa-solid fa-magnifying-glass " class="text-white" />
                         </button>
                     </div>
 
@@ -220,7 +222,7 @@ export default {
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg px-5 mx-auto"
                     role="document">
-                    <div class="modal-content">
+                    <div class="modal-content bg_post">
                         <div class="modal-header">
                             <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
@@ -305,21 +307,31 @@ export default {
                             <input type="range" class="form-range" min="0" id="price_range"> -->
                             <div class="modal-footer justify-content-center justify-content-sm-between">
                                 <b>
-                                    <a @click="resetFilters()" type="reset" class="btn btn-dark">Cancella filtri</a>
+                                    <a @click="resetFilters()" type="reset"
+                                        class="btn btn-outline-danger border_radius_30"><span class="icon">
+                                            <font-awesome-icon icon="fa-solid fa-undo" /></span>Cancella filtri</a>
                                 </b>
                                 <button
                                     @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
-                                    type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalId">Mostra risultati</button>
+                                    type="button" class="btn bg_purple border_radius_30" data-bs-toggle="modal"
+                                    data-bs-target="#modalId">
+                                    <span class="icon"><font-awesome-icon
+                                            icon="fa-solid fa-magnifying-glass" /></span>Mostra
+                                    risultati</button>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="image_container px-0 px-sm-4">
-                <img class="jumbo_tron_img" src="../assets/images/pexels-quang-nguyen-vinh-2131772.jpg"
-                    alt="Jumbotron image">
-            </div>
+            <!-- <div class=""> -->
+
+            <SiteCarousel></SiteCarousel>
+            <!-- <img class="jumbo_tron_img" src="../assets/images/pexels-quang-nguyen-vinh-2131772.jpg" alt="Jumbotron image"> -->
+            <!-- <div class="carousel">
+                    <img :key="currentImage" :src="currentImage" class="carousel-image fade" />
+                </div> -->
+            <!-- </div> -->
         </div>
 
         <div v-if="store.apartments.length > 0" class="container">
@@ -329,8 +341,7 @@ export default {
             <div class="d-flex flex-wrap">
 
 
-                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" 
-                    v-for="apartment in store.apartments">
+                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" v-for="apartment in store.apartments">
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                         class="text-decoration-none">
                         <div class="post_card text-center">
@@ -346,7 +357,8 @@ export default {
                                 :alt="apartment.name + ' image'">
                             <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
-                            <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
+                            <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 247) +
+                                '...' :
                                 apartment.description }}</p>
                         </div>
                     </router-link>

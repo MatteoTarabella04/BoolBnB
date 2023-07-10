@@ -1,3 +1,4 @@
+@use "./Colors.scss" as *;
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap");
 
 #radius_range {
@@ -18,11 +19,11 @@
     }
 
     &::-webkit-slider-thumb {
-        border: 1px solid #0D6EFD;
+        border: 1px solid $bg-hippo;
         width: 16px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        background: #0D6EFD;
+        background: $bg-hippo;
         cursor: pointer;
         -webkit-appearance: none;
         margin-top: -6px;
@@ -38,14 +39,14 @@
     }
 
     &::-moz-range-thumb {
-        border: 1px solid #0D6EFD;
+        border: 1px solid $bg-hippo;
         width: 16px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        background: #0D6EFD;
+        background: $bg-hippo;
         cursor: pointer;
     }
-    
+
     &::-ms-track {
         width: 100%;
         height: 7px;
@@ -55,25 +56,25 @@
         border-width: 16px 0;
         color: transparent;
     }
-    
+
     &::-ms-fill-lower {
-        background: #2a6495;
+        background: $bg-hippo;
         border: 1px solid #DEE2E6;
         border-radius: 2.6px;
     }
-    
+
     &::-ms-fill-upper {
         background: #FFFFFF;
         border: 1px solid #DEE2E6;
         border-radius: 2.6px;
     }
-    
+
     &::-ms-thumb {
-        border: 1px solid #0D6EFD;
+        border: 1px solid $bg-hippo;
         width: 16px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        background: #0D6EFD;
+        background: $bg-hippo;
         cursor: pointer;
     }
 }
@@ -84,6 +85,7 @@
 
 .apartment_type_wrapper {
     border: 1px solid black;
+    transition-duration: 0.4s;
 }
 
 .apartment_type_wrapper:first-child {
@@ -105,10 +107,9 @@
 }
 
 .post_card {
-    height: fit-content;
     display: flex;
     flex-direction: column;
-    padding: 1rem 1rem 2rem;
+    padding: 1rem 1rem 1rem;
     background: #f8f3e8;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
@@ -133,7 +134,7 @@
     font-family: "Kalam", cursive;
     font-weight: normal;
     font-size: 2rem;
-    color: #4a4a7d;
+    color: $bg-hippo;
     // text-align: center;
 }
 

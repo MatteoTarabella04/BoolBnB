@@ -16,8 +16,8 @@ export default {
         <nav class="navbar navbar-expand-md navbar-light">
             <div class="container ">
 
-                <router-link :to="{name: 'home'}" class="text-decoration-none fw-bold fs-2 text-dark">
-                <img class="logo" src="../assets/logo/provaconexpand-01.svg" alt="">
+                <router-link :to="{ name: 'home' }" class="text-decoration-none fw-bold fs-2 text-dark">
+                    <img class="logo" src="../assets/logo/provaconexpand-01.svg" alt="">
                 </router-link>
 
                 <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse"
@@ -35,7 +35,7 @@ export default {
                                 :class="{ 'selected_link': $route.name === 'home' }">Home</span>
                         </router-link>
                         <router-link :to="{ 'name': 'searchPage' }" class="nav-link text_shadow">
-                            <span class="nav-item mx-2 underline-on-hover"
+                            <span class="nav-item mx-lg-2 underline-on-hover"
                                 :class="{ 'selected_link': $route.name === 'searchPage' }">Ricerca
                             </span>
                         </router-link>
