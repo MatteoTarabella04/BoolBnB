@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 // REDIRECT TO DASHBOARD WHEN A REGISTERED USER LANDS ON THE HOMEPAGE
 Route::get('/', function () {
-    return view('admin.dashboard');
+    return to_route('admin.dashboard');
 })->middleware(['auth', 'verified']);
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
@@ -34,7 +34,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('apartments', ApartmentController::class)->parameters([
         'apartments' => 'apartment:slug',
     ]);
-    Route::get('/message', [MessageController::class, 'index'])->name('message');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 });
 
 // REMOVED BECAUSE OF BRIEF INDICATIONS
