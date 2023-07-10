@@ -2,6 +2,7 @@
 @use './partials/ul_address.scss' as *;
 @use "./partials/appHeader.scss";
 @use "./partials/dashboard.scss";
+@use "./partials/message.scss";
 @use "./partials/utilities_selector.scss";
 @use "./partials/hover_effect.scss";
 
@@ -17,5 +18,5 @@ body {
   // font-family: 'Fasthand', cursive;
   // font-family: 'Poppins', sans-serif;
 
-  font-family: 'Comfortaa', cursive; 
+  font-family: 'Comfortaa', cursive;
 }

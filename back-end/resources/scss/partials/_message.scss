@@ -1,0 +1,5 @@
+@use "./colors.scss" as *;
+
+.message {
+    background-color: $bg-card-special !important;
+}

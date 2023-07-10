@@ -3,12 +3,15 @@
 @section('content')
 <section>
     <div class="container">
-        <h4>Messaggi Ricevuti</h4>
-        <div class="row">
-            @if($messages)
-                <ul>
+        <h1 class="p-4"> <strong>I tuoi messaggi</strong></h1>
+        
+        <div class="row ">
+            <div class="col-12 card message p-4 strong_shadow rounded-4">
+                <h4>Messaggi Ricevuti:</h4>
+                @if($messages)
+                <ul class="list-group border-0">
                     @foreach($messages as $message)
-                        <li>
+                        <li class="card  list-group-item  p-4 mb-3 strong_shadow rounded-4">
                             <strong>Nome:</strong> {{ $message->full_name }} <br>
                             <strong>Email:</strong> {{ $message->sender_email }} <br>
                             <strong>Contenuto del messaggio:</strong> {{ $message->content }}
@@ -27,6 +30,8 @@
             @else
                 <p>Non ci sono messaggi in arrivo.</p>
             @endif
+            </div>
+            
         </div>
     </div>
 </section>
