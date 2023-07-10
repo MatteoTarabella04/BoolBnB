@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import { store } from "../store.js";
+import { nextTick } from "vue";
 import DrawingPin from '../components/DrawingPin.vue';
 export default {
     name: "HomeView",
@@ -22,6 +23,12 @@ export default {
                         store.apartments = response.data.apartments;
                         store.services = response.data.services;
                         store.apartmentTypes = response.data.apartment_types;
+                        nextTick(() => {
+                            let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
+                            loadedApartmentsEls.forEach(loadedApartmentsEl => {
+                                loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
+                            })
+                        });
                     })
                     .catch(error => {
                         console.error(error.message);
@@ -312,7 +319,7 @@ export default {
             <div class="d-flex flex-wrap">
 
 
-                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" :style="{ transform: randomRotate() }"
+                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" 
                     v-for="apartment in store.apartments">
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                         class="text-decoration-none">
