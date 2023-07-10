@@ -11,9 +11,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faMask, faUser, faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faUndo, faMask, faUser, faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faUserSecret, faMask, faUser, faFilter, faMagnifyingGlass)
+library.add(faUserSecret, faUndo, faMask, faUser, faFilter, faMagnifyingGlass)
 
 createApp(App).use(router).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
