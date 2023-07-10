@@ -172,7 +172,21 @@ export default {
         }
     },
     mounted() {
-        this.getAllApartments();
+        axios
+        .get(store.base_admin_URL + "api/apartments-types-services")
+        .then(response => {
+            store.services = response.data.services;
+            store.apartmentTypes = response.data.apartment_types;
+            nextTick(() => {
+                let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
+                loadedApartmentsEls.forEach(loadedApartmentsEl => {
+                    loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
+                })
+            });
+        })
+        .catch(error => {
+            console.error(error.message);
+        })
     }
 }
 </script>
