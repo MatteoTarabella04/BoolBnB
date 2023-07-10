@@ -326,7 +326,7 @@ export default {
                                 :alt="apartment.name + ' image'">
                             <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
-                            <p class="fs-5">{{ Math.floor(apartment.distance_from_point * 100) / 100 + "km" }}</p>
+                            <p v-if="store.selectedAddress" class="fs-5">{{ Math.floor(apartment.distance_from_point * 100) / 100 + "km" }}</p>
                             <!-- <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
                                 apartment.description }}</p> -->
                         </div>
