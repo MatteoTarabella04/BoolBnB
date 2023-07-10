@@ -17,7 +17,7 @@ export default {
             <div class="container ">
 
                 <router-link :to="{name: 'home'}" class="text-decoration-none fw-bold fs-2 text-dark">
-                <img class="logo" src="../assets/logo/logoo-01.svg" alt="">
+                <img class="logo" src="../assets/logo/logo-test.svg" alt="">
                 </router-link>
 
                 <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse"
