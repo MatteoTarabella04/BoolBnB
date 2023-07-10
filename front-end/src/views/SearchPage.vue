@@ -45,7 +45,7 @@ export default {
         },
         getRealtimeResults() {
             axios
-                .get(`https://api.tomtom.com/search/2/search/${store.inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10&idxSet=PAD,Addr,Str,XStr`)
+                .get(`https://api.tomtom.com/search/2/search/${store.inputAddress}.json?key=1tCQiScG72uLCOIZ32Xx2BG2eB07fCTm&typeahead=true&language=it-IT&limit=10`)
                 .then(response => {
                     store.results = response.data.results
                 })
@@ -138,6 +138,13 @@ export default {
         getImagePath(path) {
             return store.base_admin_URL + 'storage/' + path
         },
+        checkOrUncheck(e) {
+            if (e.target.getAttribute("checked") == true) {
+                e.target.setAttribute("checked", null)
+            } else {
+                e.target.setAttribute("checked", true)
+            }
+        },
         resetTheSearch() {
             this.resetFilters();
             this.store.results = [];
@@ -150,6 +157,20 @@ export default {
             this.store.arrowKeysFunction();
 
         }
+    },
+    mounted() {
+        axios
+        .get(store.base_admin_URL + "api/apartments-types-services")
+        .then(response => {
+            if(store.apartments.length === 0) {
+                store.apartments = response.data.apartments;
+            }
+            store.services = response.data.services;
+            store.apartmentTypes = response.data.apartment_types;
+        })
+        .catch(error => {
+            console.error(error.message);
+        })
     }
 }
 </script>
@@ -247,7 +268,7 @@ export default {
 
                                     <div v-for="(service, index) in store.services" class="col-12 col-md-6">
                                         <input :value="service.id" type="checkbox" class="form-checkbox"
-                                            :id="service.name + '-' + index" v-model="store.checkedServices">
+                                            :id="service.name + '-' + index" v-model="store.checkedServices" @click.stop="checkOrUncheck">
                                         <label :for="service.name + '-' + index" class="ms-2 d-inline">
 
                                             {{ service.name }}
