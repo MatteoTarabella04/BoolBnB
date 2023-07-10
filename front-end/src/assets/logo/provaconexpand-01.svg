@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-61f0a004-0571-4678-832d-28edff2138c9" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 180">
+  <line x1="22.3" y1="118.4" x2="225" y2="118.4" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <polyline points="42.5 116.9 42.5 64.6 90 30.5 143.2 67.9 209.7 80.2 209.7 70.8 147.8 58.3 90.5 17.5 37.6 55.4 37.6 67.9 44.1 63.5 136.7 63.5" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="52.3" y1="27.1" x2="52.3" y2="44.8" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <polyline points="63.8 36 63.8 25.9 52.3 25.9" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="106.2" y1="41.9" x2="74.2" y2="41.9" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="116.7" y1="49.3" x2="64.5" y2="49.3" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="53.8" y1="56.6" x2="126.5" y2="56.6" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="52.2" y1="118.4" x2="52.2" y2="63.5" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="64.9" y1="63.5" x2="64.9" y2="117.4" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <polyline points="75.7 118.4 75.7 83.8 105.2 83.8 105.2 118" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="103.2" y1="63.5" x2="103.2" y2="83.8" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="90.6" y1="63.5" x2="90.6" y2="83.1" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="77.8" y1="63.5" x2="77.8" y2="83.8" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="203.8" y1="118.4" x2="203.8" y2="79.1" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="195.9" y1="118.4" x2="195.9" y2="78.1" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="184.3" y1="118.4" x2="184.3" y2="75.4" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="172.1" y1="118.4" x2="172.1" y2="73.3" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="159.8" y1="118.4" x2="159.8" y2="71.1" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="148.1" y1="118.4" x2="148.1" y2="68.9" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="137.9" y1="118.4" x2="137.9" y2="65.5" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="128.6" y1="118.4" x2="128.6" y2="63.5" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <line x1="115.9" y1="63.5" x2="115.9" y2="118.4" style="fill: none; stroke: #000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 4px;"/>
+  <g>
+    <path d="m21.8,124.8h7.9c2.1,0,3.8,0,5.5,0,7,0,9.5,4,9.5,8.5s-.4,7-3.8,9.1c3.1,1.5,5,4.4,5,8.6,0,7.4-4.6,10-11.6,10h-12.5v-36.3Zm7.8,14.6c2.2,0,2.4,0,3.9,0,3.1,0,3.5-2,3.5-3.2,0-2-1.6-2.9-3.4-3h-4v6.1h0Zm2.9,13.2c4.7,0,5.6-1.2,5.6-3.5s-1.4-3.4-5.2-3.4h-3.3v6.8h2.9Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: .2px;"/>
+    <path d="m64.2,123.6c10.4,0,15.8,7.7,15.8,19.2s-5.4,19.1-15.8,19.1-15.8-7.7-15.8-19.1,5.4-19.2,15.8-19.2Zm0,29.8c5.6,0,8.1-5.4,8.1-10.6s-2.5-10.7-8.1-10.7-8.1,5.4-8.1,10.7,2.5,10.6,8.1,10.6Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: .2px;"/>
+    <path d="m98.4,123.6c10.4,0,15.8,7.7,15.8,19.2s-5.4,19.1-15.8,19.1-15.8-7.7-15.8-19.1,5.4-19.2,15.8-19.2Zm0,29.8c5.6,0,8.1-5.4,8.1-10.6s-2.5-10.7-8.1-10.7-8.1,5.4-8.1,10.7,2.5,10.6,8.1,10.6Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: .2px;"/>
+    <path d="m117.2,124.8h7.7v29.1h14.3v7.1h-22v-36.3Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: .2px;"/>
+    <path d="m142.2,124.8h7.9c2.1,0,3.8,0,5.5,0,7,0,9.5,4,9.5,8.5s-.4,7-3.8,9.1c3.1,1.5,5,4.4,5,8.6,0,7.4-4.6,10-11.6,10h-12.5v-36.3Zm7.8,14.6c2.2,0,2.4,0,3.9,0,3.1,0,3.5-2,3.5-3.2,0-2-1.6-2.9-3.4-3h-4v6.1h0Zm2.9,13.2c4.7,0,5.6-1.2,5.6-3.5s-1.4-3.4-5.2-3.4h-3.3v6.8h2.9Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: .2px;"/>
+    <path d="m169.8,124.8h10.4l11,25v-25h7.7v36.3h-9.9l-11.5-26.1v26.1h-7.7v-36.3Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: .2px;"/>
+    <path d="m202.9,124.8h7.9c2.1,0,3.8,0,5.5,0,7,0,9.5,4,9.5,8.5s-.4,7-3.8,9.1c3.1,1.5,5,4.4,5,8.6,0,7.4-4.6,10-11.6,10h-12.5v-36.3Zm7.8,14.6c2.2,0,2.4,0,3.9,0,3.1,0,3.5-2,3.5-3.2,0-2-1.6-2.9-3.4-3h-4v6.1h0Zm2.9,13.2c4.7,0,5.6-1.2,5.6-3.5s-1.4-3.4-5.2-3.4h-3.3v6.8h2.9Z" style="stroke: #000; stroke-miterlimit: 10; stroke-width: .2px;"/>
+  </g>
+</svg>

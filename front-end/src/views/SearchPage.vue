@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import { store } from "../store.js";
+import { nextTick } from "vue";
 import DrawingPin from '../components/DrawingPin.vue';
 export default {
     name: "SearchPage",
@@ -22,6 +23,12 @@ export default {
                         store.apartments = response.data.apartments;
                         store.services = response.data.services;
                         store.apartmentTypes = response.data.apartment_types;
+                        nextTick(() => {
+                            let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
+                            loadedApartmentsEls.forEach(loadedApartmentsEl => {
+                                loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
+                            })
+                        });
                     })
                     .catch(error => {
                         console.error(error.message);
@@ -72,6 +79,12 @@ export default {
                 return false;
             });
             store.apartments.sort((a, b) => a.distance_from_point - b.distance_from_point);
+            nextTick(() => {
+                let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
+                loadedApartmentsEls.forEach(loadedApartmentsEl => {
+                    loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
+                })
+            });
         },
         calculateDistance(lat1, lat2, lon1, lon2) {
 
@@ -169,17 +182,22 @@ export default {
     mounted() {
         this.store.arrowKeysFunction();
         axios
-            .get(store.base_admin_URL + "api/apartments-types-services")
-            .then(response => {
-                if (store.apartments.length === 0) {
-                    store.apartments = response.data.apartments;
-                }
-                store.services = response.data.services;
-                store.apartmentTypes = response.data.apartment_types;
-            })
-            .catch(error => {
-                console.error(error.message);
+
+        .get(store.base_admin_URL + "api/apartments-types-services")
+        .then(response => {
+            store.services = response.data.services;
+            store.apartmentTypes = response.data.apartment_types;
+            nextTick(() => {
+                let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
+                loadedApartmentsEls.forEach(loadedApartmentsEl => {
+                    loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
+                })
             });
+        })
+        .catch(error => {
+            console.error(error.message);
+        })
+
     }
 }
 </script>
@@ -340,7 +358,7 @@ export default {
             <div class="d-flex flex-wrap">
 
 
-                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" :style="{ transform: randomRotate() }"
+                <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment"
                     v-for="apartment in store.apartments">
                     <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                         class="text-decoration-none">
