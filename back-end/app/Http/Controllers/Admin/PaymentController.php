@@ -41,12 +41,12 @@ class PaymentController extends Controller
 
         if($result->success) {
             $transaction = $result->transaction;
-            return back()->with("success_message", "Transaction successfull. The id is: " . $transaction->id);
+            return back()->with("success_message", "Transazione avvenuta con successo. L'ID è: " . $transaction->id);
         } else {
             $errorString = "";
 
             foreach($result->errors->deepAll() as $error) {
-                $errorString .= "Error: " . $error->code . ": " . $error->message . "\n";
+                $errorString .= "Errore: " . $error->code . ": " . $error->message . "\n";
             }
 
             return back()->withErrors($result->message);
