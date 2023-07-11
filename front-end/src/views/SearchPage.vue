@@ -251,7 +251,7 @@ export default {
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg px-5 mx-auto"
                     role="document">
-                    <div class="modal-content bg_post">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
