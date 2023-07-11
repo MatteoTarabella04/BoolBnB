@@ -8,7 +8,14 @@
     <div>
         <div class="bg_double_show body_minus_header_block"></div>
 
-        <div class="container py-5 px-2  rounded-4">
+        <div class="container py-5 px-2 rounded-4">
+        {{-- messaggio effettuata sponsorizzazione --}}
+        @if (session('success_message'))
+            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong> {{ session('success_message') }}</strong>
+            </div>
+        @endif
             <a class="btn btn-dark strong_shadow" href="{{ route('admin.apartments.index') }}">
                 <span class="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -60,7 +67,7 @@
                                 </svg>
                             </span>
                             <span class="text_from_left">Modifica</span></a>
-                        <a class="btn me-2 btn-warning shadow" href="{{ route('admin.sponsor_plans') }}"> <span
+                        <a class="btn me-2 btn-warning shadow" href="{{ route('admin.sponsor_plans', $apartment) }}"> <span
                                 class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-coin" viewBox="0 0 16 16">
