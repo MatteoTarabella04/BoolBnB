@@ -41,7 +41,7 @@ class PaymentController extends Controller
 
         if($result->success) {
             $transaction = $result->transaction;
-            return back()->with("success_message", "Transaction successfull");
+            return back()->with("success_message", "Transaction successfull. The id is: " . $transaction->id);
         } else {
             $errorString = "";
 
@@ -49,8 +49,6 @@ class PaymentController extends Controller
                 $errorString .= "Error: " . $error->code . ": " . $error->message . "\n";
             }
 
-            // $_SESSION["errors"] = $errorString;
-            // header("Location: index.php");
             return back()->withErrors($result->message);
         }
     }
