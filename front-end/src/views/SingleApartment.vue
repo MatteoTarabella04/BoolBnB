@@ -42,9 +42,6 @@ export default {
       this.content = '';
     },
     registerVisit() {
-      // const dateOptions = {
-      //   day: 2-digit, month: 2-digit, hour: 2-digit, minute: 2-digit, second: 2-digit
-      // }
       const now = new Date();
       const day = ("0" + now.getDate()).slice(-2);
       const month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -52,7 +49,7 @@ export default {
       const seconds = ("0" + now.getSeconds()).slice(-2);
       const minutes = ("0" + now.getMinutes()).slice(-2);
       const hours = ("0" + now.getHours()).slice(-2);
-      const formattedDate = year + "/" + month + "/" + day + " " + hours + "-" + minutes + "-" + seconds;
+      const formattedDate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
 
       const data = {
         apartment_id: this.apartment.id,
