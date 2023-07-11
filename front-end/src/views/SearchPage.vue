@@ -226,23 +226,27 @@ export default {
                     <div class="d-flex align-items-center justify-content-end justify-content-sm-between">
                         <!-- Modal trigger button -->
                         <div>
-                            <button type="button" class="btn btn-outline-dark my-3 border_radius_30 " data-bs-toggle="modal"
-                                data-bs-target="#modalId">
-                                <span class="d-none d-sm-inline me-2">Filtri</span>
-                                <font-awesome-icon icon="fa-solid fa-filter" />
+                            <button type="button" class="btn btn-outline-dark my-3 border_radius_30 px-3"
+                                data-bs-toggle="modal" data-bs-target="#modalId"><span
+                                    class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
+                                        icon="fa-solid fa-filter" /></span><span class="d-sm-none"><font-awesome-icon
+                                        icon="fa-solid fa-filter" /></span>
+                                <span class="d-none d-sm-inline">Filtri</span>
+
                             </button>
-                            <button type="button" class="btn btn-outline-dark my-3 ms-2 border_radius_30 "
-                                @click="resetTheSearch()">
-                                <span class="d-none d-sm-inline me-2">Azzera</span>
-                                <font-awesome-icon icon="fa-solid fa-undo" />
+                            <button type="button" class="btn btn-outline-dark my-3 ms-2 border_radius_30 px-3 "
+                                @click="resetTheSearch()"><span class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
+                                        icon="fa-solid fa-undo" /></span><span class="d-sm-none"><font-awesome-icon
+                                        icon="fa-solid fa-undo" /></span>
+                                <span class="d-none d-sm-inline">Azzera</span>
+
                             </button>
                         </div>
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
                             type="button" class="btn bg_purple hover_button text-white my-3 ms-2 border_radius_30 px-3">
-                            <span class="d-none d-sm-inline me-2 text-white ">Mostra risultati</span>
-                            <font-awesome-icon icon="fa-solid fa-magnifying-glass " class="text-white" />
-                        </button>
+                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>Mostra
+                            risultati</button>
                     </div>
 
                 </div>

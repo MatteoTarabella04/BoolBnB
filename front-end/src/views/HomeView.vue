@@ -210,10 +210,10 @@ export default {
                         </button> -->
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
-                            type="button" class="btn bg_purple border_radius_30 my-3 hover_button px-3">
-                            <span class="d-none d-sm-inline me-2 text-white ">Mostra risultati</span>
-                            <font-awesome-icon icon="fa-solid fa-magnifying-glass " class="text-white" />
-                        </button>
+                            type="button" class="btn bg_purple border_radius_30 my-3 hover_button px-3 text-white">
+                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>Mostra
+                            risultati</button>
+
                     </div>
 
                 </div>
@@ -269,10 +269,10 @@ export default {
                                         <input :value="service.id" type="checkbox" class="form-checkbox"
                                             :id="service.name + '-' + index" v-model="store.checkedServices"
                                             @click.stop="checkOrUncheck">
-                                            <label :for="service.name + '-' + index" class="ms-2 d-inline">
-                                                {{ service.name }}
-                                            </label>
-                                            <font-awesome-icon :icon=" service.icon " />
+                                        <label :for="service.name + '-' + index" class="ms-2 d-inline">
+                                            {{ service.name }}
+                                        </label>
+                                        <font-awesome-icon :icon="service.icon" />
 
                                     </div>
                                 </div>
