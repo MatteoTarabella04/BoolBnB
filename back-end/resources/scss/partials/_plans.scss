@@ -1,0 +1,46 @@
+@use "./colors.scss" as *;
+
+.plan {
+   background-color: $bg-special-dark !important;
+   color: $text-secondary !important;
+
+   border-radius: 2rem !important;
+   transition: 1s;
+
+   &:hover {
+      transform: translatey(10%);
+
+      background-color: $bg-secondary !important;
+
+      color: $bg-special-dark !important;
+
+   }
+}
+
+.braintree-card,
+.transaction_wrapper {
+   width: 300px;
+   margin: auto;
+}
+
+.braintree-sheet__container {
+   background-color: #fff;
+}
+
+
+@media screen and (min-width:768px) {
+
+   .braintree-card,
+   .transaction_wrapper {
+      width: 600px;
+   }
+
+   .btn_absolute {
+      position: absolute;
+
+      z-index: 1000000;
+
+      top: 60%;
+      right: 85px;
+   }
+}

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\SponsorizationPlan;
 use App\Http\Requests\StoreSponsorizationPlanRequest;
 use App\Http\Requests\UpdateSponsorizationPlanRequest;
+use App\Http\Controllers\Controller;
 
 class SponsorizationPlanController extends Controller
 {
@@ -15,7 +16,9 @@ class SponsorizationPlanController extends Controller
      */
     public function index()
     {
-        //
+        $plans = SponsorizationPlan::all();
+
+        return view('admin.sponsor.plans.index', compact('plans'));
     }
 
     /**

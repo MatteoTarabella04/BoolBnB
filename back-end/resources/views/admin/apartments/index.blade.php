@@ -10,6 +10,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            {{-- messaggio effettuata sponsorizzazione --}}
+            @if (session('success_message'))
+                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong> {{ session('success_message') }}</strong>
+                </div>
+            @endif
             <h1 class="pt-3 fw-bold text-center">I tuoi annunci</h1>
             <div class="d-flex justify-content-end">
                 <a class="btn bg_special text-end strong_shadow" href="{{ route('admin.apartments.create') }}">
