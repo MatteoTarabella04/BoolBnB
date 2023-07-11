@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PaymentController;
 // REMOVED BECAUSE OF BRIEF INDICATIONS
 // use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         'apartments' => 'apartment:slug',
     ]);
     Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+    Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
 });
 
 // REMOVED BECAUSE OF BRIEF INDICATIONS
