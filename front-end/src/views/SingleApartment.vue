@@ -1,10 +1,10 @@
 <script>
 import axios from "axios";
+import { nextTick } from "vue";
 import tt from "@tomtom-international/web-sdk-maps";
 import DrawingPin from '../components/DrawingPin.vue';
 
 
-import { nextTick } from "vue";
 /* import { showMap } from "../js/map.js"; */
 export default {
   data() {
@@ -16,6 +16,7 @@ export default {
       base_URL: 'http://127.0.0.1:8000/',
       // TODO mettere api-key in file separato, non pushato su GitHub, ed importarlo in alto
       apiKey: 'EzjZV0IZ4ed8DMmJXesJTqZNFMWxQ0E5',
+      ipAddress: null,
     }
   },
   components: {
@@ -40,6 +41,33 @@ export default {
       this.senderEmail = '';
       this.content = '';
     },
+    registerVisit() {
+      // const dateOptions = {
+      //   day: 2-digit, month: 2-digit, hour: 2-digit, minute: 2-digit, second: 2-digit
+      // }
+      const now = new Date();
+      const day = ("0" + now.getDate()).slice(-2);
+      const month = ("0" + (now.getMonth() + 1)).slice(-2);
+      const year = now.getFullYear();
+      const seconds = ("0" + now.getSeconds()).slice(-2);
+      const minutes = ("0" + now.getMinutes()).slice(-2);
+      const hours = ("0" + now.getHours()).slice(-2);
+      const formattedDate = year + "/" + month + "/" + day + " " + hours + "-" + minutes + "-" + seconds;
+
+      const data = {
+        apartment_id: this.apartment.id,
+        visit_date: formattedDate,
+        ip_address: this.ipAddress,
+      }
+      axios
+      .post("http://127.0.0.1:8000/api/register-visit", data)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error(error.message);
+      })
+    },
     getImagePath(path) {
       return this.base_URL + 'storage/' + path
     },
@@ -58,30 +86,39 @@ export default {
     // }
   },
   mounted() {
-    axios
-      .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
-      .then(response => {
-        this.apartment = response.data.apartment;
+    const dataObjectScope = this;
 
-        this.$nextTick(() => {
-          const lon = response.data.apartment.longitude;
-          const lat = response.data.apartment.latitude;
+    function getApartmentInfo() {
+      return axios.get(`http://127.0.0.1:8000/api/apartments/${dataObjectScope.$route.params.slug}`);
+    }
 
-          let map = tt.map({
-            key: this.apiKey,
-            container: 'map',
-            center: [lon, lat],
-            zoom: 14,
-          });
+    function getIpAddress() {
+      return axios.get('https://api.ipify.org?format=json');
+    }
 
-          let marker = new tt.Marker()
-            .setLngLat([lon, lat])
-            .addTo(map);
+    Promise
+    .all([getApartmentInfo(), getIpAddress()])
+    .then(([apartmentResponse, ipAddressResponse]) => {
+      this.apartment = apartmentResponse.data.apartment;
+      nextTick(() => {
+        const lon = apartmentResponse.data.apartment.longitude;
+        const lat = apartmentResponse.data.apartment.latitude;
+
+        let map = tt.map({
+          key: this.apiKey,
+          container: 'map',
+          center: [lon, lat],
+          zoom: 14,
         });
-      })
-      .catch(error => {
-        console.error(error.message);
+
+        let marker = new tt.Marker()
+          .setLngLat([lon, lat])
+          .addTo(map);
       });
+
+      this.ipAddress = ipAddressResponse.data.ip;
+      this.registerVisit();
+    });
 
     // this.setPostsContainerHeight();
     // window.addEventListener('resize', this.setPostsContainerHeight);
@@ -93,20 +130,15 @@ export default {
 <template>
   <!-- TODO completare pagina -->
   <div v-if="apartment" class="container">
-
     <div class="posts_container d-flex flex-wrap mb-3">
-
       <div class=" col-12 col-md-7 mt-3 p-2 left_side">
         <div class="post_card image_container">
           <a class="open_modal" type="button" data-bs-toggle="modal" data-bs-target="#modalId">
-            <img :src="getImagePath(apartment.image)" class="card-img-top moving_image pointer card_shadow h-100"
-              :alt="apartment.name + ' image'">
+            <img :src="getImagePath(apartment.image)" class="card-img-top moving_image pointer card_shadow h-100" :alt="apartment.name + ' image'">
           </a>
           <!-- Modal Body -->
-          <div class="modal fade text-center" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl position-relative"
-              role="document">
+          <div class="modal fade text-center" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl position-relative" role="document">
               <div class="modal-content">
                 <div class="modal-body p-0">
                   <button type="button" class="modal_close_button" data-bs-dismiss="modal" aria-label="Close">
@@ -126,22 +158,18 @@ export default {
         <div class="mt-3 text-center">
           <div class="card shadow">
             <div class="card-body">
-
               <div class="purple_text mb-1" v-if="apartment.visible == 1">Ancora Disponibile</div>
               <div class="text-danger mb-1" v-else>Non Disponibile</div>
               <span class="d-block">
                 <strong class="fs-4">{{ apartment.price_per_night }}€</strong> /notte
               </span>
-              <a class="btn btn-dark mt-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                aria-controls="offcanvasExample">
+              <a class="btn btn-dark mt-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                 Contatta la struttura
               </a>
             </div>
           </div>
         </div>
-
       </div>
-
 
       <div id="info_container" class="info_container col-12 col-md-5 d-flex flex-column">
         <div class="p-2 ">
@@ -172,9 +200,9 @@ export default {
             </span>
           </div>
         </div>
+
         <div class="p-2 ">
           <div v-if="apartment.services.length > 0" class="post_card  image_container services_container h-100">
-
             <h5 class=" mb-3 purple_text fw-bold">
               Servizi inclusi nel prezzo:
             </h5>
@@ -186,28 +214,20 @@ export default {
           </div>
         </div>
       </div>
-
     </div>
-
-
 
     <div class="col-12 p-3 d-flex flex-wrap justify-content-center">
-      <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId"
-        placeholder="" :value="apartment.latitude" required>
-      <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId"
-        placeholder="" :value="apartment.longitude" required>
-
-      <div id="map" class="rounded-2 shadow">
-      </div>
-
+      <input type="text" class="form-control d-none" name="latitude" id="latitude" aria-describedby="helpId" placeholder="" :value="apartment.latitude" required>
+      <input type="text" class="form-control d-none" name="longitude" id="longitude" aria-describedby="helpId" placeholder="" :value="apartment.longitude" required>
+      <div id="map" class="rounded-2 shadow"></div>
     </div>
-
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Contatta il proprietario</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
+
       <div class="offcanvas-body">
         <form>
           <div class="mb-3">
@@ -216,8 +236,7 @@ export default {
           </div>
           <div class="mb-3">
             <label for="sender_email" class="form-label">La tua Mail:</label>
-            <input type="email" class="form-control" id="sender_email" name="sender_email" v-model="senderEmail"
-              placeholder="name@example.com">
+            <input type="email" class="form-control" id="sender_email" name="sender_email" v-model="senderEmail" placeholder="name@example.com">
           </div>
           <div class="mb-3">
             <label for="content" class="form-label">Scrivi un messaggio:</label>

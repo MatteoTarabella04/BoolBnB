@@ -10,6 +10,8 @@ class Visit extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["apartment_id", "visit_date", "ip_address"];
+
     public function apartment(): BelongsTo
     {
         return $this->belongsTo(Apartment::class);
