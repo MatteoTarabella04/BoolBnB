@@ -45,12 +45,13 @@ class PaymentController extends Controller
 
         if ($result->success) {
             $transaction = $result->transaction;
-            return to_route('admin.apartments.index')->with("success_message", "Transaction successfull. The id is: " . $transaction->id);
+
+            return to_route('admin.apartments.index')->with("success_message", "Transazione avvenuta con successo. L'ID è: " . $transaction->id);
         } else {
             $errorString = "";
 
-            foreach ($result->errors->deepAll() as $error) {
-                $errorString .= "Error: " . $error->code . ": " . $error->message . "\n";
+            foreach($result->errors->deepAll() as $error) {
+                $errorString .= "Errore: " . $error->code . ": " . $error->message . "\n";
             }
 
             return back()->withErrors($result->message);
