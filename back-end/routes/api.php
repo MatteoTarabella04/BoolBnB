@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApartmentController;
 use App\Http\Controllers\API\MessageController;
+use App\Http\Controllers\API\VisitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/apartments', [ApartmentController::class, 'index']);
 Route::get('/apartments/{slug}', [ApartmentController::class, 'show']);
 Route::get('/apartments-types-services', [ApartmentController::class, 'all']);
+Route::post('/register-visit', [VisitController::class, 'store']);
 
 Route::post('/contacts', [MessageController::class, 'store']);
