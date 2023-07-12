@@ -32,7 +32,7 @@ class MessageController extends Controller
 
         usort($messages, array("App\Http\Controllers\Admin\MessageController", "sortByDescDate"));
 
-        return view('admin.apartments.message', compact('messages', 'apartments'));
+        return view('admin.messages.index', compact('messages', 'apartments'));
     }
 
     public function sortByDescDate($messageA, $messageB) {
@@ -43,27 +43,6 @@ class MessageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMessageRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMessageRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Message  $message
@@ -71,30 +50,11 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMessageRequest  $request
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMessageRequest $request, Message $message)
-    {
-        //
+        if(!$message->seen) {
+            $message->seen = 1;
+            $message->update();
+        }
+        return view('admin.messages.show', compact("message"));
     }
 
     /**
@@ -105,6 +65,7 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        $message->delete();
+        return to_route("admin.messages.index")->with("message", "Messaggio ricevuto da " . $message->full_name . " eliminato");
     }
 }

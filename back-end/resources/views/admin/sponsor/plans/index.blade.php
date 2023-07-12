@@ -6,11 +6,11 @@
             Seleziona il piano di sponsorizzazione adatto a te:
         </h1>
 
-        <div class="row row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-lg-3 g-3">
             @foreach ($plans as $plan)
                 <div class="col">
                     <a class="text-decoration-none" href="{{ route('admin.payment', [$apartment, $plan]) }}">
-                        <div class="card plan border-0 p-3 shadow">
+                        <div class="card plan border-0 p-3 shadow h-100">
                             <div class="card-body">
                                 <h3 class=" text-center ">
                                     {{ $plan->name }}

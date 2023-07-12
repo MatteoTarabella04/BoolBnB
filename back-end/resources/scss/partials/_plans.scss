@@ -8,13 +8,11 @@
    transition: 1s;
 
    &:hover {
-      transform: translatey(10%);
-
       background-color: $bg-secondary !important;
 
       color: $bg-special-dark !important;
-
    }
+
 }
 
 .braintree-card,
@@ -27,6 +25,9 @@
    background-color: #fff;
 }
 
+.summary {
+   width: 300px;
+}
 
 @media screen and (min-width:768px) {
 
@@ -43,4 +44,24 @@
       top: 60%;
       right: 85px;
    }
+
+   .summary {
+      width: 600px;
+   }
+}
+
+@media screen and (min-width:992px) {
+
+   .plan {
+
+      &:hover {
+         transform: translatey(10%);
+
+         background-color: $bg-secondary !important;
+
+         color: $bg-special-dark !important;
+
+      }
+   }
+
 }

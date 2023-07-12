@@ -1,21 +1,10 @@
 @use "./colors.scss" as *;
 
 .dashboard {
-    h1 {
-        box-shadow: 2px 2px 3px rgb(63, 63, 63);
-    }
 
     .card_bg_special {
         background-color: $bg-snow !important;
         box-shadow: 2px 2px 3px rgb(63, 63, 63);
-    }
-
-    .badge_special {
-        text-align: center;
-        padding: 1.5rem;
-        background-color: $bg-snow !important;
-        display: block;
-        border-radius: 1rem;
     }
 
     .card_off {

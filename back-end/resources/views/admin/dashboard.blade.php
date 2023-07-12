@@ -7,17 +7,7 @@
 @section('content')
     <div class="container dashboard">
         <div class="bg_double_show body_minus_header_block"></div>
-
-        <div class="row">
-            <div class="col">
-                <h1 class="fs-1 text-dark-emphasis my-4 text-center fw-bolder badge_special">
-                    {{ __('Dashboard ') }}
-                </h1>
-            </div>
-        </div>
-
-
-
+            <h1 class="fs-1 text-dark-emphasis my-4 text-center fw-bolder page_title">{{ __('Dashboard') }}</h1>
         <div class=" justify-content-center">
             <div class="row">
                 <div class="col-sm-12 col-lg-6 d-flex flex-wrap">

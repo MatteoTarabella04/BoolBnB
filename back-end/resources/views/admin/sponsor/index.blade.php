@@ -35,6 +35,8 @@
                         form.submit();
                     })
                 }
+                /* aggiunto d-none al bottone di acquisto dopo essere stato cliccato */
+                document.getElementById('buy_btn').classList.add('d-none');
             })
         })
     </script>
@@ -68,12 +70,13 @@
                 <input type="hidden" id="payment_method_nonce" name="payment_method_nonce">
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-outline-success btn_absolute">Acquista</button>
+                    <button type="submit" id="buy_btn"
+                        class="btn mb-3 btn-outline-success btn_absolute">Acquista</button>
                 </div>
             </div>
         </form>
 
-        <div class="card w-25 m-auto rounded-4">
+        <div class="card summary m-auto rounded-2">
             <div class="card-body text-center">
                 <h3>
                     {{ $sponsorization_plan->name }}

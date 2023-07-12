@@ -48,16 +48,38 @@
 
 //DIMENSION
 
-.object_fit_cover {
-    object-fit: cover;
-}
-
 .font_size_20 {
     font-size: 20px;
+}
+
+.image_aspect_ratio {
+    aspect-ratio: 12 / 9;
+    object-fit: cover;
 }
 
 //OF FUNCTIONALITY
 
 .transition_duration_1 {
     transition-duration: 1s;
+}
+
+// COMPONENTS
+
+.page_title {
+    text-align: center;
+    box-shadow: 2px 2px 3px rgb(63, 63, 63);
+    background-color: $bg-snow !important;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+.sponsorization_badge {
+    position: absolute;
+    top: 5%;
+    left: 4%;
+    width: 96%;
+
+    svg {
+        filter: drop-shadow();
+    }
 }

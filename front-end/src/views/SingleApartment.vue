@@ -60,7 +60,6 @@ export default {
       axios
         .post("http://127.0.0.1:8000/api/register-visit", data)
         .then(response => {
-          console.log(response);
         })
         .catch(error => {
           console.error(error.message);
@@ -184,7 +183,10 @@ export default {
                 Servizi inclusi nel prezzo:
               </h5>
               <div class=" d-flex flex-wrap">
-                <div class="mb-2 me-3" v-for="service in apartment.services">{{ service.name }}</div>
+                <div class="mb-2 me-3" v-for="service in apartment.services">
+                  <font-awesome-icon :icon="service.icon" />
+                  {{ service.name }}
+                </div>
               </div>
             </div>
           </div>
