@@ -24,12 +24,19 @@
             </div>
             <div class="row">
                 @forelse($apartments as $apartment)
-                    <div class="col-12 d-flex align-items-center flex-wrap rounded-1 m-1">
-                        <div class="col-12 col-sm-6 col-md-4 p-3">
+                    <div class="col-12 d-flex align-items-center flex-wrap rounded-1">
+                        <div class="col-12 col-sm-6 col-md-4 my-3 position-relative">
                             <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}"
                                 class="w-100 rounded-3 strong_shadow image_aspect_ratio">
+                            @if($apartment->hasSponsorization)
+                                <div class="sponsorization_badge">
+                                    <svg fill="#ffc107" xmlns="http://www.w3.org/2000/svg" width="10%" viewBox="0 0 576 512">
+                                        <path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"/>
+                                    </svg>
+                                </div>
+                            @endif
                         </div>
-                        <div class="col-12 col-sm-6 col-md-8 p-3 d-flex flex-column justify-content-center">
+                        <div class="col-12 col-sm-6 col-md-8 py-3 px-3 px-sm-4 px-md-4 d-flex flex-column justify-content-center">
                             <h3><strong>{{ $apartment->name }} </strong></h3>
                             <div>
                                 <h6><strong>{{ $apartment->apartment_type->name }}</strong></h6>
@@ -43,9 +50,8 @@
                                 </p>
                             </div>
                             <div class="index_buttons">
-                                <div
-                                    class="d-flex justify-content-start justify-content-sm-center justify-content-md-start flex-wrap flex-sm-column flex-md-row">
-                                    <a class="btn me-2 my-2 btn-light strong_shadow"
+                                <div class="d-flex justify-content-start justify-content-sm-center justify-content-md-start flex-wrap flex-sm-column flex-md-row gap-2">
+                                    <a class="btn my-2 btn-light strong_shadow"
                                         href="{{ route('admin.apartments.show', $apartment) }}">
                                         <span class="icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -57,7 +63,7 @@
                                         </span>
                                         <span class="text_from_left">Dettagli</span>
                                     </a>
-                                    <a class="btn me-2 my-2  btn-light strong_shadow"
+                                    <a class="btn my-2  btn-light strong_shadow"
                                         href="{{ route('admin.apartments.edit', $apartment) }}">
                                         <span class="icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -69,10 +75,10 @@
                                         <span class="text_from_left">Modifica</span>
                                     </a>
                                     <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="post"
-                                        class="text-center ">
+                                        class="d-flex">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-dark my-2 strong_shadow width_minus_8" type="submit">
+                                        <button class="btn btn-dark my-2 strong_shadow width_minus_8 flex-grow-1" type="submit">
                                             <span class="icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
