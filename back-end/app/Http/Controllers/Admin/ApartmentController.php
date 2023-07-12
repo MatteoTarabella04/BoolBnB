@@ -11,6 +11,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -22,6 +23,15 @@ class ApartmentController extends Controller
     public function index()
     {
         $apartments = Auth::user()->apartments()->orderByDesc('id')->paginate(6);
+        foreach ($apartments as $apartment) {
+            $sponsorization = DB::table("apartment_sponsorization_plan")->where("apartment_id", $apartment->id)->orderByDesc("expiry_date")->first();
+            $now = Carbon::now()->format("Y-m-d H:i:s");
+            if($sponsorization) {
+                $sponsorization->expiry_date > $now ? $apartment["hasSponsorization"] = true : $apartment["hasSponsorization"] = false;
+            } else {
+                $apartment["hasSponsorization"] = false;
+            }
+        }
         return view("admin.apartments.index", compact("apartments"));
     }
 
@@ -85,11 +95,18 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $sponsorization = DB::table("apartment_sponsorization_plan")->where("apartment_id", $apartment->id)->orderByDesc("expiry_date")->first();
+        $now = Carbon::now()->format("Y-m-d H:i:s");
+        if($sponsorization) {
+            $sponsorization->expiry_date > $now ? $hasSponsorization = true : $hasSponsorization = false;
+        } else {
+            $hasSponsorization = false;
+        }
         $apartment_types = ApartmentType::orderBy('name')->get();
         $apartment_services = Service::orderBy('name')->get();
 
         if (Auth::id() === $apartment->user_id) {
-            return view("admin.apartments.show", compact("apartment", "apartment_types", "apartment_services"));
+            return view("admin.apartments.show", compact("apartment", "apartment_types", "apartment_services", "hasSponsorization"));
         } else {
             return to_route("admin.apartments.index")->with("message", "Stai cercando di visualizzare un appartamento non tuo");
         }

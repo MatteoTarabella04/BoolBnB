@@ -214,9 +214,8 @@ export default {
 
 
             <h1 v-if="store.selectedAddress" class="text-center my-5">Risultati ricerca</h1>
+            <h1 v-else class="text-center my-5">In primo piano</h1>
 
-            <div v-if="store.sponsorizedApartmentsPresent">
-                <h1 class="text-center my-5">Annunci in evidenza</h1>
                 <div class="d-flex flex-wrap justify-content-center">
                     <template v-for="apartment in store.apartments">
                         <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" v-if="store.checkIfSponsorized(apartment)">
@@ -246,12 +245,7 @@ export default {
                             </router-link>
                         </div>
                     </template>
-                </div>
-            </div>
 
-            <h1 v-if="store.selectedResult" class="text-center my-5">Altri risultati</h1>
-            <h1 v-else class="text-center my-5">Annunci</h1>
-            <div class="d-flex flex-wrap justify-content-center">
                 <template v-for="apartment in store.apartments">
                     <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" v-if="!store.checkIfSponsorized(apartment)">
                         <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
@@ -282,6 +276,7 @@ export default {
                     </div>
                 </template>
             </div>
+
         </div>
         <div class="container" v-else>
             <h1 class="text-center mt-5">Nessun risultato disponibile</h1>
