@@ -26,8 +26,7 @@
                 @forelse($apartments as $apartment)
                     <div class="col-12 d-flex align-items-center flex-wrap rounded-1 m-1">
                         <div class="col-12 col-sm-6 col-md-4 p-3">
-                            <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}"
-                                class="w-100 rounded-3 strong_shadow">
+                            <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}" class="w-100 rounded-3 strong_shadow image_aspect_ratio">
                         </div>
                         <div class="col-12 col-sm-6 col-md-8 p-3 d-flex flex-column justify-content-center">
                             <h3><strong>{{ $apartment->name }} </strong></h3>

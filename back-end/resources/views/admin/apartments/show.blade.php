@@ -98,8 +98,8 @@
                 </div>
                 <div
                     class="image mt-4 mt-md-0 col-12 col-md-6 col-lg-4 ps-md-4 d-flex justify-content-center align-items-center flex-column ">
-                    <img src="{{ asset('storage/' . $apartment->image) }}" class="rounded-4 strong_shadow object_fit_cover"
-                        style="width: 100%; max-width:500px; aspect-ratio: 12 / 9" alt="Immagine {{ $apartment->name }}">
+                    <img src="{{ asset('storage/' . $apartment->image) }}" class="rounded-4 strong_shadow image_aspect_ratio"
+                        style="width: 100%; max-width:500px;" alt="Immagine {{ $apartment->name }}">
                     <input type="text" class="form-control d-none" name="latitude" id="latitude"
                         aria-describedby="helpId" placeholder="" value="{{ old('latitude', $apartment->latitude) }}"
                         required>

@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="image mt-4 mt-md-0 col-12 col-md-6 col-lg-4 ps-md-4 d-flex justify-content-center align-items-center flex-column ">
-                    <img src="{{ asset('storage/' . $message->apartment->image) }}" class="rounded-4 strong_shadow object_fit_cover" style="width: 100%; max-width:500px; aspect-ratio: 12 / 9" alt="Immagine {{ $message->apartment->name }}">
+                    <img src="{{ asset('storage/' . $message->apartment->image) }}" class="rounded-4 strong_shadow object-fit-cover" style="width: 100%; max-width:500px; aspect-ratio: 12 / 9" alt="Immagine {{ $message->apartment->name }}">
                 </div>
             </div>
         </div>

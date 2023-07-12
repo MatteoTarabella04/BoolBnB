@@ -48,12 +48,13 @@
 
 //DIMENSION
 
-.object_fit_cover {
-    object-fit: cover;
-}
-
 .font_size_20 {
     font-size: 20px;
+}
+
+.image_aspect_ratio {
+    aspect-ratio: 12 / 9;
+    object-fit: cover;
 }
 
 //OF FUNCTIONALITY
