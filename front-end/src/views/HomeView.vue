@@ -357,6 +357,8 @@ export default {
                             <img :src="getImagePath(apartment.image)"
                                 class="card-img-top moving_image pointer card_shadow h-100"
                                 :alt="apartment.name + ' image'">
+                            <div class="position-absolute text-white bg_purple border_radius_30 px-2 m-1"> {{
+                                Math.floor(apartment.price_per_night).toLocaleString() + " €" }}</div>
                             <h2>{{ apartment.name }}</h2>
                             <p> {{ apartment.address }}</p>
                             <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 247) +

@@ -34,6 +34,10 @@
     color: $bg-hippo;
 }
 
+.font_size_10 {
+    font-size: 10px;
+}
+
 //BACKGROUND
 
 .bg_primary {
@@ -90,6 +94,10 @@
 .border_radius_30 {
     border-radius: 30px !important;
     ;
+}
+
+.no_wrap {
+    white-space: nowrap !important;
 }
 
 //CUSTOMIZATION

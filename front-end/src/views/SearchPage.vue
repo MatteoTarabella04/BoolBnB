@@ -380,12 +380,16 @@ export default {
                             <img :src="getImagePath(apartment.image)"
                                 class="card-img-top moving_image pointer card_shadow h-100"
                                 :alt="apartment.name + ' image'">
+                            <div class="position-absolute text-white bg_purple border_radius_30 px-2 m-1"> {{
+                                Math.floor(apartment.price_per_night).toLocaleString() + " €" }}</div>
                             <h2>{{ apartment.name }}</h2>
-                            <p> {{ apartment.address }}</p>
-                            <p v-if="store.selectedAddress" class="fs-5">{{ Math.floor(apartment.distance_from_point * 100)
-                                / 100 + "km" }}</p>
-                            <!-- <p> {{ apartment.description.length > 250 ? apartment.description.slice(0, 247) + '...' :
-                                apartment.description }}</p> -->
+                            <p> {{ apartment.address }} </p>
+                            <p v-if="store.selectedAddress" class="fs-5">{{ 'Distante ' +
+                                Math.floor(apartment.distance_from_point * 100)
+                                / 100 + " km" }}</p>
+
+                            <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 247) + '...' :
+                                apartment.description }}</p>
                         </div>
                     </router-link>
                 </div>
