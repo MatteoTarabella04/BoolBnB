@@ -164,6 +164,8 @@ class ApartmentController extends Controller
         }
         if ($request->has('services')) {
             $apartment->services()->sync($request->services);
+        } else {
+            $apartment->services()->sync([]);
         }
 
         return to_route("admin.apartments.show", $apartment)->with("message", "Annuncio: " . $apartment->name . " aggiornato");
