@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Braintree\Gateway;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
