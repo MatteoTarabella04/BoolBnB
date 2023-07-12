@@ -39,7 +39,7 @@
                                 @endif
 
                                 @if(Route::currentRouteName() != "admin.messages")
-                                <a class="dropdown-item" href="{{ route('admin.messages') }}">{{ __('Messaggi ricevuti') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.messages.index') }}">{{ __('Messaggi ricevuti') }}</a>
                                 @endif
                                 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
