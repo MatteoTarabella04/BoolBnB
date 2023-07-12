@@ -11,7 +11,6 @@ export const store = new reactive({
   apartmentType: 0,
   checkedServices: [],
   results: [],
-  sponsorizedApartmentsPresent: false,
   selectedResult: "",
   inputAddress: "",
   selectedAddress: null,
@@ -116,8 +115,7 @@ export const store = new reactive({
     const hours = ("0" + now.getHours()).slice(-2);
     const formattedDate = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
     if(latestExpiry > formattedDate) {
-      this.sponsorizedApartmentsPresent = true;
-        return true;
+      return true;
     }
     return false;
   },
@@ -129,7 +127,6 @@ export const store = new reactive({
       .get(this.base_admin_URL + "api/apartments-types-services")
       .then(response => {
           this.apartments = response.data.apartments;
-          this.sponsorizedApartmentsPresent = false;
           this.services = response.data.services;
           this.apartmentTypes = response.data.apartment_types;
           nextTick(() => {
@@ -147,7 +144,6 @@ export const store = new reactive({
       .get(this.base_admin_URL + "api/apartments")
       .then(response => {
           this.apartments = response.data.apartments;
-          this.sponsorizedApartmentsPresent = false;
           if (address != null) {
               this.filtering = true;
           }
