@@ -36,10 +36,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('apartments', ApartmentController::class)->parameters([
         'apartments' => 'apartment:slug',
     ]);
-    Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+    Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 
     Route::get('/sponsor_plans/{apartment:slug}', [SponsorizationPlanController::class, 'index'])->name('sponsor_plans');
-    Route::get('/payment/{apartment:slug}/{sponsorization_plan}', [PaymentController::class, 'index'])->name('payment');
+    Route::get('/payment/{apartment:slug}/{sponsorization_plan}', [PaymentController::class, 'requireToken'])->name('payment');
     Route::post('/checkout/{apartment:slug}/{sponsorization_plan}', [PaymentController::class, 'checkout'])->name('checkout');
 });
 
