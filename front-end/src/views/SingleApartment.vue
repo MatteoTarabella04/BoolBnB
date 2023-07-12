@@ -68,19 +68,7 @@ export default {
     getImagePath(path) {
       return this.base_URL + 'storage/' + path
     },
-    // setPostsContainerHeight() {
-    //   const infoContainer = document.getElementById('info_container');
-    //   const leftSide = document.querySelector('.left_side');
 
-    //   if (infoContainer && leftSide) {
-    //     const infoContainerHeight = infoContainer.getBoundingClientRect().height;
-    //     const leftSideHeight = leftSide.getBoundingClientRect().height;
-
-    //     const maxHeight = Math.min(infoContainerHeight, leftSideHeight);
-    //     infoContainer.style.height = `${maxHeight}px`;
-    //     leftSide.style.height = `${maxHeight}px`;
-    //   }
-    // }
   },
   mounted() {
     const dataObjectScope = this;
@@ -117,8 +105,6 @@ export default {
         this.registerVisit();
       });
 
-    // this.setPostsContainerHeight();
-    // window.addEventListener('resize', this.setPostsContainerHeight);
   }
 
 }
@@ -228,7 +214,7 @@ export default {
               <form>
                 <div class="mb-3">
                   <label for="full_name" class="form-label">Nome e Cognome:</label>
-                  <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Mario Rossi"
+                  <input type="text" class="form-control " id="full_name" name="full_name" placeholder="Mario Rossi"
                     v-model="fullName">
                 </div>
                 <div class="mb-3">
@@ -240,8 +226,9 @@ export default {
                   <label for="content" class="form-label">Scrivi un messaggio:</label>
                   <textarea class="form-control" id="content" name="content" v-model="content" rows="3"></textarea>
                 </div>
-                <button @click.prevent="sendMail()" type="submit" class="btn bg_purple text-white w-100"><span
-                    class="icon"><font-awesome-icon icon="fa-solid fa-envelope" /></span>Invia</button>
+                <button @click.prevent="sendMail()" type="submit"
+                  class="btn bg_purple text-white border_radius_30 w-100"><span class="icon"><font-awesome-icon
+                      icon="fa-solid fa-envelope" /></span>Invia</button>
               </form>
             </div>
           </div>
