@@ -256,7 +256,7 @@ export default {
                     role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn-close m-0 position-absolute rotate_animation"
+                            <button type="button" class="btn-close me-1 responsiive_absolute rotate_animation"
                                 data-bs-dismiss="modal" aria-label="Close"></button>
                             <h5 class="modal-title m-auto" id="modalTitleId">Affina la tua ricerca</h5>
                             <!-- <div class="space"></div> -->
@@ -279,7 +279,7 @@ export default {
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div><!-- min_beds input -->
+                                    <div class="h-100 d-flex flex-column justify-content-between"><!-- min_beds input -->
                                         <h5 for="min_beds" class="form-label">Posti letto</h5>
                                         <input type="number" class="form-control" min="0" max="255" step="1" name="min_beds"
                                             id="min_beds" v-model="store.beds">
