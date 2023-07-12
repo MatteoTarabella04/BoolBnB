@@ -1,6 +1,8 @@
 // Import all of Bootstrap's CSS
 @use './partials/colors.scss' as *;
 @use './partials/hover_effect.scss' as *;
+@use './partials/animation.scss' as *;
+@use './partials/modal_customitation.scss' as *;
 @use './partials/homeView.scss';
 @use './partials/ul_address.scss';
 @use './partials/utilities.scss';
