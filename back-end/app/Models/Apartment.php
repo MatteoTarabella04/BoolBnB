@@ -47,7 +47,6 @@ class Apartment extends Model
 
     public function sponsorization_plans(): BelongsToMany
     {
-        return $this->belongsToMany(SponsorizationPlan::class);
+        return $this->belongsToMany(SponsorizationPlan::class)->withPivot("expiry_date");
     }
-
 }
