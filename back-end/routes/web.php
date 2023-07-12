@@ -38,9 +38,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     ]);
     Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 
-    Route::get('/sponsor_plans', [SponsorizationPlanController::class, 'index'])->name('sponsor_plans');
-    Route::get('/payment/{id}', [PaymentController::class, 'index'])->name('payment');
-    Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/sponsor_plans/{apartment:slug}', [SponsorizationPlanController::class, 'index'])->name('sponsor_plans');
+    Route::get('/payment/{apartment:slug}/{sponsorization_plan}', [PaymentController::class, 'index'])->name('payment');
+    Route::post('/checkout/{apartment:slug}/{sponsorization_plan}', [PaymentController::class, 'checkout'])->name('checkout');
 });
 
 // REMOVED BECAUSE OF BRIEF INDICATIONS

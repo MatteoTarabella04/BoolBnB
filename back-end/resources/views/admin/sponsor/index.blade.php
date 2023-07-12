@@ -58,7 +58,7 @@
                 </ul>
             </div>
         @endif
-        <form id="payment_form" action="/admin/checkout" method="post">
+        <form id="payment_form" action="{{ route('admin.checkout', [$apartment, $sponsorization_plan]) }}" method="post">
             @csrf
             <input type="hidden" name="amount" id="amount" value="{{ $sponsorization_plan->price }}">
             <div class="position-relative transaction_wrapper">
