@@ -60,7 +60,7 @@ export default {
       axios
         .post("http://127.0.0.1:8000/api/register-visit", data)
         .then(response => {
-          console.log(response);
+          // console.log(response);
         })
         .catch(error => {
           console.error(error.message);
@@ -95,28 +95,28 @@ export default {
     }
 
     Promise
-      .all([getApartmentInfo(), getIpAddress()])
-      .then(([apartmentResponse, ipAddressResponse]) => {
-        this.apartment = apartmentResponse.data.apartment;
-        nextTick(() => {
-          const lon = apartmentResponse.data.apartment.longitude;
-          const lat = apartmentResponse.data.apartment.latitude;
+    .all([getApartmentInfo(), getIpAddress()])
+    .then(([apartmentResponse, ipAddressResponse]) => {
+      this.apartment = apartmentResponse.data.apartment;
+      nextTick(() => {
+        const lon = apartmentResponse.data.apartment.longitude;
+        const lat = apartmentResponse.data.apartment.latitude;
 
-          let map = tt.map({
-            key: this.apiKey,
-            container: 'map',
-            center: [lon, lat],
-            zoom: 14,
-          });
-
-          let marker = new tt.Marker()
-            .setLngLat([lon, lat])
-            .addTo(map);
+        let map = tt.map({
+          key: this.apiKey,
+          container: 'map',
+          center: [lon, lat],
+          zoom: 14,
         });
 
-        this.ipAddress = ipAddressResponse.data.ip;
-        this.registerVisit();
+        let marker = new tt.Marker()
+          .setLngLat([lon, lat])
+          .addTo(map);
       });
+
+      this.ipAddress = ipAddressResponse.data.ip;
+      this.registerVisit();
+    });
 
     // this.setPostsContainerHeight();
     // window.addEventListener('resize', this.setPostsContainerHeight);
