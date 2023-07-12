@@ -10,17 +10,17 @@ use App\Models\ApartmentType;
 class ApartmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Updates the apartments data
      * 
      * @return \Illuminate\Http\JsonResponse
      */
     public function index() {
-        $apartments = Apartment::with(['apartment_type', 'services', 'visits'])->orderByDesc('id')->get();
+        $apartments = Apartment::with(['apartment_type', 'services', 'visits', 'sponsorization_plans'])->orderByDesc('id')->get();
 
         if ($apartments) {
             return response()->json([
                 'success' => true,
-                'apartments' => $apartments
+                'apartments' => $apartments,
             ]);
         } else {
             return response()->json([
@@ -29,8 +29,13 @@ class ApartmentController extends Controller
         }
     }
 
+    /**
+     * Updates the apartments data and also retrieves services and apartment types
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function all() {
-        $apartments = Apartment::with(['apartment_type', 'services', 'visits'])->orderByDesc('id')->get();
+        $apartments = Apartment::with(['apartment_type', 'services', 'sponsorization_plans'])->orderByDesc('id')->get();
         $apartment_types = ApartmentType::orderBy("name")->get();
         $services = Service::orderBy("name")->get();
 
@@ -39,7 +44,7 @@ class ApartmentController extends Controller
                 'success' => true,
                 'apartments' => $apartments,
                 'apartment_types' => $apartment_types,
-                'services' => $services
+                'services' => $services,
             ]);
         } else {
             return response()->json([
@@ -48,12 +53,17 @@ class ApartmentController extends Controller
         }
     }
 
+    /**
+     * Updates the single apartment data
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($slug) {
-        $apartment = Apartment::with(['apartment_type', 'services'])->where("slug", $slug)->get();
+        $apartment = Apartment::with(['apartment_type', 'services'])->where("slug", $slug)->first();
         if ($apartment) {
             return response()->json([
                 "success" => true,
-                "apartment" => $apartment[0],
+                "apartment" => $apartment,
             ]);
         } else {
             return response()->json([
