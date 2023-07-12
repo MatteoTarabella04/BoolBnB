@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
-    public function index(Apartment $apartment, SponsorizationPlan $sponsorization_plan)
+    public function requireToken(Apartment $apartment, SponsorizationPlan $sponsorization_plan)
     {
         $gateway = new Gateway([
             "environment" => env("BRAINTREE_ENVIRONMENT"),
@@ -55,7 +55,7 @@ class PaymentController extends Controller
             }
 
             $now = Carbon::now()->format("Y-m-d H:i:s");
-            
+
             if($lastExpiry && $lastExpiry > $now) {
                 $formattedExpiry = Carbon::createFromFormat("Y-m-d H:i:s", $lastExpiry);
                 $expiry = $formattedExpiry->addHours($sponsorization_plan->duration)->format("Y-m-d H:i:s");
