@@ -9,7 +9,7 @@ export default {
 
 <template>
     <AppHeader></AppHeader>
-    <router-view class="py-3"></router-view>
+    <router-view class="pb-3 pt-0 pt-sm-3"></router-view>
 </template>
 
 <style lang="scss"></style>

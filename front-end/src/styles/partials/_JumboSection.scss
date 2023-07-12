@@ -3,27 +3,10 @@
 .jumbotron {
     height: calc(80vh - 62px);
 
+
     .image_container {
         height: 100%;
-        transition-duration: 0.5s;
-        // padding: 30px;
 
-        .jumbo_tron_img {
-            height: 100%;
-            width: 100%;
-            min-width: 70vw;
-            object-fit: cover;
-
-        }
-    }
-}
-
-
-
-@media screen and (min-width:576px) {
-    .jumbo_tron_img {
-
-        border-radius: 30px;
 
     }
 }

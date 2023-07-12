@@ -211,7 +211,7 @@ export default {
                 <div>
                     <input
                         @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false, control()"
-                        class="form-control" type="text" id="address" name="address"
+                        class="form-control border_radius_30" type="text" id="address" name="address"
                         placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled position-absolute bg-white w-75 rounded-3 list-group" id="addressSuggestions">
                         <li class="cursor_pointer p-1 list-group-item list-group-item-action"
@@ -309,7 +309,7 @@ export default {
 
                             <div class="mb-3 "><!-- apartment_type input -->
                                 <h5>Tipo di alloggio?</h5>
-                                <div class="d-flex flex-column flex-md-row align-items-stretch">
+                                <div class="d-flex flex-column flex-md-row align-items-stretch my-3">
 
                                     <div class="apartment_type_wrapper g-1 d-flex"
                                         :class="store.apartmentType === 0 ? 'bg_purple text-light' : ''" role="group"
