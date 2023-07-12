@@ -3,15 +3,15 @@
 @section('content')
     <section>
         <div class="bg_double_show body_minus_header_block"></div>
-        <div class="container">
+        <div class="container pt-3">
             @if (session('message'))
                 <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
                     <strong>{{ session('message') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <h1 class="pt-3 fw-bold text-center">I tuoi annunci</h1>
-            <div class="d-flex justify-content-end">
+            <h1 class="fw-bold page_title">I tuoi annunci</h1>
+            <div class="d-flex justify-content-end my-4">
                 <a class="btn bg_special text-end strong_shadow" href="{{ route('admin.apartments.create') }}">
                     <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

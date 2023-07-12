@@ -19,4 +19,8 @@ header {
     & .nav-item:hover {
         background-color: $bg-primary-hover !important;
     }
+
+    .dropdown-item.active, .dropdown-item:active {
+        background-color: $bg-card-special;
+    }
 }

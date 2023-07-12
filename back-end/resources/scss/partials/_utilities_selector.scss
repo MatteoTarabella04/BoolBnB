@@ -61,3 +61,13 @@
 .transition_duration_1 {
     transition-duration: 1s;
 }
+
+// COMPONENTS
+
+.page_title {
+    text-align: center;
+    box-shadow: 2px 2px 3px rgb(63, 63, 63);
+    background-color: $bg-snow !important;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}

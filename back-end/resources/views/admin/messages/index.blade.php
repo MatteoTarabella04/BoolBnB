@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section>
+<section class="messages">
     <div class="bg_double_show body_minus_header_block"></div>
 
     <div class="container">
@@ -11,7 +11,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-        <h1 class="pt-3 fw-bold text-center">Messaggi ricevuti</h1>
+        <h1 class="page_title fs-1 text-dark-emphasis my-4 text-center fw-bolder badge_special">{{ __('Messaggi ricevuti') }}</h1>
         <div class="row">
             @forelse($messages as $message)
                 <div class="col-12 d-flex align-items-center flex-wrap rounded-1 m-1">
