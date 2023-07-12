@@ -226,15 +226,14 @@ export default {
                     <div class="d-flex align-items-center justify-content-end justify-content-sm-between">
                         <!-- Modal trigger button -->
                         <div>
-                            <button type="button" class="btn btn-outline-dark my-3 border_radius_30 px-3"
-                                data-bs-toggle="modal" data-bs-target="#modalId"><span
-                                    class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
+                            <button type="button" class="btn border_black my-3 border_radius_30 px-3" data-bs-toggle="modal"
+                                data-bs-target="#modalId"><span class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
                                         icon="fa-solid fa-filter" /></span><span class="d-sm-none"><font-awesome-icon
                                         icon="fa-solid fa-filter" /></span>
                                 <span class="d-none d-sm-inline">Filtri</span>
 
                             </button>
-                            <button type="button" class="btn btn-outline-dark my-3 ms-2 border_radius_30 px-3 "
+                            <button type="button" class="btn border_black my-3 ms-2 border_radius_30 px-3 "
                                 @click="resetTheSearch()"><span class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
                                         icon="fa-solid fa-undo" /></span><span class="d-sm-none"><font-awesome-icon
                                         icon="fa-solid fa-undo" /></span>
@@ -253,12 +252,12 @@ export default {
             </div>
             <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg px-5 mx-auto"
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg px-5 mx-auto confortaa_font"
                     role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="btn-close m-0 position-absolute" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close me-1 responsiive_absolute rotate_animation"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
                             <h5 class="modal-title m-auto" id="modalTitleId">Affina la tua ricerca</h5>
                             <!-- <div class="space"></div> -->
                         </div>
@@ -280,7 +279,7 @@ export default {
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div><!-- min_beds input -->
+                                    <div class="h-100 d-flex flex-column justify-content-between"><!-- min_beds input -->
                                         <h5 for="min_beds" class="form-label">Posti letto</h5>
                                         <input type="number" class="form-control" min="0" max="255" step="1" name="min_beds"
                                             id="min_beds" v-model="store.beds">
@@ -288,26 +287,24 @@ export default {
                                 </div>
                             </div>
 
+                            <h5 class="d-flex gap-2">Servizi aggiuntivi
+                                <span v-if="store.checkedServices.length > 0"
+                                    class="d-flex align-items-center justify-content-center text-white bg_purple badge pb-1">
+                                    {{ store.checkedServices.length }}
+                                </span>
+                            </h5>
                             <div class="mb-3"><!-- services input -->
-                                <h5 class="d-flex gap-2">Servizi aggiuntivi
-                                    <span v-if="store.checkedServices.length > 0"
-                                        class="d-flex align-items-center justify-content-center badge text-bg-primary badge text-bg-primary">
-                                        {{ store.checkedServices.length }}
-                                    </span>
-                                </h5>
-                                <div class="d-flex flex-wrap">
+                                <!-- <div class="d-flex flex-wrap"> -->
+                                <div v-for="(service, index) in store.services" class="col-12 col-xl-6">
+                                    <label :for="service.name + '-' + index" class="ms-2 d-inline checkbox_side">{{
+                                        service.name }}
+                                        <input :value="service.id" type="checkbox" class="" :id="service.name + '-' + index"
+                                            v-model="store.checkedServices" @click.stop="checkOrUncheck">
+                                        <span class="checkmark"></span>
 
-
-                                    <div v-for="(service, index) in store.services" class="col-12 col-md-6">
-                                        <input :value="service.id" type="checkbox" class="form-checkbox"
-                                            :id="service.name + '-' + index" v-model="store.checkedServices"
-                                            @click.stop="checkOrUncheck">
-                                        <label :for="service.name + '-' + index" class="ms-2 d-inline">
-
-                                            {{ service.name }}
-                                        </label>
-                                    </div>
+                                    </label>
                                 </div>
+                                <!-- </div> -->
                             </div>
 
                             <div class="mb-3 "><!-- apartment_type input -->
@@ -339,13 +336,14 @@ export default {
                             <div class="modal-footer justify-content-center justify-content-sm-between">
                                 <b>
                                     <a @click="resetFilters()" type="reset"
-                                        class="btn btn-outline-dark border_radius_30 px-3"><span class="icon">
+                                        class="btn border_black border_radius_30 px-3"><span class="icon me-1">
                                             <font-awesome-icon icon="fa-solid fa-undo" /></span>Azzera filtri</a>
                                 </b>
                                 <button
                                     @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? getAllApartments(store.selectedResult) : store.searchError = true"
                                     type="button" class="btn bg_purple text-white border_radius_30 px-3"
-                                    data-bs-toggle="modal" data-bs-target="#modalId"><span class="icon"><font-awesome-icon
+                                    data-bs-toggle="modal" data-bs-target="#modalId"><span
+                                        class="icon me-1"><font-awesome-icon
                                             icon="fa-solid fa-magnifying-glass" /></span>Mostra risultati</button>
                             </div>
                         </div>

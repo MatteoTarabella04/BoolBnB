@@ -23,7 +23,7 @@
         width: 16px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        background: $bg-hippo;
+        background: $bg-light-hippo;
         cursor: pointer;
         -webkit-appearance: none;
         margin-top: -6px;
@@ -39,11 +39,11 @@
     }
 
     &::-moz-range-thumb {
-        border: 1px solid $bg-hippo;
+        border: 1px solid $bg-light-hippo;
         width: 16px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        background: $bg-hippo;
+        background: $bg-light-hippo;
         cursor: pointer;
     }
 
@@ -58,7 +58,7 @@
     }
 
     &::-ms-fill-lower {
-        background: $bg-hippo;
+        background: $bg-light-hippo;
         border: 1px solid #DEE2E6;
         border-radius: 2.6px;
     }
@@ -70,11 +70,11 @@
     }
 
     &::-ms-thumb {
-        border: 1px solid $bg-hippo;
+        border: 1px solid $bg-light-hippo;
         width: 16px;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
-        background: $bg-hippo;
+        background: $bg-light-hippo;
         cursor: pointer;
     }
 }
