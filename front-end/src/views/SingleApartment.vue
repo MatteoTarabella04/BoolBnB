@@ -94,28 +94,28 @@ export default {
     }
 
     Promise
-    .all([getApartmentInfo(), getIpAddress()])
-    .then(([apartmentResponse, ipAddressResponse]) => {
-      this.apartment = apartmentResponse.data.apartment;
-      nextTick(() => {
-        const lon = apartmentResponse.data.apartment.longitude;
-        const lat = apartmentResponse.data.apartment.latitude;
+      .all([getApartmentInfo(), getIpAddress()])
+      .then(([apartmentResponse, ipAddressResponse]) => {
+        this.apartment = apartmentResponse.data.apartment;
+        nextTick(() => {
+          const lon = apartmentResponse.data.apartment.longitude;
+          const lat = apartmentResponse.data.apartment.latitude;
 
-        let map = tt.map({
-          key: this.apiKey,
-          container: 'map',
-          center: [lon, lat],
-          zoom: 14,
+          let map = tt.map({
+            key: this.apiKey,
+            container: 'map',
+            center: [lon, lat],
+            zoom: 14,
+          });
+
+          let marker = new tt.Marker()
+            .setLngLat([lon, lat])
+            .addTo(map);
         });
 
-        let marker = new tt.Marker()
-          .setLngLat([lon, lat])
-          .addTo(map);
+        this.ipAddress = ipAddressResponse.data.ip;
+        this.registerVisit();
       });
-
-      this.ipAddress = ipAddressResponse.data.ip;
-      this.registerVisit();
-    });
 
     // this.setPostsContainerHeight();
     // window.addEventListener('resize', this.setPostsContainerHeight);
@@ -197,7 +197,10 @@ export default {
                 Servizi inclusi nel prezzo:
               </h5>
               <div class=" d-flex flex-wrap">
-                <div class="mb-2 me-3" v-for="service in apartment.services">{{ service.name }}</div>
+                <div class="mb-2 me-3" v-for="service in apartment.services">
+                  <font-awesome-icon :icon="service.icon" />
+                  {{ service.name }}
+                </div>
               </div>
             </div>
           </div>
