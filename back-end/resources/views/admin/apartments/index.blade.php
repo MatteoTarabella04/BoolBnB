@@ -10,7 +10,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <h1 class="fw-bold page_title">I tuoi annunci</h1>
+            <h1 class="fw-bold text-dark-emphasis page_title">I tuoi annunci</h1>
             <div class="d-flex justify-content-end my-4">
                 <a class="btn bg_special text-end strong_shadow" href="{{ route('admin.apartments.create') }}">
                     <span class="icon">
@@ -26,7 +26,8 @@
                 @forelse($apartments as $apartment)
                     <div class="col-12 d-flex align-items-center flex-wrap rounded-1 m-1">
                         <div class="col-12 col-sm-6 col-md-4 p-3">
-                            <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}" class="w-100 rounded-3 strong_shadow image_aspect_ratio">
+                            <img src="{{ asset('storage/' . $apartment->image) }}" alt="Immagine {{ $apartment->name }}"
+                                class="w-100 rounded-3 strong_shadow image_aspect_ratio">
                         </div>
                         <div class="col-12 col-sm-6 col-md-8 p-3 d-flex flex-column justify-content-center">
                             <h3><strong>{{ $apartment->name }} </strong></h3>
