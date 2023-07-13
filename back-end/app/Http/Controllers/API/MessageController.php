@@ -37,7 +37,8 @@ class MessageController extends Controller
         $new_message->fill($data);
         $new_message->save();
 
-        Mail::to(env("MAIL_TO_ADDRESS"))->send(new NewContact($new_message));
+        // COMMENTED TO AVOID MAIL SENDING
+        // Mail::to(env("MAIL_TO_ADDRESS"))->send(new NewContact($new_message));
 
         //TODO controllare che sia stata inviata correttamente
         // if() {
