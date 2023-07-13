@@ -1,5 +1,4 @@
 import Chart from 'chart.js/auto';
-import { result } from 'lodash';
 
 getVisits();
 
@@ -13,36 +12,28 @@ const baseData = {
     }]
 };
 
-
-
 let results = []
 
 function getVisits() {
 
     axios
-        .get(`http://127.0.0.1:8000/api/apartments`).then(response => {
+    .get(`http://127.0.0.1:8000/api/apartments`).then(response => {
+        results = response.data.apartments;
 
-            results = response.data.apartments;
-
-            results.forEach(apartment => {
-                
-                baseData.labels.push(apartment.name)
-                
-                baseData.datasets[0].data.push(apartment.visits.length)
-                //console.log(apartment.name);
-                //console.log(baseData);
-                
-            });
+        results.forEach(apartment => {
+            baseData.labels.push(apartment.name)
+            baseData.datasets[0].data.push(apartment.visits.length)
+        });
             
-            const myChart = new Chart(ctx, {
-                type: 'polarArea',
-                data: baseData ,
-                options: {},
-            });
-        })
-        .catch(error => {
-            console.error(error.message);
-        })
+        const myChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: baseData ,
+            options: {},
+        });
+    })
+    .catch(error => {
+        console.error(error.message);
+    })
 }
 
 const myTimeout = setTimeout(cardOff, 2000);

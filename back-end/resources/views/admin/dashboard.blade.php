@@ -52,7 +52,7 @@
                 <div class="col-sm-12 col-lg-6">
                     <div class="card card_bg_special mb-4">{{-- statistics card --}}
                         <div class="card-header text-center">
-                            <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('le tue statistiche') }}</h2>
+                            <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('LE TUE STATISTICHE') }}</h2>
 
                         </div>
                         <div class="card-body">
@@ -126,7 +126,6 @@
                             <span class="position-absolute text-dark top-0 start-100 translate-middle badge rounded-pill bg_special p-2">
                                 {{ count($sortedUnreadMessages) }}
                             <span class="visually-hidden">unread messages</span>
-
                         </span>
                         </a>
                     </div>
