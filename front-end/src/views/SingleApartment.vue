@@ -18,6 +18,7 @@ export default {
       // TODO mettere api-key in file separato, non pushato su GitHub, ed importarlo in alto
       apiKey: 'EzjZV0IZ4ed8DMmJXesJTqZNFMWxQ0E5',
       ipAddress: null,
+      messageError: false,
     }
   },
   components: {
@@ -25,6 +26,12 @@ export default {
   },
   methods: {
     sendMail() {
+      this.messageError = false;
+      if(this.fullName == "" || this.senderEmail == "" || this.content == "") {
+        this.messageError = true;
+        console.log(this.messageError);
+        return;
+      }
       const data = {
         full_name: this.fullName,
         sender_email: this.senderEmail,
@@ -224,10 +231,10 @@ export default {
             <div class="card-body  ">
               <h3 class="text-center mb-3">Contatta l'host</h3>
               <!-- <div class="font_size_10 text-center">Verrai ricontattato il prima possibile</div> -->
-              <!-- <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="success_message">
+              <div v-if="this.messageError" class="alert alert-danger alert-dismissible fade show" role="alert" id="success_message">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>Messaggio inviato correttamente</strong>
-              </div> -->
+                <strong>Tutti i campi devono essere compilati</strong>
+              </div>
               
               <form>
                 <div class="mb-3">

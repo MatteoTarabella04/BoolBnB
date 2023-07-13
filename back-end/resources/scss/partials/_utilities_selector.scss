@@ -20,6 +20,18 @@
     background: linear-gradient(315deg, rgba(243, 243, 243, 1) 80%, rgba(243, 243, 243, 1) 81%, $bg-card-special 81%);
 }
 
+.bg_primary_hover {
+    background-color: #f1bdaa !important;
+}
+
+.text_primary_hover {
+    color: #f1bdaa !important;
+}
+
+.border_primary_hover {
+    border: 1px solid #f1bdaa !important;
+}
+
 
 //CONTAINER 
 

@@ -12,9 +12,8 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-6 d-flex flex-wrap">
                     <div id="card_off_interval" class="card card_bg_special w-100 mb-4">{{-- dashboard card --}}
-
                         <div class="card-header text-center p-2">
-                            <h2 class="fw-bolder m-0 text-secondary">{{ __('Login effettuato!') }}</h2>
+                            <h2 class="fw-bolder m-0 text-secondary">{{ __('LOGIN EFFETTUATO!') }}</h2>
                         </div>
                         <div class="card-body transition_duration_1 d-flex align-items-center justify-content-center p-2">
                             @if (session('status'))
@@ -68,7 +67,7 @@
             <div id="latest_messages">
                 <div class="card card_bg_special w-100 mb-4">
                     <div class="card-header text-center p-3">
-                        <h2 class="fw-bolder m-0 text-secondary">{{ __('Messaggi da leggere') }}</h2>
+                        <h2 class="fw-bolder m-0 text-secondary">{{ __('MESSAGGI DA LEGGERE') }}</h2>
                     </div>
                     <div class=" card-body p-0">
                         <ul class="list-group list-unstyled rounded-0">
@@ -124,7 +123,7 @@
                             </span>
                             <span class="text_from_left">Messaggi ricevuti</span>
                             
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span class="position-absolute text-dark top-0 start-100 translate-middle badge rounded-pill bg_special p-2">
                                 {{ count($sortedUnreadMessages) }}
                             <span class="visually-hidden">unread messages</span>
 
