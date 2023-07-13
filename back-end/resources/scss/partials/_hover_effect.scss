@@ -7,10 +7,25 @@
     transition-duration: 0.3s;
 }
 
+// APPLY TO FONT-AWESOME 20x20 ICONS
+.vertical_align_sub {
+    vertical-align: sub;
+}
+
+// APPLY TO BOOTSTRAP 16x16 ICONS
+.vertical_align_text_top {
+    vertical-align: text-top;
+}
+
+// APPLY TO BOOTSTRAP 20x20 ICONS
+.vertical_align_top {
+    vertical-align: top;
+}
+
 a:hover .icon svg,
 button:hover .icon svg {
     width: 20px;
-    scale: 1,
+    scale: 1;
 }
 
 // EFFECT
