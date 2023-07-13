@@ -97,16 +97,19 @@ class ApartmentController extends Controller
     {
         $sponsorization = DB::table("apartment_sponsorization_plan")->where("apartment_id", $apartment->id)->orderByDesc("expiry_date")->first();
         $now = Carbon::now()->format("Y-m-d H:i:s");
+        $hasSponsorization = false;
+        $latestExpiryDate = null;
         if($sponsorization) {
-            $sponsorization->expiry_date > $now ? $hasSponsorization = true : $hasSponsorization = false;
-        } else {
-            $hasSponsorization = false;
+            if($sponsorization->expiry_date > $now) {
+                $hasSponsorization = true;
+                $latestExpiryDate = $sponsorization->expiry_date;
+            }
         }
         $apartment_types = ApartmentType::orderBy('name')->get();
         $apartment_services = Service::orderBy('name')->get();
 
         if (Auth::id() === $apartment->user_id) {
-            return view("admin.apartments.show", compact("apartment", "apartment_types", "apartment_services", "hasSponsorization"));
+            return view("admin.apartments.show", compact("apartment", "apartment_types", "apartment_services", "hasSponsorization", "latestExpiryDate"));
         } else {
             return to_route("admin.apartments.index")->with("message", "Stai cercando di visualizzare un appartamento non tuo");
         }

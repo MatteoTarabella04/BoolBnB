@@ -2,6 +2,8 @@
 
 @section('javascript')
     @vite(['resources/js/insertAddress.js'])
+    @vite(['resources/js/apartmentStatistics.js'])
+    @vite(['resources/js/countdown.js'])
 @endsection
 
 @section('content')
@@ -32,6 +34,14 @@
                     class="mt-2 mt-md-0 col-12 col-md-6 col-lg-8 d-flex flex-column align-items-start justify-content-center">
                     <h1 class="fw-bold">{{ $apartment->name }}</h1>
                     <h3 class="fw-bold">{{ $apartment->apartment_type->name }}</h3>
+
+                    <span id="latestExpiryDate" class="d-none">{{ $latestExpiryDate }}</span>
+                    @if($hasSponsorization)
+                    <p class="sponsoritation_counter"> Manca alla termine della tua sponsorizzazione: 
+                        <span id="remainingTime"></span>
+                    </p>
+                    @endif
+                    
                     <p><strong>Descrizione:</strong> {{ $apartment->description }}</p>
                     <p><strong>Prezzo per notte:</strong> {{ $apartment->price_per_night }}€</p>
                     <p><strong>Numero di stanze:</strong> {{ $apartment->rooms }}</p>
@@ -120,8 +130,29 @@
                         class="rounded-4 strong_shadow mt-3">
                     </div>
                 </div>
-
             </div>
+
+            
+
+
+
+            <div class="card card_bg_special my-4">{{-- statistics card --}}
+                <div class="card-header text-center">
+                    <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('VISITE MENSILI') }}</h2>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart" style="width:100%; max-width:700px; margin-inline: auto"></canvas>
+                </div>
+                {{-- <div class="card-footer">
+                    footer
+                </div> --}}
+            </div>
+
+
+
+
+
+
         </div>
     </div>
 @endsection
