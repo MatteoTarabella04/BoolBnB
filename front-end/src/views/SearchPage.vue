@@ -65,7 +65,7 @@ export default {
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
                     <input
-                        @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false, control()"
+                        @input="store.inputAddress.length >= 3 ? store.getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false, control()"
                         class="form-control border_radius_30" type="text" id="address" name="address"
 
                         placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">

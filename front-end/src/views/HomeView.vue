@@ -46,7 +46,7 @@ export default {
                 <div>
                     <input
 
-                        @input="store.inputAddress.length >= 3 ? getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
+                        @input="store.inputAddress.length >= 3 ? store.getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
                         @keydown.enter="store.selectedLat != null && store.selectedLon != null ? getAllApartments(store.selectedResult) : ''"
                         class="form-control border_radius_30" type="text" id="address" name="address"
 
