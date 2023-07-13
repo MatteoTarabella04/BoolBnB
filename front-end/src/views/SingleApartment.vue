@@ -39,8 +39,8 @@ export default {
 
       const formEl = document.querySelector("form");
       formEl.insertAdjacentHTML("beforebegin",
-      `<div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="success_message">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      `<div class="alert bg_purple text-white alert-dismissible fade show d-none" role="alert" id="success_message">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
         <strong>Messaggio inviato correttamente</strong>
       </div>`);
 
