@@ -16,13 +16,13 @@ button:hover .icon svg {
 
 // EFFECT
 
+.scale_with_hover {
+    transition-duration: 0.4s;
+}
 
-// .hover_button:hover {
-//     background-color: $bg-hippo;
-//     opacity: 80%;
-//     border-radius: 30px;
-//     transition-duration: 0.4s;
-// }
+.scale_with_hover:hover {
+    transform: scale(1.05);
+}
 
 .hover_button {
     background-color: $bg-hippo;
