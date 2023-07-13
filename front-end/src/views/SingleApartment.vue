@@ -32,10 +32,23 @@ export default {
         apartment_id: this.apartment.id,
       }
 
+      const existingSuccessMessageEl = document.getElementById("success_message");
+      if(existingSuccessMessageEl) {
+        existingSuccessMessageEl.remove();
+      }
+
+      const formEl = document.querySelector("form");
+      formEl.insertAdjacentHTML("beforebegin",
+      `<div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="success_message">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>Messaggio inviato correttamente</strong>
+      </div>`);
+
       axios
         .post("http://127.0.0.1:8000/api/contacts", data)
         .then(response => {
-          console.log(response);
+          const successMessageEl = document.getElementById("success_message");
+          successMessageEl.classList.remove("d-none");
         })
 
       this.fullName = '';
@@ -211,6 +224,11 @@ export default {
             <div class="card-body  ">
               <h3 class="text-center mb-3">Contatta l'host</h3>
               <!-- <div class="font_size_10 text-center">Verrai ricontattato il prima possibile</div> -->
+              <!-- <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="success_message">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>Messaggio inviato correttamente</strong>
+              </div> -->
+              
               <form>
                 <div class="mb-3">
                   <label for="full_name" class="form-label">Nome e Cognome:</label>
