@@ -38,7 +38,7 @@
                                 <a class="dropdown-item" href="{{ route('admin.apartments.index') }}">{{ __('I tuoi annunci') }}</a>
                                 @endif
 
-                                @if(Route::currentRouteName() != "admin.messages")
+                                @if(Route::currentRouteName() != "admin.messages.index")
                                 <a class="dropdown-item" href="{{ route('admin.messages.index') }}">{{ __('Messaggi ricevuti') }}</a>
                                 @endif
                                 
