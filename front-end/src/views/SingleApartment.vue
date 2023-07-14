@@ -240,16 +240,16 @@ export default {
                 <div class="mb-3">
                   <label for="full_name" class="form-label">Nome e Cognome:</label>
                   <input type="text" class="form-control " id="full_name" name="full_name" placeholder="Mario Rossi"
-                    v-model="fullName">
+                    v-model="fullName" required>
                 </div>
                 <div class="mb-3">
                   <label for="sender_email" class="form-label">La tua Mail:</label>
                   <input type="email" class="form-control" id="sender_email" name="sender_email" v-model="senderEmail"
-                    placeholder="mariorossi@example.com">
+                    placeholder="mariorossi@example.com" required>
                 </div>
                 <div class="mb-3">
                   <label for="content" class="form-label">Scrivi un messaggio:</label>
-                  <textarea class="form-control" id="content" name="content" v-model="content" rows="3"></textarea>
+                  <textarea class="form-control" id="content" name="content" v-model="content" rows="3" required></textarea>
                 </div>
                 <button @click.prevent="sendMail()" type="submit"
                   class="btn bg_purple text-white border_radius_30 w-100"><span class="icon"><font-awesome-icon
