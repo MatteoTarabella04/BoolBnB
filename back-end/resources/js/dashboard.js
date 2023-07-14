@@ -1,5 +1,7 @@
 import Chart from 'chart.js/auto';
 
+const userId = document.getElementById("userId").value
+
 const ctx = document.getElementById('myChart');
 const baseData = {
     labels: [],
@@ -19,7 +21,9 @@ const myTimeout = setTimeout(cardOff, 2000);
 function getVisits() {
 
     axios
-    .get(`http://127.0.0.1:8000/api/apartments`).then(response => {
+    .get(`http://127.0.0.1:8000/api/user-apartments/${userId}`)
+    .then(response => {
+        console.log(response);
         results = response.data.apartments;
 
         results.forEach(apartment => {
@@ -34,7 +38,7 @@ function getVisits() {
         });
     })
     .catch(error => {
-        console.error(error.message);
+        console.error(error);
     })
 }
 

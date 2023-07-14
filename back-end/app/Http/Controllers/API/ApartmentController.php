@@ -30,6 +30,26 @@ class ApartmentController extends Controller
     }
 
     /**
+     * Updates the apartments data
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function userApartments($id) {
+        $apartments = Apartment::with(['apartment_type', 'services', 'visits', 'sponsorization_plans'])->where("user_id", $id)->orderByDesc('id')->get();
+
+        if ($apartments) {
+            return response()->json([
+                'success' => true,
+                'apartments' => $apartments,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
+    }
+
+    /**
      * Updates the apartments data and also retrieves services and apartment types
      * 
      * @return \Illuminate\Http\JsonResponse
