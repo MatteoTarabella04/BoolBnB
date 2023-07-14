@@ -20,12 +20,11 @@
 
                                 <hr>
 
-                                <input type="number" name="price" id="price" value="{{ $plan->price }}"
-                                    class="d-none">
+                                <input type="hidden" name="price" id="price" value="{{ $plan->price }}">
 
-                                <p>
-                                    {{ $plan->notes }}
-                                </p>
+                                <h4>
+                                    {{ $plan->duration }} ore
+                                </h4>
 
                                 <hr>
 

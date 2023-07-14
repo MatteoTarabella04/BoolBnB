@@ -1,4 +1,3 @@
-//TODO implementare validazione doppia delle regole HTML
 // RETRIEVE DOM ELEMENTS
 const formEl = document.getElementById("create_apartment_form");
 const imageValidationEl = document.getElementById("image");

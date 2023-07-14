@@ -50,6 +50,7 @@
                     </div>
                 </div>
 
+                <input type="hidden" value="{{ Auth::id() }}" id="userId">
                 <div class="col-sm-12 col-lg-6">
                     <div class="card card_bg_special mb-4">{{-- statistics card --}}
                         <div class="card-header text-center">

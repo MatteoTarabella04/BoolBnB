@@ -40,7 +40,6 @@ class MessageController extends Controller
         // COMMENTED TO AVOID MAIL SENDING
         // Mail::to(env("MAIL_TO_ADDRESS"))->send(new NewContact($new_message));
 
-        //TODO controllare che sia stata inviata correttamente
         // if() {
             return response()->json([
                 "success" => true,
