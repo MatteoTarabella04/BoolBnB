@@ -114,6 +114,7 @@
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     position: relative;
+    transition-duration: 0.4s;
 
     .drawing_pin {
         transform: scale(0.45);

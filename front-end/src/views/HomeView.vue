@@ -80,7 +80,7 @@ export default {
             <h1 class="text-center my-5">In primo piano</h1>
             <div class="d-flex flex-wrap justify-content-center">
                 <template v-for="apartment in store.apartments">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment"
+                    <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment card_hover"
                         v-if="store.checkIfSponsorized(apartment)">
                         <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                             class="text-decoration-none">
@@ -109,7 +109,7 @@ export default {
                     </div>
                 </template>
                 <template v-for="apartment in store.apartments">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment"
+                    <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment card_hover"
                         v-if="!store.checkIfSponsorized(apartment)">
                         <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                             class="text-decoration-none">

@@ -49,3 +49,17 @@ button:hover .icon svg {
 
     }
 }
+
+//CARD 
+
+.card_hover {
+    transition-duration: 0.4s;
+}
+
+.card_hover:hover {
+    transform: scale(1.01);
+
+    .post_card {
+        background-color: #f1e7c9 !important;
+    }
+}
