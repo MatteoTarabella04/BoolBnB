@@ -14,15 +14,19 @@ button:hover .icon svg {
     scale: 1,
 }
 
-// EFFECT
+// BORDER 
+
+.border_bottom_hover {
+    transition-duration: 0.4s;
+}
+
+.border_bottom_hover:hover {
+    // border-bottom: 1px solid;
+    color: black;
+}
 
 
-// .hover_button:hover {
-//     background-color: $bg-hippo;
-//     opacity: 80%;
-//     border-radius: 30px;
-//     transition-duration: 0.4s;
-// }
+//BUTTON
 
 .hover_button {
     background-color: $bg-hippo;
