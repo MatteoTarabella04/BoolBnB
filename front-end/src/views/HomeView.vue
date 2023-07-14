@@ -48,7 +48,7 @@ export default {
                         @input="store.inputAddress.length >= 3 ? store.getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
                         @keydown.enter="store.selectedLat != null && store.selectedLon != null ? getAllApartments(store.selectedResult) : ''"
                         class="form-control border_radius_30" type="text" id="address" name="address"
-                        placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
+                        placeholder="Digita qui" v-model="store.inputAddress">
                     <ul class="list-unstyled bg-white w-75 rounded-3 list-group" id="addressSuggestions">
                         <li class="cursor_pointer p-1 list-group-item list-group-item-action"
                             @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, store.searchError = false, control()"
@@ -59,11 +59,11 @@ export default {
                     <h6 v-if="store.searchError" class="text-danger">
                         Attenzione: selezionare un indirizzo dall'elenco a discesa che compare digitando
                     </h6>
-                    <div class="d-flex align-items-center justify-content-end  gap-3">
+                    <div class="d-flex align-items-center justify-content-end gap-3">
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? store.getAllApartments(this, store.selectedResult) : store.searchError = true"
-                            type="button" class="btn bg_purple border_radius_30 my-3 hover_button px-3 text-white">
-                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>Mostra
+                            type="button" class="btn bg_purple border_radius_30 my-3 hover_button px-3 text-white flex-grow-1 flex-md-grow-0" id="view_results">
+                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass"/></span>Mostra
                             risultati</button>
 
                     </div>
