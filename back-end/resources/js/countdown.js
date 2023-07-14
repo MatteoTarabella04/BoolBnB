@@ -15,7 +15,7 @@ function startCountdown(endDate) {
   }, 1000);
 }
 
-const latestExpiryDate = document.getElementById("latestExpiryDate").innerHTML;
+const latestExpiryDate = document.getElementById("latestExpiryDate").value;
 const remainingTimeEl = document.getElementById("remainingTime");
 if(latestExpiryDate != "") {
   const expiryFrom1970 = new Date(latestExpiryDate).getTime();

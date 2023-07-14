@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('javascript')
-    @vite(['resources/js/insertAddress.js'])
+    @vite(['resources/js/loadMap.js'])
     @vite(['resources/js/apartmentStatistics.js'])
     @vite(['resources/js/countdown.js'])
 @endsection
@@ -35,11 +35,12 @@
                     <h1 class="fw-bold">{{ $apartment->name }}</h1>
                     <h3 class="fw-bold">{{ $apartment->apartment_type->name }}</h3>
 
-                    <span id="latestExpiryDate" class="d-none">{{ $latestExpiryDate }}</span>
-                    @if ($hasSponsorization)
-                        <p class="sponsoritation_counter"> Manca alla termine della tua sponsorizzazione:
-                            <span id="remainingTime"></span>
-                        </p>
+
+                    <input type="hidden" name="latestExpiryDate" id="latestExpiryDate" value="{{ $latestExpiryDate }}" disabled>
+                    @if($hasSponsorization)
+                    <p class="sponsoritation_counter"> Manca alla termine della tua sponsorizzazione: 
+                        <span id="remainingTime"></span>
+                    </p>
                     @endif
 
                     <p><strong>Descrizione:</strong> {{ $apartment->description }}</p>
@@ -175,27 +176,16 @@
                 </div>
             </div>
 
-
-
-
+            <input type="hidden" name="slug" id="slug" value="{{ $apartment->slug }}" disabled>
 
             <div class="card card_bg_special my-4">{{-- statistics card --}}
                 <div class="card-header text-center">
-                    <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('VISITE MENSILI') }}</h2>
+                    <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('VISITE MENSILI ') . date("Y") }}</h2>
                 </div>
-                <div class="card-body">
-                    <canvas id="myChart" style="width:100%; max-width:700px; margin-inline: auto"></canvas>
+                <div class="card-body" style="width: 100%; max-width: 700px; margin-inline: auto">
+                    <canvas id="myChart"></canvas>
                 </div>
-                {{-- <div class="card-footer">
-                    footer
-                </div> --}}
             </div>
-
-
-
-
-
-
         </div>
     </div>
 @endsection
