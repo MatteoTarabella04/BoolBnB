@@ -59,7 +59,7 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($slug) {
-        $apartment = Apartment::with(['apartment_type', 'services'])->where("slug", $slug)->first();
+        $apartment = Apartment::with(['apartment_type', 'services', 'visits'])->where("slug", $slug)->first();
         if ($apartment) {
             return response()->json([
                 "success" => true,
