@@ -34,25 +34,25 @@ export default {
         }
     },
     mounted() {
-        if(!store.selectedResult) {
+        if (!store.selectedResult) {
             store.getAllApartments(this)
         }
         this.store.arrowKeysFunction();
         axios
-        .get(store.base_admin_URL + "api/apartments-types-services")
-        .then(response => {
-            store.services = response.data.services;
-            store.apartmentTypes = response.data.apartment_types;
-            nextTick(() => {
-                let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
-                loadedApartmentsEls.forEach(loadedApartmentsEl => {
-                    loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
-                })
-            });
-        })
-        .catch(error => {
-            console.error(error.message);
-        })
+            .get(store.base_admin_URL + "api/apartments-types-services")
+            .then(response => {
+                store.services = response.data.services;
+                store.apartmentTypes = response.data.apartment_types;
+                nextTick(() => {
+                    let loadedApartmentsEls = document.querySelectorAll(".sponsored_apartment");
+                    loadedApartmentsEls.forEach(loadedApartmentsEl => {
+                        loadedApartmentsEl.style.rotate = `${Math.random() * 10 - 5}deg`;
+                    })
+                });
+            })
+            .catch(error => {
+                console.error(error.message);
+            })
     }
 }
 </script>
@@ -67,7 +67,6 @@ export default {
                     <input
                         @input="store.inputAddress.length >= 3 ? store.getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false, control()"
                         class="form-control border_radius_30" type="text" id="address" name="address"
-
                         placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled position-absolute bg-white w-75 rounded-3 list-group" id="addressSuggestions">
                         <li class="cursor_pointer p-1 list-group-item list-group-item-action"
@@ -79,9 +78,9 @@ export default {
                     <h6 v-if="store.searchError" class="text-danger">
                         Attenzione: selezionare un indirizzo dall'elenco a discesa che appare dopo aver digitato.
                     </h6>
-                    <div class="d-flex align-items-center justify-content-end justify-content-sm-between">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-between">
                         <!-- Modal trigger button -->
-                        <div>
+                        <div class="d-flex align-items-center justify-content-center">
                             <button type="button" class="btn border_black my-3 border_radius_30 px-3" data-bs-toggle="modal"
                                 data-bs-target="#modalId"><span class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
                                         icon="fa-solid fa-filter" /></span><span class="d-sm-none"><font-awesome-icon
@@ -90,18 +89,33 @@ export default {
 
                             </button>
                             <button type="button" class="btn border_black my-3 ms-2 border_radius_30 px-3 "
-                                @click="resetTheSearch()"><span class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
-                                        icon="fa-solid fa-undo" /></span><span class="d-sm-none"><font-awesome-icon
-                                        icon="fa-solid fa-undo" /></span>
+                                @click="resetTheSearch()">
+                                <span class="icon d-none d-sm-inline me-sm-1">
+                                    <font-awesome-icon icon="fa-solid fa-undo" />
+                                </span>
+                                <span class="d-sm-none">
+                                    <font-awesome-icon icon="fa-solid fa-undo" />
+                                </span>
                                 <span class="d-none d-sm-inline">Azzera</span>
 
                             </button>
                         </div>
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? store.getAllApartments(this, store.selectedResult) : store.searchError = true"
-                            type="button" class="btn bg_purple hover_button text-white my-3 ms-2 border_radius_30 px-3">
-                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>Mostra
-                            risultati</button>
+                            type="button" class="btn bg_purple text-white my-3 ms-2 border_radius_30 px-3">
+                            <!-- <span class="icon">
+                                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            </span> -->
+                            <span class="icon d-none d-sm-inline me-sm-1">
+                                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            </span>
+                            <span class="d-sm-none">
+                                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            </span>
+                            <span class="d-none d-sm-inline">Mostra
+                                risultati</span>
+
+                        </button>
                     </div>
 
                 </div>
@@ -217,40 +231,42 @@ export default {
             <h1 v-if="store.selectedAddress" class="text-center my-5">Risultati ricerca</h1>
             <h1 v-else class="text-center my-5">In primo piano</h1>
 
-                <div class="d-flex flex-wrap justify-content-center">
-                    <template v-for="apartment in store.apartments">
-                        <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" v-if="store.checkIfSponsorized(apartment)">
-                            <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
+            <div class="d-flex flex-wrap justify-content-center">
+                <template v-for="apartment in store.apartments">
+                    <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment"
+                        v-if="store.checkIfSponsorized(apartment)">
+                        <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
                             class="text-decoration-none">
-                                <div class="post_card text-center mb-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
-                                        class="bi bi-bookmark-star-fill position-absolute top-0 start-0 ms-1 text-warning"
-                                        viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z" />
-                                    </svg>
-                                    <DrawingPin></DrawingPin>
-                                    <img :src="store.getImagePath(apartment.image)"
-                                        class="card-img-top moving_image pointer card_shadow h-100"
-                                        :alt="apartment.name + ' image'">
-                                    <div class="position-absolute text-white bg_purple border_radius_30 px-2 m-1"> {{
-                                        Math.floor(apartment.price_per_night).toLocaleString() + " €" }}</div>
-                                    <h2>{{ apartment.name }}</h2>
-                                    <p> {{ apartment.address }} </p>
-                                    <p v-if="store.selectedAddress" class="fs-5">{{ 'Distante ' +
-                                        Math.floor(apartment.distance_from_point * 100)
-                                        / 100 + " km" }}</p>
-                                    <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 247) + '...' :
-                                        apartment.description }}</p>
-                                </div>
-                            </router-link>
-                        </div>
-                    </template>
+                            <div class="post_card text-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+                                    class="bi bi-bookmark-star-fill position-absolute top-0 start-0 ms-1 text-warning"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z" />
+                                </svg>
+                                <DrawingPin></DrawingPin>
+                                <img :src="store.getImagePath(apartment.image)"
+                                    class="card-img-top moving_image pointer card_shadow h-100"
+                                    :alt="apartment.name + ' image'">
+                                <div class="position-absolute text-white bg_purple border_radius_30 px-2 m-1"> {{
+                                    Math.floor(apartment.price_per_night).toLocaleString() + " €" }}</div>
+                                <h2>{{ apartment.name }}</h2>
+                                <p> {{ apartment.address }} </p>
+                                <p v-if="store.selectedAddress" class="fs-5">{{ 'Distante ' +
+                                    Math.floor(apartment.distance_from_point * 100)
+                                    / 100 + " km" }}</p>
+                                <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 247) + '...' :
+                                    apartment.description }}</p>
+                            </div>
+                        </router-link>
+                    </div>
+                </template>
 
                 <template v-for="apartment in store.apartments">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment" v-if="!store.checkIfSponsorized(apartment)">
+                    <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment"
+                        v-if="!store.checkIfSponsorized(apartment)">
                         <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
-                        class="text-decoration-none">
+                            class="text-decoration-none">
                             <div class="post_card text-center mb-2">
                                 <!-- <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
                                     class="bi bi-bookmark-star-fill position-absolute top-0 end-0 me-2 text-warning"
