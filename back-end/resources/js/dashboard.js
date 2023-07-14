@@ -1,7 +1,5 @@
 import Chart from 'chart.js/auto';
 
-getVisits();
-
 const ctx = document.getElementById('myChart');
 const baseData = {
     labels: [],
@@ -12,7 +10,11 @@ const baseData = {
     }]
 };
 
-let results = []
+let results = [];
+
+getVisits();
+
+const myTimeout = setTimeout(cardOff, 2000);
 
 function getVisits() {
 
@@ -35,8 +37,6 @@ function getVisits() {
         console.error(error.message);
     })
 }
-
-const myTimeout = setTimeout(cardOff, 2000);
 
 function cardOff() {
     const cardEl = document.getElementById("card_off_interval");
