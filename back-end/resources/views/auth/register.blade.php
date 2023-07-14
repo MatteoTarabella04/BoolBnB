@@ -18,7 +18,7 @@
                         <div class="mb-4 row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
-                            //TODO rimettere tipo email
+                            {{--//TODO rimettere tipo email--}}
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" max="255">
 
