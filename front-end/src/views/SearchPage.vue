@@ -78,9 +78,9 @@ export default {
                     <h6 v-if="store.searchError" class="text-danger">
                         Attenzione: selezionare un indirizzo dall'elenco a discesa che appare dopo aver digitato.
                     </h6>
-                    <div class="d-flex align-items-center justify-content-end justify-content-sm-between">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-between">
                         <!-- Modal trigger button -->
-                        <div>
+                        <div class="d-flex align-items-center justify-content-center">
                             <button type="button" class="btn border_black my-3 border_radius_30 px-3" data-bs-toggle="modal"
                                 data-bs-target="#modalId"><span class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
                                         icon="fa-solid fa-filter" /></span><span class="d-sm-none"><font-awesome-icon
@@ -89,18 +89,33 @@ export default {
 
                             </button>
                             <button type="button" class="btn border_black my-3 ms-2 border_radius_30 px-3 "
-                                @click="resetTheSearch()"><span class="icon d-none d-sm-inline me-sm-1"><font-awesome-icon
-                                        icon="fa-solid fa-undo" /></span><span class="d-sm-none"><font-awesome-icon
-                                        icon="fa-solid fa-undo" /></span>
+                                @click="resetTheSearch()">
+                                <span class="icon d-none d-sm-inline me-sm-1">
+                                    <font-awesome-icon icon="fa-solid fa-undo" />
+                                </span>
+                                <span class="d-sm-none">
+                                    <font-awesome-icon icon="fa-solid fa-undo" />
+                                </span>
                                 <span class="d-none d-sm-inline">Azzera</span>
 
                             </button>
                         </div>
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? store.getAllApartments(this, store.selectedResult) : store.searchError = true"
-                            type="button" class="btn bg_purple hover_button text-white my-3 ms-2 border_radius_30 px-3">
-                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>Mostra
-                            risultati</button>
+                            type="button" class="btn bg_purple text-white my-3 ms-2 border_radius_30 px-3">
+                            <!-- <span class="icon">
+                                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            </span> -->
+                            <span class="icon d-none d-sm-inline me-sm-1">
+                                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            </span>
+                            <span class="d-sm-none">
+                                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            </span>
+                            <span class="d-none d-sm-inline">Mostra
+                                risultati</span>
+
+                        </button>
                     </div>
 
                 </div>
