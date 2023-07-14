@@ -44,6 +44,8 @@
 
 @section('content')
     <div class="container">
+        <div class="bg_double_show body_minus_header_block"></div>
+
         <div class="alert alert-danger d-none" role="alert" id="amount_error">
             <strong>Errore di pagamento</strong>
             Importo incongruente col prezzo della sponsorizzazione

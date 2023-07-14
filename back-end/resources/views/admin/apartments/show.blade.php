@@ -33,15 +33,16 @@
                 <div
                     class="mt-2 mt-md-0 col-12 col-md-6 col-lg-8 d-flex flex-column align-items-start justify-content-center">
                     <h1 class="fw-bold">{{ $apartment->name }}</h1>
-                    <h3 class="fw-bold">{{ $apartment->apartment_type->name }}</h3>
+                    <h3 class="fw-bold mb-3">{{ $apartment->apartment_type->name }}</h3>
 
 
-                    <input type="hidden" name="latestExpiryDate" id="latestExpiryDate" value="{{ $latestExpiryDate }}" disabled>
-                    @if($hasSponsorization)
-                    <p class="sponsoritation_counter"> Manca alla termine della tua sponsorizzazione: 
-                        <span id="remainingTime"></span>
-                    </p>
-                    @endif
+                    {{-- <input type="hidden" name="latestExpiryDate" id="latestExpiryDate" value="{{ $latestExpiryDate }}"
+                        disabled>
+                    @if ($hasSponsorization)
+                        <p class="sponsoritation_counter text-danger"> Countdown sponsorizzazione: <br>
+                            <span id="remainingTime" class="fw-bold"></span>
+                        </p>
+                    @endif --}}
 
                     <p><strong>Descrizione:</strong> {{ $apartment->description }}</p>
                     <p><strong>Prezzo per notte:</strong> {{ $apartment->price_per_night }}€</p>
@@ -68,9 +69,9 @@
                             ?>
                         </p>
                     @endif
-                    <div class="d-flex justify-content-start flex-wrap gap-2">
-                        <a class="btn btn-dark shadow" href="{{ route('admin.apartments.edit', $apartment) }}"> <span
-                                class="icon">
+                    <div class="d-flex justify-content-start flex-wrap gap-2 mt-3">
+                        <a class="btn border_black shadow" href="{{ route('admin.apartments.edit', $apartment) }}">
+                            <span class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-pencil-fill vertical_align_text_top" viewBox="0 0 16 16">
                                     <path
@@ -78,37 +79,10 @@
                                 </svg>
                             </span>
                             <span class="text_from_left">Modifica</span></a>
-                        <a class="btn btn-warning shadow" href="{{ route('admin.sponsor_plans', $apartment) }}"> <span
-                                class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-coin vertical_align_text_top" viewBox="0 0 16 16">
-                                    <path
-                                        d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z" />
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                    <path
-                                        d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
-                                </svg>
-                            </span>
-                            <span class="text_from_left">Sponsorizza</span></a>
 
-                        {{-- <form class="" action="{{ route('admin.apartments.destroy', $apartment) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger shadow" type="submit">
-                                <span class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-trash3-fill vertical_align_text_top"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                                    </svg>
-                                </span>
-                                <span class="text_from_left">Elimina</span>
-                            </button>
-                        </form> --}}
 
                         <!-- Modal trigger button -->
-                        <button type="button" class="btn btn-danger strong_shadow " data-bs-toggle="modal"
+                        <button type="button" class="btn btn-dark strong_shadow " data-bs-toggle="modal"
                             data-bs-target="#modalId-{{ $apartment->id }}">
                             <span class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -150,13 +124,36 @@
                 </div>
                 <div
                     class="image mt-4 mt-md-0 col-12 col-md-6 col-lg-4 ps-md-4 d-flex justify-content-center align-items-center flex-column ">
+                    <input type="hidden" name="latestExpiryDate" id="latestExpiryDate" value="{{ $latestExpiryDate }}"
+                        disabled>
+                    @if ($hasSponsorization)
+                        <p class="sponsoritation_counter text-center my-3"> Manca al termine della tua
+                            sponsorizzazione: <br>
+                            <span id="remainingTime" class="fw-bold fs-5 text-danger "></span>
+                        </p>
+                    @endif
+
+                    <a class="btn btn-warning shadow mb-3 w-100" href="{{ route('admin.sponsor_plans', $apartment) }}">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-coin vertical_align_text_top" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z" />
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path
+                                    d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+                            </svg>
+                        </span>
+                        <span class="text_from_left">Sponsorizza</span></a>
+
                     <div class="position-relative">
                         <img src="{{ asset('storage/' . $apartment->image) }}"
                             class="rounded-4 strong_shadow image_aspect_ratio" style="width: 100%; max-width:500px;"
                             alt="Immagine {{ $apartment->name }}">
                         @if ($hasSponsorization)
                             <div class="sponsorization_badge">
-                                <svg fill="#ffc107" xmlns="http://www.w3.org/2000/svg" width="10%" viewBox="0 0 576 512">
+                                <svg fill="#ffc107" xmlns="http://www.w3.org/2000/svg" width="10%"
+                                    viewBox="0 0 576 512">
                                     <path
                                         d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z" />
                                 </svg>
@@ -180,7 +177,7 @@
 
             <div class="card card_bg_special my-4">{{-- statistics card --}}
                 <div class="card-header text-center">
-                    <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('VISITE MENSILI ') . date("Y") }}</h2>
+                    <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('VISITE MENSILI ') . date('Y') }}</h2>
                 </div>
                 <div class="card-body" style="width: 100%; max-width: 700px; margin-inline: auto">
                     <canvas id="myChart"></canvas>

@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="container my-4">
+        <div class="bg_double_show body_minus_header_block"></div>
+
         <h1 class="mb-4">
             Seleziona il piano di sponsorizzazione adatto a te:
         </h1>

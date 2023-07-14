@@ -19,16 +19,16 @@
             <div class="info_container mt-4 d-flex justify-content-center flex-wrap">
                 <div
                     class="mt-2 mt-md-0 col-12 col-md-6 col-lg-8 d-flex flex-column align-items-start justify-content-center">
-                    <h1 class="fw-bold mb-0">Nome mittente:<p class="fw-medium mb-0 mt-2">{{ $message->full_name }}</p>
-                    </h1>
+                    <h2 class="fw-bold mb-0">Nome mittente:<p class="fw-medium mb-0 mt-2">{{ $message->full_name }}</p>
+                    </h2>
                     <hr class="w-100">
-                    <h3 class="fw-bold mb-0">Testo messaggio:<p class="fw-medium mb-0 mt-2">{{ $message->content }}</p>
-                    </h3>
+                    <h4 class="fw-bold mb-0">Testo messaggio:<p class="fw-medium mb-0 mt-2">{{ $message->content }}</p>
+                    </h4>
                     <hr class="w-100">
-                    <h3 class="fw-bold mb-0">E-mail mittente:<a href="mailto:{{ $message->sender_email }}"
-                            class="fw-medium d-block mb-0 mt-2" style="color: #c9b7b0">{{ $message->sender_email }}</a></h3>
+                    <h4 class="fw-bold mb-0">E-mail mittente:<a href="mailto:{{ $message->sender_email }}"
+                            class="fw-medium d-block mb-0 mt-2" style="color: #c9b7b0">{{ $message->sender_email }}</a></h4>
                     <hr class="w-100">
-                    <p class="fw-medium mb-3"><strong>Data messaggio:</strong><br>{{ $message->send_date }}</p>
+                    <h5 class="fw-medium mb-3"><strong>Data messaggio:</strong><br>{{ $message->send_date }}</h5>
                     <div class="d-flex justify-content-start flex-wrap">
                         <!-- Modal trigger button -->
                         <button type="button" class="btn btn-dark my-2 strong_shadow " data-bs-toggle="modal"
