@@ -1,5 +1,3 @@
-//TODO implementare validazione doppia delle regole HTML
-
 // RETRIEVE DOM ELEMENTS
 const form = document.getElementById("register_form");
 const emailEl = document.getElementById("email");
