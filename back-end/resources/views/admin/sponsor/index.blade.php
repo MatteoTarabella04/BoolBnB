@@ -83,7 +83,7 @@
                 </h3>
 
                 <h3>
-                    {{ $sponsorization_plan->duration }}h
+                    {{ $sponsorization_plan->duration }} ore
                 </h3>
 
                 <hr>
