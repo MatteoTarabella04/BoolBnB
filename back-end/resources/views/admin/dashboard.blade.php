@@ -123,9 +123,11 @@
                             </span>
                             <span class="text_from_left">Messaggi ricevuti</span>
                             
+                            @if(count($sortedUnreadMessages) > 0)
                             <span class="position-absolute text-dark top-0 start-100 translate-middle badge rounded-pill bg_special p-2">
                                 {{ count($sortedUnreadMessages) }}
                             <span class="visually-hidden">unread messages</span>
+                            @endif
                         </span>
                         </a>
                     </div>
