@@ -100,6 +100,7 @@ export default {
 
                             </button>
                         </div>
+                        
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? store.getAllApartments(this, store.selectedResult) : store.searchError = true"
                             type="button" class="btn bg_purple text-white my-3 ms-2 border_radius_30 px-3">
