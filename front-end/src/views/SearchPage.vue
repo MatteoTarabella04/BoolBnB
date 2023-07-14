@@ -60,7 +60,7 @@ export default {
 <template>
     <main class=" bg_primary overflow-hidden" @click.stop="store.results = []">
         <div class="d-flex p-4">
-            <div class="col-12 card p-4 strong_shadow rounded-4">
+            <div class="col-12 card p-4 strong_shadow rounded-4" style="z-index: 10; position: relative;">
                 <h4 class="fw-bold">Trova alloggi su BoolBnB</h4>
                 <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
                 <div>
@@ -69,7 +69,7 @@ export default {
                         class="form-control border_radius_30" type="text" id="address" name="address"
                         placeholder="Inizia a digitare un indirizzo per affinare la ricerca" v-model="store.inputAddress">
                     <ul class="list-unstyled position-absolute bg-white w-75 rounded-3 list-group" id="addressSuggestions">
-                        <li class="cursor_pointer p-1 list-group-item list-group-item-action"
+                        <li class="cursor_pointer p-1 list-group-item list-group-item-action z_index_1000"
                             @click="store.selectedResult = result, store.results = [], store.inputAddress = result.address.freeformAddress, store.searchError = false"
                             v-for="result in store.results">
                             {{ result.address.freeformAddress }}
@@ -117,7 +117,6 @@ export default {
 
                         </button>
                     </div>
-
                 </div>
             </div>
             <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
