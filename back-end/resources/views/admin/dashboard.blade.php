@@ -55,8 +55,8 @@
                             <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('LE TUE STATISTICHE') }}</h2>
 
                         </div>
-                        <div class="card-body">
-                            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                        <div class="card-body" style="width: 100%; max-width: 700px; margin-inline: auto">
+                            <canvas id="myChart"></canvas>
                         </div>
                         {{-- <div class="card-footer">
                             footer
