@@ -195,8 +195,8 @@ export default {
           </div>
           <hr>
           <p class="confortaa_font text-dark"> {{ apartment.description }}</p>
-          <hr>
-          <div class=" ">
+          <hr v-if="apartment.services.length > 0">
+          <div>
             <div v-if="apartment.services.length > 0">
               <h5 class=" mb-4 purple_text">
                 Servizi inclusi nel prezzo:
