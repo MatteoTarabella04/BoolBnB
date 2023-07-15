@@ -10,62 +10,6 @@
         <div class="bg_double_show body_minus_header_block"></div>
         <h1 class="fs-1 text-dark-emphasis my-4 text-center fw-bolder page_title">{{ __('Dashboard') }}</h1>
         <div class=" justify-content-center">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6 d-flex flex-wrap">
-                    <div id="card_off_interval" class="card card_bg_special w-100 mb-4">{{-- dashboard card --}}
-                        <div class="card-header text-center p-2">
-                            <h2 class="fw-bolder m-0 text-secondary">{{ __('LOGIN EFFETTUATO!') }}</h2>
-                        </div>
-                        <div class="card-body transition_duration_1 d-flex align-items-center justify-content-center p-2">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-                            <h3>{{ __('Bentornato ' . Auth::user()->first_name) }}</h3>
-
-                        </div>
-                    </div>
-                    <div class="card card_bg_special mb-4">{{-- operations card --}}
-                        <div class="card-header text-center text-uppercase p-2">
-                            <h2 class="fw-bolder m-0 text-secondary">{{ __('Operazioni') }}</h2>
-                        </div>
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <p class="operations_description">
-                                {{ __('Mantieni aggiornata la tua dashboard, accedi alla pagina dei tuoi annunci, aggiungine di nuovi o elimina quelli obsoleti!') }}
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row d-flex justify-content-around">
-
-
-                                <a class="col-5 btn btn-dark text-uppercase d-flex justify-content-center align-items-center"
-                                    href="{{ route('admin.apartments.index') }}" role="button">{{ __('Vedi annunci') }}</a>
-
-                                <a class="col-5 btn btn-dark text-uppercase d-flex justify-content-center align-items-center"
-                                    href="{{ route('admin.apartments.create') }}"
-                                    role="button">{{ __('Inserisci annuncio') }}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <input type="hidden" value="{{ Auth::id() }}" id="userId">
-                <div class="col-sm-12 col-lg-6">
-                    <div class="card card_bg_special mb-4">{{-- statistics card --}}
-                        <div class="card-header text-center">
-                            <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('LE TUE STATISTICHE') }}</h2>
-
-                        </div>
-                        <div class="card-body" style="width: 100%; max-width: 700px; margin-inline: auto">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                        {{-- <div class="card-footer">
-                            footer
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
             <div id="latest_messages">
                 <div class="card card_bg_special w-100 mb-4">
                     <div class="card-header text-center p-3">
@@ -154,6 +98,64 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6 d-flex flex-wrap">
+                    <div id="card_off_interval" class="card card_bg_special w-100 mb-4">{{-- dashboard card --}}
+                        <div class="card-header text-center p-2">
+                            <h2 class="fw-bolder m-0 text-secondary">{{ __('LOGIN EFFETTUATO!') }}</h2>
+                        </div>
+                        <div class="card-body transition_duration_1 d-flex align-items-center justify-content-center p-2">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            <h3>{{ __('Bentornato ' . Auth::user()->first_name) }}</h3>
+
+                        </div>
+                    </div>
+                    <div class="card card_bg_special mb-4">{{-- operations card --}}
+                        <div class="card-header text-center text-uppercase p-2">
+                            <h2 class="fw-bolder m-0 text-secondary">{{ __('Operazioni') }}</h2>
+                        </div>
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            <p class="operations_description">
+                                {{ __('Mantieni aggiornata la tua dashboard, accedi alla pagina dei tuoi annunci, aggiungine di nuovi o elimina quelli obsoleti!') }}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row d-flex justify-content-around">
+
+
+                                <a class="col-5 btn btn-dark text-uppercase d-flex justify-content-center align-items-center"
+                                    href="{{ route('admin.apartments.index') }}"
+                                    role="button">{{ __('Vedi annunci') }}</a>
+
+                                <a class="col-5 btn btn-dark text-uppercase d-flex justify-content-center align-items-center"
+                                    href="{{ route('admin.apartments.create') }}"
+                                    role="button">{{ __('Inserisci annuncio') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" value="{{ Auth::id() }}" id="userId">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="card card_bg_special mb-4">{{-- statistics card --}}
+                        <div class="card-header text-center">
+                            <h2 class="fw-bolder m-0 text-secondary text-uppercase">{{ __('LE TUE STATISTICHE') }}</h2>
+
+                        </div>
+                        <div class="card-body" style="width: 100%; max-width: 700px; margin-inline: auto">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        {{-- <div class="card-footer">
+                            footer
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

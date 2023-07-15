@@ -15,7 +15,8 @@
                 {{ __('Messaggi ricevuti') }}</h1>
             <div class="row">
                 @forelse($messages as $message)
-                    <div class="col-12 d-flex align-items-center flex-wrap rounded-1 m-1">
+                    <div
+                        class="col-12 d-flex align-items-center flex-wrap rounded-1 p-1 @if (!$message->seen) overlay_messagge @endif">
                         <div class="col-12 col-sm-6 col-md-8 p-3 d-flex gap-4 align-items-start align-items-md-center">
                             <span class="text-dark">
                                 @if ($message->seen)
