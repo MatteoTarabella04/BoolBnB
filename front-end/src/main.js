@@ -13,9 +13,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faUndo, faEnvelope, faBed, faMask, faUser, faFilter, faMagnifyingGlass, faPersonSkiing, faBell, faDog, faFan, faPanorama, faFire, faRotateLeft, faMugSaucer, faKitchenSet, faBabyCarriage, faSmoking, faSeedling, faHouse, faHotTubPerson, faWheelchair, faDumbbell, faSquareParking, faWaterLadder, faCarOn, faSmog, faDumpsterFire, faLaptop, faShirt, faTv, faWater, faWifi, faToilet } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faUndo, faEnvelope, faBed, faMask, faUser, faFilter, faMagnifyingGlass, faPersonSkiing, faBell, faDog, faFan, faPanorama, faFire, faRotateLeft, faMugSaucer, faKitchenSet, faBabyCarriage, faSmoking, faSeedling, faHouse, faHotTubPerson, faWheelchair, faDumbbell, faSquareParking, faWaterLadder, faCarOn, faSmog, faDumpsterFire, faLaptop, faShirt, faTv, faWater, faWifi, faToilet, faBars } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faUserSecret, faUndo, faEnvelope, faBed, faMask, faUser, faFilter, faMagnifyingGlass, faPersonSkiing, faBell, faDog, faFan, faPanorama, faFire, faRotateLeft, faMugSaucer, faKitchenSet, faBabyCarriage, faSmoking, faSeedling, faHouse, faHotTubPerson, faWheelchair, faDumbbell, faSquareParking, faWaterLadder, faCarOn, faSmog, faDumpsterFire, faLaptop, faShirt, faTv, faWater, faWifi, faToilet)
+library.add(faUserSecret, faUndo, faEnvelope, faBed, faMask, faUser, faFilter, faMagnifyingGlass, faPersonSkiing, faBell, faDog, faFan, faPanorama, faFire, faRotateLeft, faMugSaucer, faKitchenSet, faBabyCarriage, faSmoking, faSeedling, faHouse, faHotTubPerson, faWheelchair, faDumbbell, faSquareParking, faWaterLadder, faCarOn, faSmog, faDumpsterFire, faLaptop, faShirt, faTv, faWater, faWifi, faToilet, faBars)
 
 createApp(App).use(router).component('font-awesome-icon', FontAwesomeIcon).mount('#app')

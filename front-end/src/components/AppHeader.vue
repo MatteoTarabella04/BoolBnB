@@ -26,7 +26,7 @@ export default {
                     data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
 
-                    <font-awesome-icon icon="fa-solid fa-user" />
+                    <font-awesome-icon icon="fa-solid fa-bars" size="lg" />
 
                     <!-- <span class="navbar-toggler-icon"></span> -->
                 </button>
