@@ -60,6 +60,16 @@
     ;
 }
 
+// .bg_double_show {
+//     position: fixed;
+//     top: 58px;
+//     left: 0;
+//     width: 100%;
+//     z-index: -1;
+//     background: rgb(243, 243, 243);
+//     background: linear-gradient(315deg, rgba(243, 243, 243, 1) 80%, rgba(243, 243, 243, 1) 81%, #e9d7d0 81%);
+//     height: 100%;
+// }
 
 //UTILITIES 
 
@@ -113,4 +123,8 @@
 .box_shadow {
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.2);
 
+}
+
+.logo_font {
+    font-family: 'Homemade Apple', cursive !important;
 }

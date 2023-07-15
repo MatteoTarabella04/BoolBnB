@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from './views/HomeView.vue';
 import SearchPage from './views/SearchPage.vue';
 import SingleApartment from "./views/SingleApartment.vue";
+import infoPrivacy from './views/infoPrivacy.vue';
+import infoContatti from './views/infoContatti.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +22,16 @@ const router = createRouter({
             'path': '/apartment/:slug',
             'name': 'singleApartment',
             'component': SingleApartment
+        },
+        {
+            'path': '/info-contatatti',
+            'name': 'infoContatti',
+            'component': infoContatti
+        },
+        {
+            'path': '/privacy',
+            'name': 'infoPrivacy',
+            'component': infoPrivacy
         },
     ],
     scrollBehavior() {

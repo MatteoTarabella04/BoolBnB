@@ -126,15 +126,15 @@
 .post_card>img {
     width: 100%;
     height: auto;
-    aspect-ratio: 600/300;
+    aspect-ratio: 600/400;
     object-fit: cover;
 }
 
 .post_card>h2 {
     margin-top: 1rem;
     font-family: "Kalam", cursive;
-    font-weight: normal;
-    font-size: 2rem;
+    font-weight: bold;
+    font-size: 1.6rem;
     color: $bg-hippo;
     // text-align: center;
 }

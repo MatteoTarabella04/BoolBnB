@@ -42,7 +42,7 @@ export default {
 
             <div class="col-8 col-md-6 card p-4 ms-5 ms-sm-0 position-absolute start-0 strong_shadow rounded-4 z_index_998">
                 <h4 class="fw-bold">Trova alloggi su BoolBnB</h4>
-                <p>Inserisci una città o un indirizzo ed inizia la tua ricerca</p>
+                <p>Inserisci una città o un indirizzo</p>
                 <div>
                     <input
                         @input="store.inputAddress.length >= 3 ? store.getRealtimeResults() : store.results = [], store.selectedResult = '', store.searchError = false"
@@ -62,8 +62,10 @@ export default {
                     <div class="d-flex align-items-center justify-content-end gap-3">
                         <button
                             @click="store.selectedResult != '' && store.selectedResult.address.freeformAddress == store.inputAddress ? store.getAllApartments(this, store.selectedResult) : store.searchError = true"
-                            type="button" class="btn bg_purple border_radius_30 my-3 hover_button px-3 text-white flex-grow-1 flex-md-grow-0" id="view_results">
-                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass"/></span>Mostra
+                            type="button"
+                            class="btn bg_purple border_radius_30 my-3 hover_button px-3 text-white flex-grow-1 flex-md-grow-0"
+                            id="view_results">
+                            <span class="icon"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></span>Mostra
                             risultati</button>
 
                     </div>
@@ -122,7 +124,7 @@ export default {
                                     Math.floor(apartment.price_per_night).toLocaleString() + " €" }}</div>
                                 <h2>{{ apartment.name }}</h2>
                                 <p> {{ apartment.address }}</p>
-                                <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 247) +
+                                <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 200) +
                                     '...' :
                                     apartment.description }}</p>
                             </div>

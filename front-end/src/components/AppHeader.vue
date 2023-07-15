@@ -15,9 +15,11 @@ export default {
     <header class="position-sticky top-0 z_index_1000 bg_primary shadow" @click.stop="store.results = []">
         <nav class="navbar navbar-expand-md navbar-light">
             <div class="container ">
+                <!-- <div class="bg_double_show body_minus_header_block"></div> -->
 
                 <router-link :to="{ name: 'home' }" class="text-decoration-none fw-bold fs-2 text-dark">
                     <img class="logo" src="../assets/logo/provaconexpand-01.svg" alt="">
+                    <!-- <h2 class="align-middle logo_font">BoolBnB</h2> -->
                 </router-link>
 
                 <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse"

@@ -16,17 +16,21 @@ export default {
             class="container d-flex justify-content-between align-items-center flex-column flex-md-row h-100 gap-3 gap-md-0 p-3">
 
 
-
-            <div class="cursor_pointer border_bottom_hover text-center text-md-start" style="width: 121px;">Privacy</div>
+            <router-link :to="{ name: 'infoPrivacy' }" class="text-decoration-none">
+                <div class="cursor_pointer border_bottom_hover text-center text-md-start " style="width: 121px;">
+                    Privacy
+                </div>
+            </router-link>
 
             <div class="Copyright text-center fw-bold text-dark order-1 order-md-0">
-                Copyright © 2023 BoolBnB.com™.
+                Copyright © 2023 BoolBnB.com™
 
             </div>
-            <div class="info cursor_pointer border_bottom_hover">
-
-                Info & Contatti
-            </div>
+            <router-link :to="{ name: 'infoContatti' }" class="text-decoration-none">
+                <div class="cursor_pointer border_bottom_hover text-center text-md-start ">
+                    info & Contatti
+                </div>
+            </router-link>
         </div>
     </footer>
 </template>
