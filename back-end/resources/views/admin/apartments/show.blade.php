@@ -66,7 +66,7 @@
                     </p>
 
                     @if ($apartment->services->isNotEmpty())
-                        <h5 class="fw-bold">Services</h5>
+                        <h5 class="fw-bold">Servizi</h5>
                         <p>
                             <?php
                             for ($i = 0; $i < count($apartment->services); $i++) {
