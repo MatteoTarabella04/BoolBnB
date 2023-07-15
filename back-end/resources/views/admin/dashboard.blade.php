@@ -102,15 +102,21 @@
                 <div class="col-sm-12 col-lg-6 d-flex flex-wrap">
                     <div id="card_off_interval" class="card card_bg_special w-100 mb-4">{{-- dashboard card --}}
                         <div class="card-header text-center p-2">
-                            <h2 class="fw-bolder m-0 text-secondary">{{ __('LOGIN EFFETTUATO!') }}</h2>
+                            <h2 class="fw-bolder m-0 text-secondary">{{ __('DATI UTENTE') }}</h2>
                         </div>
-                        <div class="card-body transition_duration_1 d-flex align-items-center justify-content-center p-2">
+                        <div
+                            class="card-body transition_duration_1 d-flex flex-column align-items-center justify-content-center p-2">
                             @if (session('status'))
                                 <div class="alert alert-success" role="alert">
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <h3>{{ __('Bentornato ' . Auth::user()->first_name) }}</h3>
+                            <h3>{{ __(Auth::user()->first_name . ' ' . Auth::user()->last_name) }}</h3>
+                            <h4 class="mb-5">{{ __(Auth::user()->email) }}</h4>
+                            <h4><span class="">{{ __(count($userApartments)) }}</span>
+                                Annunci
+                                attivi
+                            </h4>
 
                         </div>
                     </div>

@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $messages = [];
         foreach ($userApartments as $apartment) {
             $apartmentMessages = $apartment->messages()->get();
-            if($apartmentMessages) {
+            if ($apartmentMessages) {
                 foreach ($apartmentMessages as $singleApartmentMessage) {
                     array_push($messages, $singleApartmentMessage);
                 }
@@ -26,15 +26,16 @@ class DashboardController extends Controller
         $sortedUnreadMessages = [];
 
         foreach ($messages as $singleMessage) {
-            if($singleMessage->seen == 0) {
+            if ($singleMessage->seen == 0) {
                 array_push($sortedUnreadMessages, $singleMessage);
             }
         }
 
-        return view('admin.dashboard', compact("sortedUnreadMessages"));
+        return view('admin.dashboard', compact("sortedUnreadMessages", "userApartments"));
     }
 
-    public function sortByDescDate($messageA, $messageB) {
+    public function sortByDescDate($messageA, $messageB)
+    {
         if ($messageA->send_date == $messageB->send_date) {
             return 0;
         }
