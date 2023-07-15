@@ -6,7 +6,9 @@ export default {
     name: "HomeView",
     data() {
         return {
-            store
+            store,
+            firstApartmentOnPage: 0,
+            itemsPerPage: 12,
         }
     },
     components: {
@@ -21,6 +23,38 @@ export default {
             console.log(store.selectedLat);
             console.log(store.selectedLon);
             console.log(store.searchError);
+        },
+        prevClick() {
+            const apartmentsListEl = document.getElementById("apartments-list");
+            const offset = apartmentsListEl.getBoundingClientRect().top + window.scrollY - 100;
+            
+            if(this.firstApartmentOnPage < this.itemsPerPage) {
+                window.scrollTo({
+                    top: offset
+                });
+                this.firstApartmentOnPage = 0;
+            } else {
+                window.scrollTo({
+                    top: offset
+                });
+                this.firstApartmentOnPage -= this.itemsPerPage;
+            }
+        },
+        nextClick() {
+            const apartmentsListEl = document.getElementById("apartments-list");
+            const offset = apartmentsListEl.getBoundingClientRect().top + window.scrollY - 100;
+
+            if(this.firstApartmentOnPage > store.apartments.length - (this.itemsPerPage * 2)) {
+                window.scrollTo({
+                    top: offset
+                });
+                this.firstApartmentOnPage = store.apartments.length - this.itemsPerPage;
+            } else {
+                window.scrollTo({
+                    top: offset
+                });
+                this.firstApartmentOnPage += this.itemsPerPage;
+            }
         },
     },
     mounted() {
@@ -77,14 +111,14 @@ export default {
 
         </div>
 
-        <div v-if="store.apartments.length > 0" class="container">
+        <div v-if="store.apartments.length > 0" class="container" id="apartments-list">
 
             <h1 class="text-center my-5">In primo piano</h1>
             <div class="d-flex flex-wrap justify-content-center">
-                <template v-for="apartment in store.apartments">
+                <template v-for="n in store.apartments.length < itemsPerPage ? store.apartments.length : itemsPerPage">
                     <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment card_hover"
-                        v-if="store.checkIfSponsorized(apartment)">
-                        <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
+                        v-if="store.checkIfSponsorized(store.apartments[n + firstApartmentOnPage - 1])">
+                        <router-link :to="{ name: 'singleApartment', params: { slug: store.apartments[n + firstApartmentOnPage - 1].slug } }"
                             class="text-decoration-none">
                             <div class="post_card text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
@@ -94,44 +128,94 @@ export default {
                                         d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z" />
                                 </svg>
                                 <DrawingPin></DrawingPin>
-                                <img :src="store.getImagePath(apartment.image)"
+                                <img :src="store.getImagePath(store.apartments[n + firstApartmentOnPage - 1].image)"
                                     class="card-img-top moving_image pointer card_shadow h-100"
-                                    :alt="apartment.name + ' image'">
+                                    :alt="store.apartments[n + firstApartmentOnPage - 1].name + ' image'">
                                 <div class="position-absolute text-white bg_purple border_radius_30 px-2 m-1"> {{
-                                    Math.floor(apartment.price_per_night).toLocaleString() + " €" }}
+                                    Math.floor(store.apartments[n + firstApartmentOnPage - 1].price_per_night).toLocaleString() + " €" }}
                                 </div>
-                                <h2>{{ apartment.name }}</h2>
-                                <p> {{ apartment.address }}</p>
-                                <p> {{ apartment.description.length > 200 ?
-                                    apartment.description.slice(0, 247) +
+                                <h2>{{ store.apartments[n + firstApartmentOnPage - 1].name }}</h2>
+                                <p> {{ store.apartments[n + firstApartmentOnPage - 1].address }}</p>
+                                <p> {{ store.apartments[n + firstApartmentOnPage - 1].description.length > 200 ?
+                                    store.apartments[n + firstApartmentOnPage - 1].description.slice(0, 247) +
                                     '...' :
-                                    apartment.description }}</p>
+                                    store.apartments[n + firstApartmentOnPage - 1].description }}</p>
                             </div>
                         </router-link>
                     </div>
                 </template>
-                <template v-for="apartment in store.apartments">
+                <template v-for="n in store.apartments.length < itemsPerPage ? store.apartments.length : itemsPerPage">
                     <div class="col-12 col-sm-6 col-lg-4 col-xxl-3 sponsored_apartment card_hover"
-                        v-if="!store.checkIfSponsorized(apartment)">
-                        <router-link :to="{ name: 'singleApartment', params: { slug: apartment.slug } }"
+                        v-if="!store.checkIfSponsorized(store.apartments[n + firstApartmentOnPage - 1])">
+                        <router-link :to="{ name: 'singleApartment', params: { slug: store.apartments[n + firstApartmentOnPage - 1].slug } }"
                             class="text-decoration-none">
                             <div class="post_card text-center">
                                 <DrawingPin></DrawingPin>
-                                <img :src="store.getImagePath(apartment.image)"
+                                <img :src="store.getImagePath(store.apartments[n + firstApartmentOnPage - 1].image)"
                                     class="card-img-top moving_image pointer card_shadow h-100"
-                                    :alt="apartment.name + ' image'">
+                                    :alt="store.apartments[n + firstApartmentOnPage - 1].name + ' image'">
                                 <div class="position-absolute text-white bg_purple border_radius_30 px-2 m-1"> {{
-                                    Math.floor(apartment.price_per_night).toLocaleString() + " €" }}</div>
-                                <h2>{{ apartment.name }}</h2>
-                                <p> {{ apartment.address }}</p>
-                                <p> {{ apartment.description.length > 200 ? apartment.description.slice(0, 200) +
+                                    Math.floor(store.apartments[n + firstApartmentOnPage - 1].price_per_night).toLocaleString() + " €" }}</div>
+                                <h2>{{ store.apartments[n + firstApartmentOnPage - 1].name }}</h2>
+                                <p> {{ store.apartments[n + firstApartmentOnPage - 1].address }}</p>
+                                <p> {{ store.apartments[n + firstApartmentOnPage - 1].description.length > 200 ? store.apartments[n + firstApartmentOnPage - 1].description.slice(0, 200) +
                                     '...' :
-                                    apartment.description }}</p>
+                                    store.apartments[n + firstApartmentOnPage - 1].description }}</p>
                             </div>
                         </router-link>
                     </div>
                 </template>
             </div>
+
+            <div v-if="store.apartments.length > itemsPerPage" class="d-flex justify-content-between flex-fill d-sm-none my-4">
+                <ul class="pagination">
+                    <li v-if="firstApartmentOnPage == 0" class="page-item disabled" aria-disabled="true">
+                        <span class="page-link text_purple fw-bolder">&lsaquo;&lsaquo;</span>
+                    </li>
+                    <li v-else class="page-item">
+                        <a class="page-link text_purple fw-bolder" @click.prevent="prevClick()" rel="prev">&lsaquo;&lsaquo;</a>
+                    </li>
+
+                    <li v-if="firstApartmentOnPage < store.apartments.length - itemsPerPage" class="page-item">
+                        <a class="page-link text_purple fw-bolder" @click.prevent="nextClick()" rel="next">&rsaquo;&rsaquo;</a>
+                    </li>
+                    <li v-else class="page-item disabled" aria-disabled="true">
+                        <span class="page-link text_purple fw-bolder">&rsaquo;&rsaquo;</span>
+                    </li>
+                </ul>
+            </div>
+            <div v-if="store.apartments.length > itemsPerPage" class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between my-4">
+                <div>
+                    <p class="small text-muted">
+                        Mostrando
+                        <span class="fw-semibold">{{ firstApartmentOnPage + 1 }}</span>
+                        a
+                        <span class="fw-semibold">{{ firstApartmentOnPage + itemsPerPage }}</span>
+                        di
+                        <span class="fw-semibold">{{ store.apartments.length }}</span>
+                        strutture
+                    </p>
+                </div>
+
+                <div>
+                    <ul class="pagination">
+                        <li v-if="firstApartmentOnPage == 0" class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                            <span class="page-link text_purple fw-bolder cursor_pointer" aria-hidden="true">&lsaquo;&lsaquo;</span>
+                        </li>
+                        <li v-else class="page-item" @click.prevent="prevClick()">
+                            <a class="page-link cursor_pointer text_purple fw-bolder" rel="prev" aria-label="prev">&lsaquo;&lsaquo;</a>
+                        </li>
+
+                        <li v-if="firstApartmentOnPage < store.apartments.length - itemsPerPage" class="page-item">
+                            <a class="page-link cursor_pointer text_purple fw-bolder" @click.prevent="nextClick()" rel="next" aria-label="next">&rsaquo;&rsaquo;</a>
+                        </li>
+                        <li v-else class="page-item disabled" aria-disabled="true" aria-label="next">
+                            <span class="page-link text_purple fw-bolder cursor_pointer" aria-hidden="true">&rsaquo;&rsaquo;</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </main>
 </template>
