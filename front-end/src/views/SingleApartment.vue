@@ -202,7 +202,7 @@ export default {
                 Servizi inclusi nel prezzo:
               </h5>
               <div class=" d-flex flex-wrap">
-                <div class="mb-2 me-3" v-for=" service  in  apartment.services ">
+                <div class="mb-2 me-3 border_black px-3 py-1 border_radius_30" v-for=" service  in  apartment.services ">
                   <font-awesome-icon :icon="service.icon" />
                   {{ service.name }}
                 </div>
