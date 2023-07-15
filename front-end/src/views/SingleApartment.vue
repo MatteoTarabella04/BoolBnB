@@ -1,13 +1,11 @@
 <script>
-import axios from "axios";
 import { nextTick } from "vue";
+import axios from "axios";
 import tt from "@tomtom-international/web-sdk-maps";
 import DrawingPin from '../components/DrawingPin.vue';
-
-
-
 /* import { showMap } from "../js/map.js"; */
 export default {
+  name: "SingleApartment",
   data() {
     return {
       apartment: null,
