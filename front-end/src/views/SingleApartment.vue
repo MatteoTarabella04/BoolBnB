@@ -27,7 +27,7 @@ export default {
   methods: {
     sendMail() {
       this.messageError = false;
-      if(this.fullName == "" || this.senderEmail == "" || this.content == "") {
+      if (this.fullName == "" || this.senderEmail == "" || this.content == "") {
         this.messageError = true;
         console.log(this.messageError);
         return;
@@ -40,13 +40,13 @@ export default {
       }
 
       const existingSuccessMessageEl = document.getElementById("success_message");
-      if(existingSuccessMessageEl) {
+      if (existingSuccessMessageEl) {
         existingSuccessMessageEl.remove();
       }
 
       const formEl = document.querySelector("form");
       formEl.insertAdjacentHTML("beforebegin",
-      `<div class="alert bg_purple text-white alert-dismissible fade show d-none" role="alert" id="success_message">
+        `<div class="alert bg_purple text-white alert-dismissible fade show d-none" role="alert" id="success_message">
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
         <strong>Messaggio inviato correttamente</strong>
       </div>`);
@@ -162,9 +162,8 @@ export default {
           <h5 class="purple_text">{{ apartment.apartment_type.name }}</h5>
           <div class="fs-6"> {{ apartment.address }}</div>
           <hr>
-          <div>
-
-            <div class="tooltip-wrapper me-3">
+          <div class="text-center text-sm-start">
+            <div class="tooltip-wrapper me-3 ">
               <span class="mb-2 me-2 tooltip-trigger">
                 {{ apartment.rooms }}
                 <span class="ms-1 fs-6"><font-awesome-icon icon="fa-solid fa-house" /></span>
@@ -203,12 +202,17 @@ export default {
                 Servizi inclusi nel prezzo:
               </h5>
               <div class=" d-flex flex-wrap">
-                <div class="mb-2 me-3" v-for="service in apartment.services">
+                <div class="mb-2 me-3" v-for=" service  in  apartment.services ">
                   <font-awesome-icon :icon="service.icon" />
                   {{ service.name }}
                 </div>
               </div>
             </div>
+          </div>
+          <hr>
+          <div class="text-center fw-bold" :class="apartment.visible ? 'text-dark' : 'text-danger'
+            ">{{ apartment.visible ? 'Disponibile &#x2713;' : 'Non Disponibile &#x2717;'
+  }}
           </div>
         </div>
 
@@ -231,11 +235,12 @@ export default {
             <div class="card-body  ">
               <h3 class="text-center mb-3">Contatta l'host</h3>
               <!-- <div class="font_size_10 text-center">Verrai ricontattato il prima possibile</div> -->
-              <div v-if="this.messageError" class="alert alert-danger alert-dismissible fade show" role="alert" id="success_message">
+              <div v-if="this.messageError" class="alert alert-danger alert-dismissible fade show" role="alert"
+                id="success_message">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <strong>Tutti i campi devono essere compilati</strong>
               </div>
-              
+
               <form>
                 <div class="mb-3">
                   <label for="full_name" class="form-label">Nome e Cognome:</label>
@@ -249,7 +254,8 @@ export default {
                 </div>
                 <div class="mb-3">
                   <label for="content" class="form-label">Scrivi un messaggio:</label>
-                  <textarea class="form-control" id="content" name="content" v-model="content" rows="3" required></textarea>
+                  <textarea class="form-control" id="content" name="content" v-model="content" rows="3"
+                    required></textarea>
                 </div>
                 <button @click.prevent="sendMail()" type="submit"
                   class="btn bg_purple text-white border_radius_30 w-100"><span class="icon"><font-awesome-icon

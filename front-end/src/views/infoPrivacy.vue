@@ -10,7 +10,7 @@ export default {
 <template>
     <div class="container d-flex align-items-center">
         <div class="posts_container d-flex flex-wrap mb-3">
-            <div class="privacy-section">
+            <div class="privacy-section mt-4">
 
                 <h1>Norme sulla privacy per il sito di prenotazioni di alloggi</h1>
                 <br>

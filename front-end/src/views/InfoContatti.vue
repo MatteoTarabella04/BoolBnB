@@ -8,7 +8,7 @@ export default {
 }
 </script>
 <template>
-    <div class="container d-flex align-items-center">
+    <div class="container d-flex align-items-center mt-4">
         <div class="posts_container d-flex flex-wrap mb-3">
             <div class="company-section">
                 <h2>Dati Aziendali</h2>
