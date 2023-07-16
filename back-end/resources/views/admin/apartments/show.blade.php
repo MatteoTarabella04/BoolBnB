@@ -11,6 +11,12 @@
         <div class="bg_double_show body_minus_header_block"></div>
 
         <div class="container py-5 px-2 rounded-4">
+            @if (session('message'))
+                <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                    <strong>{{ session('message') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             {{-- messaggio effettuata sponsorizzazione --}}
             @if (session('success_message'))
                 <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
@@ -60,7 +66,7 @@
                     </p>
 
                     @if ($apartment->services->isNotEmpty())
-                        <h5 class="fw-bold">Services</h5>
+                        <h5 class="fw-bold">Servizi</h5>
                         <p>
                             <?php
                             for ($i = 0; $i < count($apartment->services); $i++) {

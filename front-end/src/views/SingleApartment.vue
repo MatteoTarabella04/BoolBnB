@@ -1,13 +1,11 @@
 <script>
-import axios from "axios";
 import { nextTick } from "vue";
+import axios from "axios";
 import tt from "@tomtom-international/web-sdk-maps";
 import DrawingPin from '../components/DrawingPin.vue';
-
-
-
 /* import { showMap } from "../js/map.js"; */
 export default {
+  name: "SingleApartment",
   data() {
     return {
       apartment: null,
@@ -195,8 +193,8 @@ export default {
           </div>
           <hr>
           <p class="confortaa_font text-dark"> {{ apartment.description }}</p>
-          <hr>
-          <div class=" ">
+          <hr v-if="apartment.services.length > 0">
+          <div>
             <div v-if="apartment.services.length > 0">
               <h5 class=" mb-4 purple_text">
                 Servizi inclusi nel prezzo:

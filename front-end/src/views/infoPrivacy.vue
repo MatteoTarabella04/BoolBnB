@@ -1,10 +1,6 @@
 <script>
 export default {
-    setup() {
-
-
-        return {}
-    }
+    name: "infoPrivacy",
 }
 </script>
 <template>
@@ -66,11 +62,9 @@ export default {
                 <p>In conclusione, il nostro sito si impegna a garantire la massima riservatezza e sicurezza delle
                     informazioni personali degli utenti, al fine di offrire un'esperienza di prenotazione di alloggi
                     affidabile e soddisfacente.</p>
-
             </div>
         </div>
     </div>
 </template>
-
 
 <style lang="scss" scoped></style>

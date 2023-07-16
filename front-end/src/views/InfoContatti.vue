@@ -1,10 +1,6 @@
 <script>
 export default {
-    setup() {
-
-
-        return {}
-    }
+    name: "InfoContatti",
 }
 </script>
 <template>
@@ -26,6 +22,5 @@ export default {
         </div>
     </div>
 </template>
-
 
 <style lang="scss" scoped></style>

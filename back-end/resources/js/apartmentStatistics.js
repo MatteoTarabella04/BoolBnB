@@ -19,6 +19,8 @@ const baseData = {
     datasets: [{
         label: 'Numero di visite mensili',
         data: [],
+        backgroundColor: '#f1bdaaa0',
+        borderColor: '#ff895d',
         borderWidth: 1
     }]
 };
