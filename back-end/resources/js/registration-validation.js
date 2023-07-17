@@ -114,7 +114,7 @@ form.addEventListener("submit", (e) => {
     }
   }
 
-  if(firstName.length < 2 || firstName.length > 50) {
+  if(firstName != "" && ( firstName.length < 2 || firstName.length > 50)) {
     // PREVENT FORM SUBMIT IF THERE ARE ERRORS
     e.preventDefault();
 
@@ -138,7 +138,7 @@ form.addEventListener("submit", (e) => {
     firstNameEl.insertAdjacentElement("afterend", firstNameSpan);
   }
 
-  if(lastName.length < 2 || lastName.length > 50) {
+  if(lastName != "" && (lastName.length < 2 || lastName.length > 50)) {
     // PREVENT FORM SUBMIT IF THERE ARE ERRORS
     e.preventDefault();
 
