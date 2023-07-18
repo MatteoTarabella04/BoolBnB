@@ -1,0 +1,105 @@
+@use "./colors.scss" as *;
+
+// BACKGROUND
+
+.bg_primary {
+    background-color: $bg-primary !important;
+}
+
+.bg_special {
+    background-color: $bg-card-special !important;
+}
+
+.bg_double_show {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    background: rgb(243, 243, 243);
+    background: linear-gradient(315deg, rgba(243, 243, 243, 1) 80%, rgba(243, 243, 243, 1) 81%, $bg-card-special 81%);
+}
+
+.bg_primary_hover {
+    background-color: #f1bdaa !important;
+}
+
+.text_primary_hover {
+    color: #f1bdaa !important;
+}
+
+.border_primary_hover {
+    border: 1px solid #f1bdaa !important;
+}
+
+
+//CONTAINER 
+
+.body_minus_header {
+    min-height: calc(100vh - 58px);
+}
+
+.body_minus_header_block {
+    height: calc(100vh - 58px);
+}
+
+
+//POSITION
+
+
+.z_index_1000 {
+    z-index: 1000;
+}
+
+
+//VISUAL EFFECT
+
+.strong_shadow {
+    filter: drop-shadow(3px 3px 5px rgb(47, 47, 47));
+}
+
+.border_black {
+    border: 1px solid rgb(28, 28, 28) !important;
+}
+
+.overlay_messagge {
+    background-color: #bdbdbd9e;
+}
+
+//DIMENSION
+
+.font_size_20 {
+    font-size: 20px;
+}
+
+.image_aspect_ratio {
+    aspect-ratio: 12 / 9;
+    object-fit: cover;
+}
+
+//OF FUNCTIONALITY
+
+.transition_duration_1 {
+    transition-duration: 1s;
+}
+
+// COMPONENTS
+
+.page_title {
+    text-align: center;
+    box-shadow: 2px 2px 3px rgb(63, 63, 63);
+    background-color: $bg-snow !important;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+.sponsorization_badge {
+    position: absolute;
+    top: 5%;
+    left: 4%;
+    width: 96%;
+
+    svg {
+        filter: drop-shadow();
+    }
+}

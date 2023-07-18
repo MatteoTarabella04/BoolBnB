@@ -24,7 +24,19 @@ class UpdateApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'apartment_type_id' => 'required|exists:apartment_types,id',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price_per_night' => 'required|numeric|min:0',
+            'rooms' => 'required|integer|min:1',
+            'beds' => 'required|integer|min:1',
+            'bathrooms' => 'required|integer|min:1',
+            'square_meters' => 'required|integer|min:0',
+            'address' => 'required|string',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'image' => 'nullable|image|max:1024',
+            'visible' => 'nullable|boolean',
         ];
     }
 }

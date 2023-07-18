@@ -18,5 +18,8 @@ export default defineConfig({
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
             '~resources': '/resources/'
         }
+    },
+    server: {
+        port: 5173,
     }
 });

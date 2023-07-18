@@ -1,0 +1,19 @@
+@use "./colors.scss" as *;
+
+.dashboard {
+
+
+    .card_bg_special {
+        background-color: $bg-snow !important;
+        box-shadow: 2px 2px 3px rgb(63, 63, 63);
+    }
+
+    .card_off {
+        background-color: $bg-snow !important;
+    }
+
+    .operations_description {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+}

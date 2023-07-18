@@ -1,0 +1,79 @@
+@use "./colors.scss" as *;
+
+.checkbox_side {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox_side input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    border-radius: 4px;
+    transition-duration: 0.5s;
+}
+
+
+.checkmark {
+    position: absolute;
+    top: -3px;
+    left: -10px;
+    height: 19px;
+    width: 19px;
+    background-color: #eee;
+    border-radius: 4px;
+    transition-duration: 0.5s;
+}
+
+
+.checkbox_side:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.checkbox_side input:checked~.checkmark {
+    background-color: $bg-light-hippo;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox_side input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkbox_side .checkmark:after {
+    left: 8px;
+    top: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transition-duration: 0.5s;
+}
+
+
+
+//CROSS RESPONSIVE
+
+@media screen and (min-width:400px) {
+    .responsiive_absolute {
+        position: absolute;
+    }
+}

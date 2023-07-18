@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Models\ApartmentType;
 use App\Http\Requests\StoreApartmentTypeRequest;
 use App\Http\Requests\UpdateApartmentTypeRequest;
-use App\Http\Controllers\Controller;
 
 class ApartmentTypeController extends Controller
 {
@@ -15,6 +14,16 @@ class ApartmentTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
@@ -37,6 +46,17 @@ class ApartmentTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(ApartmentType $apartmentType)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ApartmentType  $apartmentType
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(ApartmentType $apartmentType)
     {
         //
     }

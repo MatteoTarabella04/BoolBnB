@@ -3,130 +3,92 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Apartment;
-use App\Http\Requests\StoreApartmentRequest;
-use App\Http\Requests\UpdateApartmentRequest;
+use App\Models\Service;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use App\Models\ApartmentType;
 
 class ApartmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Updates the apartments data
+     * 
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
-    {
-        $apartments = Auth::user()->apartments()->orderByDesc('id')->paginate(6);
+    public function index() {
+        $apartments = Apartment::with(['apartment_type', 'services', 'visits', 'sponsorization_plans'])->orderByDesc('id')->get();
 
-        return view('admin.apartments.index', compact('apartments'));
-    }
-
-    public function create()
-    {
-        return view('admin.apartments.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreApartmentRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreApartmentRequest $request)
-    {
-        $val_data = $request->validated();
-        //dd($val_data);
-
-        // generate the title slug
-        $slug = Apartment::generateSlug($val_data['name']);
-        //dd($slug);
-        $val_data['slug'] = $slug;
-        //dd($val_data);
-
-        $val_data['user_id'] = Auth::id();
-        //dd($val_data);
-
-
-        if ($request->hasFile('image')) {
-            $image_path = Storage::put('uploads', $request->image);
-            //dd($image_path);
-            $val_data['image'] = $image_path;
-        }
-
-        $new_apartment = Apartment::create($val_data);
-
-        return to_route('apartments.index')->with('message', 'Annuncio aggiunto');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Apartment  $apartment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Apartment $apartment)
-    {
-        return view('admin.apartments.show', compact('apartment'));
-    }
-
-    public function edit(Apartment $apartment)
-    {
-        if (Auth::id() === $apartment->user_id) {
-            return view('admin.apartments.edit', compact('apartments'));
+        if ($apartments) {
+            return response()->json([
+                'success' => true,
+                'apartments' => $apartments,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
         }
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateApartmentRequest  $request
-     * @param  \App\Models\Apartment  $apartment
-     * @return \Illuminate\Http\Response
+     * Updates the apartments data
+     * 
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateApartmentRequest $request, Apartment $apartment)
-    {
-        $val_data = $request->validated();
-        //dd($val_data);
+    public function userApartments($id) {
+        $apartments = Apartment::with(['apartment_type', 'services', 'visits', 'sponsorization_plans'])->where("user_id", $id)->orderByDesc('id')->get();
 
-        // generate the title slug
-        $slug = Apartment::generateSlug($val_data['name']);
-        //dd($slug);
-        $val_data['slug'] = $slug;
-        //dd($val_data);
-
-
-        if ($request->hasFile('image')) {
-
-            if ($apartment->image) {
-                Storage::delete($apartment->image);
-            }
-
-            $image_path = Storage::put('uploads', $request->image);
-            //dd($image_path);
-            $val_data['image'] = $image_path;
+        if ($apartments) {
+            return response()->json([
+                'success' => true,
+                'apartments' => $apartments,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
         }
-
-
-        $apartment->update($val_data);
-
-        return to_route('apartments.index')->with('message', 'Annuncio: ' . $apartment->name . 'Aggiornato');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Apartment  $apartment
-     * @return \Illuminate\Http\Response
+     * Updates the apartments data and also retrieves services and apartment types
+     * 
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Apartment $apartment)
-    {
-        // remove the image from the storage
-        if ($apartment->image) {
-            Storage::delete($apartment->image);
+    public function all() {
+        $apartments = Apartment::with(['apartment_type', 'services', 'sponsorization_plans'])->orderByDesc('id')->get();
+        $apartment_types = ApartmentType::orderBy("name")->get();
+        $services = Service::orderBy("name")->get();
+
+        if ($apartments && $services) {
+            return response()->json([
+                'success' => true,
+                'apartments' => $apartments,
+                'apartment_types' => $apartment_types,
+                'services' => $services,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
         }
-        $apartment->delete();
-        return to_route('admin.apartments.index')->with('message', 'Annuncio: ' . $apartment->name . 'Eliminato');
+    }
+
+    /**
+     * Updates the single apartment data
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($slug) {
+        $apartment = Apartment::with(['apartment_type', 'services', 'visits'])->where("slug", $slug)->first();
+        if ($apartment) {
+            return response()->json([
+                "success" => true,
+                "apartment" => $apartment,
+            ]);
+        } else {
+            return response()->json([
+                "success" => false,
+            ]);
+        }
     }
 }

@@ -1,0 +1,12 @@
+@use "./colors.scss" as *;
+
+.jumbotron {
+    height: calc(80vh - 62px);
+
+
+    .image_container {
+        height: 100%;
+
+
+    }
+}

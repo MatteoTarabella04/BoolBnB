@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -31,19 +31,16 @@ class RegisteredUserController extends Controller
     public function store(Request $request)//: RedirectResponse
     {
         $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class, 'regex:/^[^@\s]+@[^@\s]+\.[^@\s]+$/'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'first_name' => ['nullable', 'string', 'max:50'],
             'last_name' => ['nullable', 'string', 'max:50'],
-            'date_of_birth' => ['nullable', 'date', 'before:today']
+            'date_of_birth' => ['nullable', 'date', 'before:' . Carbon::now()->subYears(18)->format('Y-m-d')]
         ]);
 
         $data = [
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'first_name' => null,
-            'last_name' => null,
-            'date_of_birth' => null,
         ];
 
         if($request->first_name) {

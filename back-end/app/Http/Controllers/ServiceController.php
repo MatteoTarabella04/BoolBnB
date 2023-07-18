@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
-use App\Http\Controllers\Controller;
 
 class ServiceController extends Controller
 {
@@ -15,6 +14,16 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
@@ -37,6 +46,17 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Service $service)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Service  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Service $service)
     {
         //
     }

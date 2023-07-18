@@ -1,1 +1,23 @@
-@import '~bootstrap/scss/bootstrap'
+@use './partials/colors.scss' as *;
+@use './partials/ul_address.scss' as *;
+@use "./partials/appHeader.scss";
+@use "./partials/dashboard.scss";
+@use "./partials/message.scss";
+@use "./partials/utilities_selector.scss";
+@use "./partials/hover_effect.scss";
+@use "./partials/plans.scss";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Fasthand&family=Poppins:wght@300;400;500;600;700;900&display=swap');
+
+@import '~bootstrap/scss/bootstrap';
+@import "/node_modules/@tomtom-international/web-sdk-maps/dist/maps.css";
+
+
+body {
+  // background-color: $bg-secondary !important;
+  // font-family: 'Fasthand', cursive;
+  // font-family: 'Poppins', sans-serif;
+
+  font-family: 'Comfortaa', cursive;
+}

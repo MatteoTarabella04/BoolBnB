@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Message;
-use App\Http\Requests\StoreMessageRequest;
-use App\Http\Requests\UpdateMessageRequest;
 use App\Http\Controllers\Controller;
+use App\Mail\NewContact;
+use App\Models\Message;
+use GrahamCampbell\ResultType\Success;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -22,33 +24,42 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMessageRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMessageRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        date_default_timezone_set('Europe/Rome');
+        $data["send_date"] = date('Y-m-d H:i:s', time());
+
+        $new_message = new Message();
+        $new_message->fill($data);
+        $new_message->save();
+
+        // COMMENTED TO AVOID MAIL SENDING
+        // Mail::to(env("MAIL_TO_ADDRESS"))->send(new NewContact($new_message));
+
+        // if() {
+            return response()->json([
+                "success" => true,
+                "data" => $new_message,
+            ]);
+        // } else {
+            return response()->json([
+                "success" => false,
+            ]);
+        // }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Message  $message
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMessageRequest  $request
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMessageRequest $request, Message $message)
+    public function show($id)
     {
         //
     }
@@ -56,10 +67,10 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Message  $message
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy($id)
     {
         //
     }
